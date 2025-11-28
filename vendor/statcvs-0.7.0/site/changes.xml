@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<document>
+	<properties>
+		<title>StatCVS Changes</title>
+	</properties>
+	<body>
+	<release version="0.7.0" date="in CVS" description="Maintenance+Enhancements">
+            <action dev="benoitx" type="add" issue="1721660" due-to="David Multer">Fixing NPE issue and bad link when there are no commits in a repository.</action>
+			<action dev="benoitx" type="add">Inspired by StatCVS-xml, A module mechanism is added to StatCVS whereby it is now possible to define
+            some regular expression to group files into modules and have a dedicated set of statistics per module.</action>
+            <action dev="benoitx" type="add" issue="2141153" due-to="David Multer">The latest commit page will always be called commitlog.html </action>
+            <action dev="benoitx" type="add" issue="2141221" due-to="David Multer">2 new command line options: headerUrl and footerUrl the content of which will 
+            be incorporated just after opening body or just before the end of body.</action>
+	</release>
+        <release version="0.6.0" date="2009-08" description="Maintenance+Enhancements">
+            <action dev="benoitx" type="add" due-to="Jason">Added javascript to automatically call bit.ly to reduce the page URL. Cool stuff!</action>
+            <action dev="benoitx" type="fix" due-to="Simon Josefsson">Typo on the -disable-twitter-button help.</action>
+            <action dev="benoitx" type="fix" due-to="Simon Josefsson">The viewvc links no longer worked.</action>
+            <action dev="benoitx" type="add">Improved the ant task to support the ConfigFile and disableTwitterButton options.</action>
+            <action dev="benoitx" type="add">Dramatically reducing the amount of memory required to run StatCVS (up to a 10x factor for some repo).</action>
+        </release>
+		<release version="0.5.0" date="May 2009" description="Maintenance+Enhancements">
+			<action dev="benoitx" type="add">Add charset option.</action>
+			<action dev="benoitx" type="add" due-to="Muhammed Nasrullah">Added suggestion for a 12m rolling Developers report.</action>
+			<action dev="benoitx" type="add">
+				A bit of fun, added links to Twitter. In the statcvs.properties file defining the user, See
+				<a href="manual.html#section_config">manual</a>
+			</action>
+			<action dev="benoitx" type="add">
+				Charts are now configurable, See
+				<a href="manual.html#section_config">manual</a>
+			</action>
+			<action dev="benoitx" type="add">
+				Add ability to MERGE 2 users through the config-file user.[userName].replacedBy=[newUserName]
+			</action>
+            <action dev="benoitx" type="add">
+                Add Cloud Tag based on most frequent words in the commit comments.
+            </action>
+            <action dev="benoitx" type="add">
+                Add Ability to put a background image in the Plot or entire chart.
+            </action>
+		</release>
+		<release version="0.4.0" date="2008-04-20" description="Maintenance+Enhancements">
+			<action dev="benoitx" type="add" issue="1639462" due-to="Jean-Francois Burdet">Applied patch for [ 1639462 ] Added TRAC Support.</action>
+			<action dev="benoitx" type="add">Any http:// or https:// or www. in the comments will be treated as a link.</action>
+			<action dev="benoitx" type="fix" issue="1757394" due-to="Richard Quirk">Applied patch for [ 1757394 ] Do not lump C++ .C,.H files in "Others".</action>
+			<action dev="benoitx" type="fix" issue="1799499" due-to="Shamil Bikineyev">[ 1799499 ] LOCChartMaker NullPointerException. Applied suggested workaround from Shamil.
+			</action>
+			<action dev="benoitx" type="fix" issue="1725844" due-to="Jan Dockx">Applied patch to StatCVS to avoid divide by zero issue (patch returns NaN if attempted
+				to divide by 0).</action>
+			<action dev="benoitx" type="update">The RepoMap and LOCChurn reports have been promoted to StatCVS and hence, removed from the StatSVN source tree.</action>
+			<action dev="benoitx" type="fix" issue="1839303" due-to="Martin Majlis">Applied patch to StatCVS to add Revision number on commit page.</action>
+		</release>
+	</body>
+</document>

@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns:lxslt="http://xml.apache.org/xslt">
+<properties><title>Directory statcvs/src/net/sf/statcvs/ant/</title></properties>
+<head>    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatCVS 0.7.0-beta"/>
+   <link rel="stylesheet" href="objectlab-statcvs-xdoc.css" type="text/css"/>
+<script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&#38;login=statsvn&#38;apiKey=R_2c362b417d0517c27876cbaca1bb68cc"></script>
+<script type="text/javascript" charset="utf-8">
+   // wait until page is loaded to call API
+   var redir_url;
+   var short_url;
+   BitlyCB.myShortenCallback = function(data) {
+      // this is how to get a result of shortening a single url
+      var result;
+      short_url=null;
+      for (var r in data.results) {
+         result = data.results[r];
+         result['longUrl'] = r;
+         short_url = result['shortUrl'];
+         break;
+      }
+      if (short_url==null) // bit.ly failed
+      document.location=redir_url;
+      else
+      redirToTwitter();
+   };
+   function shortenTweet(url) {
+      if (short_url == null || redir_url!=url) {
+      redir_url = url;
+      BitlyClient.shorten(document.location, 'BitlyCB.myShortenCallback');
+      }
+      else
+      redirToTwitter();
+      return false;
+   }
+   function redirToTwitter() { 
+      // replace {0} which is visible as %7B0} in the link
+      document.location = redir_url.replace('%7B0}', short_url);
+   }
+</script>
+</head>
+
+<body><section name="Directory statcvs/src/net/sf/statcvs/ant/">
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for StatCVS</a></div>
+<dl class="attributes">
+    <dt>Directory Created:</dt>
+    <dd><span class="date">2003-03-24 21:42</span></dd>
+    <dt>Total Files:</dt>
+    <dd>2</dd>
+    <dt>Deleted Files:</dt>
+    <dd>0</dd>
+    <dt>Lines of Code:</dt>
+    <dd>321</dd>
+</dl>
+<p><a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/">Browse with ViewVC</a></p>
+<p class="dirtree">
+<a href="dir.html">[root]</a>/<a href="dir_statcvs.html">statcvs</a>/<a href="dir_statcvs_src.html">src</a>/<a href="dir_statcvs_src_net.html">net</a>/<a href="dir_statcvs_src_net_sf.html">sf</a>/<a href="dir_statcvs_src_net_sf_statcvs.html">statcvs</a>/<strong>ant</strong><br/>
+</p>
+
+<div class="section">
+<subsection name ="Lines of Code">
+<p class="chart"><img src="loc_module_statcvs_src_net_sf_statcvs_ant.png" alt="statcvs/src/net/sf/statcvs/ant/ Lines of Code" width="952" height="596" /></p></subsection></div>
+<div class="section">
+<subsection name ="Developers">
+  <table  class="statCvsTable" rules="groups" summary="All authors and the number of their changes and lines of code in this directory">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Changes</th>
+        <th>Lines of Code</th>
+        <th>Lines per Change</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Totals</th>
+        <td>25 (100.0%)</td>
+        <td>678 (100.0%)</td>
+        <td>27.1</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="user_cyganiak.html" class="author">Richard Cyganiak</a></th>
+        <td>18 (72.0%)</td>
+        <td>411 (60.6%)</td>
+        <td>22.8</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_benoitx.html" class="author">Benoit Xhenseval</a></th>
+        <td>4 (16.0%)</td>
+        <td>256 (37.8%)</td>
+        <td>64.0</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="user_jkealey.html" class="author">Jason Kealey</a></th>
+        <td>2 (8.0%)</td>
+        <td>6 (0.9%)</td>
+        <td>3.0</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_lukasz.html" class="author">Lukasz Pekacki</a></th>
+        <td>1 (4.0%)</td>
+        <td>5 (0.7%)</td>
+        <td>5.0</td>
+      </tr>
+    </tbody>
+  </table>
+
+</subsection></div>
+<div class="section">
+<subsection name ="Most Recent Commits">
+<dl class="commitlist">
+  <dt><a name="25"></a>
+    <a href="user_benoitx.html" class="author">Benoit Xhenseval</a>
+    <span class="date">2009-06-02 16:35</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.24</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Improved the ant task to support the configFile and the disableTwitterButton options.
+    </p>
+    <p class="commitdetails"><strong>16</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.23&amp;r2=1.24" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+16&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="24"></a>
+    <a href="user_benoitx.html" class="author">Benoit Xhenseval</a>
+    <span class="date">2009-03-09 21:45</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.23</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Moved version to 0.5.0<br />
+Done a cleanUp too.
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.22&amp;r2=1.23" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="23"></a>
+    <a href="user_benoitx.html" class="author">Benoit Xhenseval</a>
+    <span class="date">2008-06-25 21:46</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.22</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added -chartset option on command line and ant task for html/xdoc documentation.
+    </p>
+    <p class="commitdetails"><strong>9</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.21&amp;r2=1.22" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+9&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="22"></a>
+    <a href="user_benoitx.html" class="author">Benoit Xhenseval</a>
+    <span class="date">2008-04-02 12:22</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.21</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Done an Eclipse cleanUp in order to reduce number of warnings by FindBugs / Checkstyle / PMD tools.<br />
+Sorry if it is looking like a massive change...
+    </p>
+    <p class="commitdetails"><strong>229</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.20&amp;r2=1.21" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+229&#160;-228)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="21"></a>
+    <a href="user_jkealey.html" class="author">Jason Kealey</a>
+    <span class="date">2007-01-12 16:15</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.20</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+bug: in the ant task, viewvc was causing NPE
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.19&amp;r2=1.20" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="20"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2007-01-01 15:26</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.19</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Bugfix: Bugzilla didn't work in Ant task (Brian J¿rgensen)
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.18&amp;r2=1.19" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="19"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2007-01-01 10:20</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.18</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Support for Mantis bug tracker (Brian J¿rgensen)
+    </p>
+    <p class="commitdetails"><strong>12</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.17&amp;r2=1.18" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+12&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="18"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 16:19</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.17</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added -no-developer option to exclude noisy accounts
+    </p>
+    <p class="commitdetails"><strong>15</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.16&amp;r2=1.17" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+15&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="17"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 21:44</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.16</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Cope with empty log file instead of aborting. Deprecated EmptyRepositoryException, it is no longer used by StatCVS.
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.15&amp;r2=1.16" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+1&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="16"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 19:47</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.15</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+- Ant task supports all options again<br />
+- Ant task uses the same names as the command line for everything<br />
+- build file can call Ant task via "ant run.ant"
+    </p>
+    <p class="commitdetails"><strong>77</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.14&amp;r2=1.15" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+77&#160;-37)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="15"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 18:16</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.14</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added JCVSWeb integration (Patch 1398245, ermeaney)
+    </p>
+    <p class="commitdetails"><strong>12</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.13&amp;r2=1.14" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+12&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="14"></a>
+    <a href="user_jkealey.html" class="author">Jason Kealey</a>
+    <span class="date">2006-11-22 16:29</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.13</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Refactoring of StatCVS so that StatSVN can properly extend it.<br />
+Added StatSVN features: bugzilla integration, viewvc integration, xdoc export<br />
+Many thanks to Benoit Xhenseval for refactoring both StatCVS and StatSVN and providing xdoc support.
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.12&amp;r2=1.13" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="13"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2005-03-24 00:19</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.12</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Support for tags
+    </p>
+    <p class="commitdetails"><strong>15</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.11&amp;r2=1.12" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+15&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="12"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2004-10-12 09:38</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.1</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Package descriptions for Javadoc
+    </p>
+    <p class="commitdetails"><strong>11</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/package.html?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">package.html</a>&#160;<span class="new">(new&#160;11)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="11"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-12-15 20:01</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.11</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+removed "Generated by StatCvs" from charts, toned it done on HTML pages, removed -nocredits switch
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.10&amp;r2=1.11" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+1&#160;-12)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="10"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-12-13 22:27</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.10</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+refactoring: project name is now kept only in ConfigurationOptions, no longer in CvsContent
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.9&amp;r2=1.10" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="9"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-12-09 11:52</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.9</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+CVS logs generated with the -d option now work correctly.
+    </p>
+    <p class="commitdetails"><strong>4</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.8&amp;r2=1.9" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+4&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="8"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-06-04 22:50</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.8</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+- made first command line parameter (project name) optional<br />
+<br />
+- module name will be retrieved from the logfile and used as default<br />
+<br />
+- project name can be specified using new -title option
+    </p>
+    <p class="commitdetails"><strong>8</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.7&amp;r2=1.8" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+8&#160;-19)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="7"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-06-04 20:30</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.7</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+update command line help and Ant task with -include and -exclude
+    </p>
+    <p class="commitdetails"><strong>27</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.6&amp;r2=1.7" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+27&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="6"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-04-19 20:23</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.6</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+cleanup of exception handling around the ConfigurationOptions object
+    </p>
+    <p class="commitdetails"><strong>63</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.5&amp;r2=1.6" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+63&#160;-20)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="5"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-04-19 18:01</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.5</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+update to some TODO items
+    </p>
+    <p class="commitdetails"><strong>6</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.4&amp;r2=1.5" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+6&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="4"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-04-17 17:39</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.4</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+added "-notes &lt;file&gt;" switch to include some custom notes in the index page of the report
+    </p>
+    <p class="commitdetails"><strong>13</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.3&amp;r2=1.4" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+13&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="3"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-04-13 18:41</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+made checkstyle happy
+    </p>
+    <p class="commitdetails"><strong>6</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.2&amp;r2=1.3" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+6&#160;-6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="2"></a>
+    <a href="user_lukasz.html" class="author">Lukasz Pekacki</a>
+    <span class="date">2003-03-25 01:20</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.2</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Minor code review tasks. <br />
+<br />
+Added some javadocs<br />
+<br />
+Fixed some unhandled Exceptions
+    </p>
+    <p class="commitdetails"><strong>5</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.1&amp;r2=1.2" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+5&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="1"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-03-24 21:42</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.1</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added Andy Glover's Ant task. NOW YOU MUST DOWNLOAD developer-libs-0.5.zip FROM SOURCEFORGE!
+    </p>
+    <p class="commitdetails"><strong>136</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">StatCvsTask.java</a>&#160;<span class="new">(new&#160;136)</span>
+      </li>
+    </ul>
+  </dd>
+
+</dl>
+
+</subsection></div></section><div id="generatedby">Generated by <a href="http://statcvs.sf.net">StatCVS</a> 0.7.0-beta</div>
+</body>
+</document>

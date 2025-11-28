@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns:lxslt="http://xml.apache.org/xslt">
+<properties><title>Directory statcvs/src/net/</title></properties>
+<head>    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatCVS 0.7.0-beta"/>
+   <link rel="stylesheet" href="objectlab-statcvs-xdoc.css" type="text/css"/>
+<script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&#38;login=statsvn&#38;apiKey=R_2c362b417d0517c27876cbaca1bb68cc"></script>
+<script type="text/javascript" charset="utf-8">
+   // wait until page is loaded to call API
+   var redir_url;
+   var short_url;
+   BitlyCB.myShortenCallback = function(data) {
+      // this is how to get a result of shortening a single url
+      var result;
+      short_url=null;
+      for (var r in data.results) {
+         result = data.results[r];
+         result['longUrl'] = r;
+         short_url = result['shortUrl'];
+         break;
+      }
+      if (short_url==null) // bit.ly failed
+      document.location=redir_url;
+      else
+      redirToTwitter();
+   };
+   function shortenTweet(url) {
+      if (short_url == null || redir_url!=url) {
+      redir_url = url;
+      BitlyClient.shorten(document.location, 'BitlyCB.myShortenCallback');
+      }
+      else
+      redirToTwitter();
+      return false;
+   }
+   function redirToTwitter() { 
+      // replace {0} which is visible as %7B0} in the link
+      document.location = redir_url.replace('%7B0}', short_url);
+   }
+</script>
+</head>
+
+<body><section name="Directory statcvs/src/net/">
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for StatCVS</a></div>
+<dl class="attributes">
+    <dt>Total Files:</dt>
+    <dd>0</dd>
+    <dt>Deleted Files:</dt>
+    <dd>0</dd>
+    <dt>Lines of Code:</dt>
+    <dd>0</dd>
+</dl>
+<p><a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/">Browse with ViewVC</a></p>
+<p class="dirtree">
+<a href="dir.html">[root]</a>/<a href="dir_statcvs.html">statcvs</a>/<a href="dir_statcvs_src.html">src</a>/<strong>net</strong><br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf.html">sf</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs.html">statcvs</a> 
+(7 files, 673 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_ant.html">ant</a> 
+(2 files, 321 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_charts.html">charts</a> 
+(12 files, 1948 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_input.html">input</a> 
+(12 files, 1924 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_model.html">model</a> 
+(11 files, 1914 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_output.html">output</a> 
+(18 files, 2764 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_output_web-files.html">web-files</a> 
+(1 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_pages.html">pages</a> 
+(23 files, 2601 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_pages_xml.html">xml</a> 
+(11 files, 1286 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_renderer.html">renderer</a> 
+(5 files, 834 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_reportmodel.html">reportmodel</a> 
+(14 files, 1226 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_reports.html">reports</a> 
+(21 files, 2030 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_util.html">util</a> 
+(11 files, 1223 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_web-files.html">web-files</a> 
+(13 files, 615 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_weblinks.html">weblinks</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_weblinks_bugs.html">bugs</a> 
+(3 files, 144 lines)<br />
+</p>
+</section><div id="generatedby">Generated by <a href="http://statcvs.sf.net">StatCVS</a> 0.7.0-beta</div>
+</body>
+</document>

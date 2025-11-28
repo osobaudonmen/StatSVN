@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns:lxslt="http://xml.apache.org/xslt">
+<properties><title>Development Statistics for StatCVS</title></properties>
+<head>    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatCVS 0.7.0-beta"/>
+   <link rel="stylesheet" href="objectlab-statcvs-xdoc.css" type="text/css"/>
+<script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&#38;login=statsvn&#38;apiKey=R_2c362b417d0517c27876cbaca1bb68cc"></script>
+<script type="text/javascript" charset="utf-8">
+   // wait until page is loaded to call API
+   var redir_url;
+   var short_url;
+   BitlyCB.myShortenCallback = function(data) {
+      // this is how to get a result of shortening a single url
+      var result;
+      short_url=null;
+      for (var r in data.results) {
+         result = data.results[r];
+         result['longUrl'] = r;
+         short_url = result['shortUrl'];
+         break;
+      }
+      if (short_url==null) // bit.ly failed
+      document.location=redir_url;
+      else
+      redirToTwitter();
+   };
+   function shortenTweet(url) {
+      if (short_url == null || redir_url!=url) {
+      redir_url = url;
+      BitlyClient.shorten(document.location, 'BitlyCB.myShortenCallback');
+      }
+      else
+      redirToTwitter();
+      return false;
+   }
+   function redirToTwitter() { 
+      // replace {0} which is visible as %7B0} in the link
+      document.location = redir_url.replace('%7B0}', short_url);
+   }
+</script>
+</head>
+
+<body><section name="Development Statistics for StatCVS">
+<dl class="attributes">
+    <dt>Generated:</dt>
+    <dd><span class="date">2010-01-01 10:17</span></dd>
+    <dt>Report Period:</dt>
+    <dd><span class="date">2002-07-11</span> to <span class="date">2010-01-01</span></dd>
+    <dt>Total Files:</dt>
+    <dd>254</dd>
+    <dt>Total Lines of Code:</dt>
+    <dd>26969</dd>
+    <dt>Developers:</dt>
+    <dd>10</dd>
+    <dt>Tweet this:</dt>
+    <dd><a onclick="return shortenTweet(this.href);" href="http://twitter.com/home?status=Project%20StatCVS%20%7B0}%20on%202010-01-01%20has%2026%2C969%20Lines%20of%20Code%20and%2010%20Developers%3A%20stats%20by%20StatCVS%20http%3A%2F%2Fbit.ly%2FmyuDS"><img style="border:0px" alt="Tweet this" src="tweet-this.png"/></a></dd>
+</dl>
+<ul class="linklist">
+    <li><a href="developers.html">Developers</a></li>
+    <li><a href="commitlog.html">Commit Logs</a></li>
+    <li><a href="loc.html">Lines of Code</a></li>
+    <li><a href="file_sizes.html">File Statistics</a></li>
+    <li><a href="dir_sizes.html">Directory Sizes</a></li>
+    <li><a href="modules.html">Modules Sizes</a></li>
+    <li><a href="repomap.html">Repo Heatmap</a></li>
+    <li><a href="churn.html">LOC and Churn</a></li>
+    <li><a href="cloud.html">Cloud Commit</a></li>
+</ul>
+<div class="section">
+<subsection name ="Lines of Code">
+<p class="chart"><a href="loc.html"><img src="loc_small.png" alt="Lines of Code" width="512" height="320" /></a></p></subsection></div>
+<div class="section">
+<subsection name ="Developers">
+  <table  class="statCvsTable" rules="groups" summary="All authors and the number of code lines they wrote or changed">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Lines of Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="user_cyganiak.html" class="author">Richard Cyganiak</a></th>
+        <td>30909 (41.2%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_benoitx.html" class="author">Benoit Xhenseval</a></th>
+        <td>23329 (31.1%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="user_lukasz.html" class="author">Lukasz Pekacki</a></th>
+        <td>8627 (11.5%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_manschu.html" class="author">Manuel Schulze</a></th>
+        <td>4099 (5.5%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="user_jentzsch.html" class="author">Anja Jentzsch</a></th>
+        <td>3290 (4.4%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_jkealey.html" class="author">Jason Kealey</a></th>
+        <td>2972 (4.0%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="user_squig.html" class="author">Steffen Pingel</a></th>
+        <td>910 (1.2%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_uid91994.html" class="author">uid91994</a></th>
+        <td>852 (1.1%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="user_farkas.html" class="author">farkas</a></th>
+        <td>55 (0.1%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_mungady.html" class="author">mungady</a></th>
+        <td>35 (0.0%)</td>
+      </tr>
+    </tbody>
+  </table>
+
+<a href="developers.html">more...</a></subsection></div>
+<div class="section">
+<subsection name ="Tag Cloud of Words in Commit Log Messages">
+<p><font size="5">activity </font> <font size="6">author </font> <font size="5">binary </font> <font size="5">bugfix </font> <font size="5">build </font> <font size="4">builder </font> <font size="8">change </font> <font size="7">chart </font> <font size="5">checkstyle </font> <font size="6">class </font> <font size="5">classes </font> <font size="5">cleanup </font> <font size="7">code </font> <font size="5">command </font> <font size="5">comment </font> <font size="4">constructor </font> <font size="4">copy </font> <font size="4">corrected </font> <font size="5">count </font> <font size="5">create </font> <font size="5">cvscontent </font> <font size="5">cvsfile </font> <font size="4">cvsrevision </font> <font size="5">date </font> <font size="5">deleted </font> <font size="6">developer </font> <font size="6">directory </font> <font size="5">each </font> <font size="5">eclipse </font> <font size="4">empty </font> <font size="8">file </font> <font size="4">first </font> <font size="7">fixed </font> <font size="5">fixes </font> <font size="7">html </font> <font size="4">http </font> <font size="4">improve </font> <font size="4">improvement </font> <font size="5">input </font> <font size="4">instead </font> <font size="4">integration </font> <font size="5">java </font> <font size="5">javadoc </font> <font size="5">jfreechart </font> <font size="5">keyword </font> <font size="7">line </font> <font size="5">link </font> <font size="4">list </font> <font size="5">logging </font> <font size="5">longer </font> <font size="5">made </font> <font size="4">main </font> <font size="5">make </font> <font size="5">message </font> <font size="7">method </font> <font size="4">minor </font> <font size="5">model </font> <font size="6">module </font> <font size="6">move </font> <font size="6">name </font> <font size="4">nolog </font> <font size="5">number </font> <font size="4">object </font> <font size="5">only </font> <font size="5">option </font> <font size="6">output </font> <font size="6">package </font> <font size="7">page </font> <font size="4">parameter </font> <font size="4">patch </font> <font size="7">refactor </font> <font size="7">remove </font> <font size="4">replace </font> <font size="6">report </font> <font size="5">revision </font> <font size="5">size </font> <font size="5">small </font> <font size="6">statcvs </font> <font size="4">statsvn </font> <font size="5">string </font> <font size="4">stuff </font> <font size="4">style </font> <font size="5">substitution </font> <font size="4">support </font> <font size="4">system </font> <font size="6">table </font> <font size="4">tags </font> <font size="5">task </font> <font size="7">test </font> <font size="4">thanks </font> <font size="5">time </font> <font size="4">tree </font> <font size="4">tweak </font> <font size="4">unit </font> <font size="6">unused </font> <font size="5">update </font> <font size="6">user </font> <font size="6">version </font> <font size="5">warn </font> <font size="4">xdoc </font> </p><a href="cloud.html">more...</a></subsection></div>
+<div class="section">
+<subsection name ="Repository Tags">
+  <table  class="statCvsTable" rules="groups" summary="Repository Tags">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Lines</th>
+        <th>LOC Churn</th>
+        <th>Developers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  class="odd">
+        <th>(now)</th>
+        <td><span class="date">2010-01-01</span></td>
+        <td>26969</td>
+        <td>1499 (2.0%)</td>
+        <td>1</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="2009-08.html#tag-v0_6_0">v0_6_0</a></th>
+        <td><span class="date">2009-08-06</span></td>
+        <td>25793</td>
+        <td>378 (0.5%)</td>
+        <td>1</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="2009-05.html#tag-v0_5_0">v0_5_0</a></th>
+        <td><span class="date">2009-05-08</span></td>
+        <td>25535</td>
+        <td>2224 (3.0%)</td>
+        <td>1</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="2008-04.html#tag-v0_4_0">v0_4_0</a></th>
+        <td><span class="date">2008-04-21</span></td>
+        <td>23881</td>
+        <td>19534 (26.0%)</td>
+        <td>3</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="2007-01.html#tag-v0_3">v0_3</a></th>
+        <td><span class="date">2007-01-04</span></td>
+        <td>19862</td>
+        <td>6566 (8.7%)</td>
+        <td>3</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="2006-12.html#tag-v0_2_4a">v0_2_4a</a></th>
+        <td><span class="date">2006-12-03</span></td>
+        <td>16755</td>
+        <td>3027 (4.0%)</td>
+        <td>2</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="2006-10.html#tag-v0_2_3">v0_2_3</a></th>
+        <td><span class="date">2006-10-10</span></td>
+        <td>15670</td>
+        <td>1061 (1.4%)</td>
+        <td>3</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="2004-10.html#tag-v0_2_2">v0_2_2</a></th>
+        <td><span class="date">2004-10-13</span></td>
+        <td>15004</td>
+        <td>3 (0.0%)</td>
+        <td>1</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="2004-10.html#tag-v0_2_1">v0_2_1</a></th>
+        <td><span class="date">2004-10-13</span></td>
+        <td>15002</td>
+        <td>14 (0.0%)</td>
+        <td>1</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="2004-10.html#tag-v0_2">v0_2</a></th>
+        <td><span class="date">2004-10-13</span></td>
+        <td>14990</td>
+        <td>19319 (25.7%)</td>
+        <td>4</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="2003-03.html#tag-v0_1_3">v0_1_3</a></th>
+        <td><span class="date">2003-03-27</span></td>
+        <td>9725</td>
+        <td>7263 (9.7%)</td>
+        <td>5</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="2002-08.html#tag-v0_1_2b">v0_1_2b</a></th>
+        <td><span class="date">2002-08-26</span></td>
+        <td>6535</td>
+        <td>1138 (1.5%)</td>
+        <td>2</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="2002-08.html#tag-v0_1_1a">v0_1_1a</a></th>
+        <td><span class="date">2002-08-12</span></td>
+        <td>6811</td>
+        <td>13024 (17.4%)</td>
+        <td>4</td>
+      </tr>
+    </tbody>
+  </table>
+
+</subsection></div>
+<div class="section">
+<subsection name ="Directories">
+<p class="dirtree">
+<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir.html">[root]</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs.html">statcvs</a> 
+(14 files, 917 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_.settings.html">.settings</a> 
+(2 files, 372 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_etc.html">etc</a> 
+(2 files, 66 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_lib.html">lib</a> 
+(5 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_maven-common-build.html">maven-common-build</a> 
+(2 files, 231 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_site.html">site</a> 
+(7 files, 1077 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_site_images.html">images</a> 
+(7 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_site_style.html">style</a> 
+(1 files, 146 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src.html">src</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net.html">net</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf.html">sf</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs.html">statcvs</a> 
+(7 files, 673 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_ant.html">ant</a> 
+(2 files, 321 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_charts.html">charts</a> 
+(12 files, 1948 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_input.html">input</a> 
+(12 files, 1924 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_model.html">model</a> 
+(11 files, 1914 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_output.html">output</a> 
+(18 files, 2764 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_output_web-files.html">web-files</a> 
+(1 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_pages.html">pages</a> 
+(23 files, 2601 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_pages_xml.html">xml</a> 
+(11 files, 1286 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_renderer.html">renderer</a> 
+(5 files, 834 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_reportmodel.html">reportmodel</a> 
+(14 files, 1226 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_reports.html">reports</a> 
+(21 files, 2030 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_util.html">util</a> 
+(11 files, 1223 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_web-files.html">web-files</a> 
+(13 files, 615 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_weblinks.html">weblinks</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_src_net_sf_statcvs_weblinks_bugs.html">bugs</a> 
+(3 files, 144 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src.html">tests-src</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net.html">net</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf.html">sf</a> 
+(0 files, 0 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs.html">statcvs</a> 
+(1 files, 66 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs_input.html">input</a> 
+(28 files, 1867 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs_model.html">model</a> 
+(7 files, 988 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs_output.html">output</a> 
+(2 files, 336 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs_pages.html">pages</a> 
+(2 files, 96 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs_renderer.html">renderer</a> 
+(2 files, 240 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs_reportmodel.html">reportmodel</a> 
+(2 files, 218 lines)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_statcvs_tests-src_net_sf_statcvs_util.html">util</a> 
+(6 files, 846 lines)<br />
+</p>
+</subsection></div></section><div id="generatedby">Generated by <a href="http://statcvs.sf.net">StatCVS</a> 0.7.0-beta</div>
+</body>
+</document>

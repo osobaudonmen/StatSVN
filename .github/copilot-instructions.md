@@ -55,11 +55,12 @@ make help     # ヘルプ表示
 #### 手動でビルドする場合
 
 ```bash
-# 1. コンパイル
-javac -d build/classes/main -cp "lib/*" $(find src -name "*.java")
+# 1. コンパイル（StatCVS ソースを含める）
+javac -encoding UTF-8 -d build/classes/main -cp "lib/*" $(find src vendor/statcvs-0.7.0/src -name "*.java")
 
 # 2. リソースファイルをコピー
 cp src/net/sf/statsvn/*.properties build/classes/main/net/sf/statsvn/
+find vendor/statcvs-0.7.0/src/net/sf/statcvs -name "*.properties" -exec sh -c 'cp "$1" build/classes/main/net/sf/statcvs/ 2>/dev/null || true' _ {} \;
 
 # 3. Fat JAR を作成
 cd build/tmp_fatjar

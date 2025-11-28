@@ -8,6 +8,22 @@ StatSVN のフォーク版
 - Github Copilotを使用して開発をします
 - 要らない機能の削除
 
+## プロジェクト構成
+
+このプロジェクトは以下のコンポーネントで構成されています：
+
+### StatSVN
+- SVNリポジトリの統計情報を生成するツール
+- メインアプリケーション（`src/net/sf/statsvn/`）
+
+### StatCVS
+- StatSVNのベースとなるCVS統計ツール
+- ソースコード: `vendor/statcvs-0.7.0/`
+- プロジェクト: [StatCVS - SourceForge](https://sourceforge.net/projects/statcvs/)
+- StatCVS 0.7.0 のソースを含めており、ビルド時に StatSVN と一緒にコンパイルされます
+
+---
+
 以下、オリジナルのREADME.mdを掲載しています。
 
 ---

@@ -33,12 +33,15 @@ echo "  ✓ クラスディレクトリをクリア"
 
 # Javaソースをコンパイル
 echo -e "${GREEN}[3/5]${NC} Javaソースをコンパイル中..."
-javac -d build/classes/main -cp "lib/*" $(find src -name "*.java")
+javac -encoding UTF-8 -d build/classes/main -cp "lib/*" $(find src vendor/statcvs-0.7.0/src -name "*.java")
 echo "  ✓ コンパイル完了"
 
 # プロパティファイルをコピー
 echo -e "${GREEN}[4/5]${NC} リソースファイルをコピー中..."
-cp src/net/sf/statsvn/*.properties build/classes/main/net/sf/statsvn/
+cp src/net/sf/statsvn/*.properties build/classes/main/net/sf/statsvn/ 2>/dev/null || true
+if [ -d "vendor/statcvs-0.7.0/src/net/sf/statcvs" ]; then
+    find vendor/statcvs-0.7.0/src/net/sf/statcvs -name "*.properties" -exec sh -c 'cp "$1" build/classes/main/net/sf/statcvs/ 2>/dev/null || true' _ {} \;
+fi
 echo "  ✓ リソースファイルをコピー"
 
 # Fat JAR を作成

@@ -1,0 +1,13 @@
+net.sf.statcvs
+net.sf.statcvs.ant
+net.sf.statcvs.charts
+net.sf.statcvs.input
+net.sf.statcvs.model
+net.sf.statcvs.output
+net.sf.statcvs.pages
+net.sf.statcvs.pages.xml
+net.sf.statcvs.renderer
+net.sf.statcvs.reportmodel
+net.sf.statcvs.reports
+net.sf.statcvs.util
+net.sf.statcvs.weblinks.bugs

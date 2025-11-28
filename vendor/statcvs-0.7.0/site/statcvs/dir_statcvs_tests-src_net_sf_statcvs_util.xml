@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns:lxslt="http://xml.apache.org/xslt">
+<properties><title>Directory statcvs/tests-src/net/sf/statcvs/util/</title></properties>
+<head>    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatCVS 0.7.0-beta"/>
+   <link rel="stylesheet" href="objectlab-statcvs-xdoc.css" type="text/css"/>
+<script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&#38;login=statsvn&#38;apiKey=R_2c362b417d0517c27876cbaca1bb68cc"></script>
+<script type="text/javascript" charset="utf-8">
+   // wait until page is loaded to call API
+   var redir_url;
+   var short_url;
+   BitlyCB.myShortenCallback = function(data) {
+      // this is how to get a result of shortening a single url
+      var result;
+      short_url=null;
+      for (var r in data.results) {
+         result = data.results[r];
+         result['longUrl'] = r;
+         short_url = result['shortUrl'];
+         break;
+      }
+      if (short_url==null) // bit.ly failed
+      document.location=redir_url;
+      else
+      redirToTwitter();
+   };
+   function shortenTweet(url) {
+      if (short_url == null || redir_url!=url) {
+      redir_url = url;
+      BitlyClient.shorten(document.location, 'BitlyCB.myShortenCallback');
+      }
+      else
+      redirToTwitter();
+      return false;
+   }
+   function redirToTwitter() { 
+      // replace {0} which is visible as %7B0} in the link
+      document.location = redir_url.replace('%7B0}', short_url);
+   }
+</script>
+</head>
+
+<body><section name="Directory statcvs/tests-src/net/sf/statcvs/util/">
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for StatCVS</a></div>
+<dl class="attributes">
+    <dt>Directory Created:</dt>
+    <dd><span class="date">2003-02-04 06:58</span></dd>
+    <dt>Total Files:</dt>
+    <dd>6</dd>
+    <dt>Deleted Files:</dt>
+    <dd>1</dd>
+    <dt>Lines of Code:</dt>
+    <dd>846</dd>
+</dl>
+<p><a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/">Browse with ViewVC</a></p>
+<p class="dirtree">
+<a href="dir.html">[root]</a>/<a href="dir_statcvs.html">statcvs</a>/<a href="dir_statcvs_tests-src.html">tests-src</a>/<a href="dir_statcvs_tests-src_net.html">net</a>/<a href="dir_statcvs_tests-src_net_sf.html">sf</a>/<a href="dir_statcvs_tests-src_net_sf_statcvs.html">statcvs</a>/<strong>util</strong><br/>
+</p>
+
+<div class="section">
+<subsection name ="Lines of Code">
+<p class="chart"><img src="loc_module_statcvs_tests-src_net_sf_statcvs_util.png" alt="statcvs/tests-src/net/sf/statcvs/util/ Lines of Code" width="952" height="596" /></p></subsection></div>
+<div class="section">
+<subsection name ="Developers">
+  <table  class="statCvsTable" rules="groups" summary="All authors and the number of their changes and lines of code in this directory">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Changes</th>
+        <th>Lines of Code</th>
+        <th>Lines per Change</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Totals</th>
+        <td>28 (100.0%)</td>
+        <td>1612 (100.0%)</td>
+        <td>57.5</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="user_benoitx.html" class="author">Benoit Xhenseval</a></th>
+        <td>6 (21.4%)</td>
+        <td>633 (39.3%)</td>
+        <td>105.5</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_cyganiak.html" class="author">Richard Cyganiak</a></th>
+        <td>16 (57.1%)</td>
+        <td>588 (36.5%)</td>
+        <td>36.7</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="user_lukasz.html" class="author">Lukasz Pekacki</a></th>
+        <td>5 (17.9%)</td>
+        <td>376 (23.3%)</td>
+        <td>75.2</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="user_jkealey.html" class="author">Jason Kealey</a></th>
+        <td>1 (3.6%)</td>
+        <td>15 (0.9%)</td>
+        <td>15.0</td>
+      </tr>
+    </tbody>
+  </table>
+
+</subsection></div>
+<div class="section">
+<subsection name ="Most Recent Commits">
+<dl class="commitlist">
+  <dt><a name="13"></a>
+    <a href="user_benoitx.html" class="author">Benoit Xhenseval</a>
+    <span class="date">2008-04-02 12:22</span>
+  </dt>
+  <dd>
+    <p class="comment">
+Done an Eclipse cleanUp in order to reduce number of warnings by FindBugs / Checkstyle / PMD tools.<br />
+Sorry if it is looking like a massive change...
+    </p>
+    <p class="commitdetails"><strong>633</strong> lines of code changed in <span class="files">6 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.7&amp;r2=1.8" class="webrepository">AllTests.java</a>&#160;<span class="change">(+15&#160;-15)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/CvsLogUtilsTest.java?r1=1.3&amp;r2=1.4" class="webrepository">CvsLogUtilsTest.java</a>&#160;<span class="change">(+42&#160;-53)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/FilePatternMatcherTest.java?r1=1.1&amp;r2=1.2" class="webrepository">FilePatternMatcherTest.java</a>&#160;<span class="change">(+201&#160;-201)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/FileUtilsTest.java?r1=1.2&amp;r2=1.3" class="webrepository">FileUtilsTest.java</a>&#160;<span class="change">(+37&#160;-39)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/IntegerMapTest.java?r1=1.3&amp;r2=1.4" class="webrepository">IntegerMapTest.java</a>&#160;<span class="change">(+257&#160;-257)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/LookaheadReaderTest.java?r1=1.2&amp;r2=1.3" class="webrepository">LookaheadReaderTest.java</a>&#160;<span class="change">(+81&#160;-81)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="12"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 12:37</span>
+  </dt>
+  <dd>
+    <p class="comment">
+Refactor:<br />
+- OutputUtils.escapeHTML =&gt; HTML.escape<br />
+- OutputUtils =&gt; ChartUtils<br />
+- StatConstants.* =&gt; HTML.*
+    </p>
+    <p class="commitdetails"><strong>0</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.6&amp;r2=1.7" class="webrepository">AllTests.java</a>&#160;<span class="change">(-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/OutputUtilsTest.java?rev=1.3&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">OutputUtilsTest.java</a>&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="11"></a>
+    <a href="user_jkealey.html" class="author">Jason Kealey</a>
+    <span class="date">2006-11-22 16:29</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Refactoring of StatCVS so that StatSVN can properly extend it.<br />
+Added StatSVN features: bugzilla integration, viewvc integration, xdoc export<br />
+Many thanks to Benoit Xhenseval for refactoring both StatCVS and StatSVN and providing xdoc support.
+    </p>
+    <p class="commitdetails"><strong>15</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/OutputUtilsTest.java?r1=1.2&amp;r2=1.3" class="webrepository">OutputUtilsTest.java</a>&#160;<span class="change">(+15&#160;-15)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="10"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2004-10-10 12:29</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.2</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Changed LookaheadReader to basically have java.util.Iterator semantics; parser and tests updated accordingly. This also fixes the infinite loop when a log ends prematurely.
+    </p>
+    <p class="commitdetails"><strong>50</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/LookaheadReaderTest.java?r1=1.1&amp;r2=1.2" class="webrepository">LookaheadReaderTest.java</a>&#160;<span class="change">(+50&#160;-49)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="9"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-06-04 22:50</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+- made first command line parameter (project name) optional<br />
+<br />
+- module name will be retrieved from the logfile and used as default<br />
+<br />
+- project name can be specified using new -title option
+    </p>
+    <p class="commitdetails"><strong>19</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/CvsLogUtilsTest.java?r1=1.2&amp;r2=1.3" class="webrepository">CvsLogUtilsTest.java</a>&#160;<span class="change">(+19&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="8"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-06-04 17:19</span>
+  </dt>
+  <dd>
+    <p class="comment">
+implemented [ 597955 ] Specify filename filters for actual code<br />
+<br />
+- FilePatternMatcher matches filenames against Ant-style wildcard patterns<br />
+<br />
+- new -include &lt;pattern-list&gt; and -exclude &lt;pattern-list&gt; command line switches to specify which files should be included in the analysis
+    </p>
+    <p class="commitdetails"><strong>239</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.5&amp;r2=1.6" class="webrepository">AllTests.java</a>&#160;<span class="change">(+2&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/FilePatternMatcherTest.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">FilePatternMatcherTest.java</a>&#160;<span class="new">(new&#160;234)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/FileUtilsTest.java?r1=1.1&amp;r2=1.2" class="webrepository">FileUtilsTest.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="7"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-06-03 10:26</span>
+  </dt>
+  <dd>
+    <p class="comment">
+moved some generic stuff from Builder to FileUtils and CvsLogUtils
+    </p>
+    <p class="commitdetails"><strong>91</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.4&amp;r2=1.5" class="webrepository">AllTests.java</a>&#160;<span class="change">(+3&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/CvsLogUtilsTest.java?r1=1.1&amp;r2=1.2" class="webrepository">CvsLogUtilsTest.java</a>&#160;<span class="change">(+14&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/FileUtilsTest.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">FileUtilsTest.java</a>&#160;<span class="new">(new&#160;74)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="6"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-06-01 18:48</span>
+  </dt>
+  <dd>
+    <p class="comment">
+heavy refactoring of the input package<br />
+<br />
+- rewrote CvsRevisionParser to get rid of its state machine design<br />
+<br />
+- added LookaheadReader which allows reading the same line multiple times<br />
+<br />
+- moved much responsibility from the parser classes to Builder<br />
+<br />
+- parser classes now look much more similiar to each other
+    </p>
+    <p class="commitdetails"><strong>177</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.3&amp;r2=1.4" class="webrepository">AllTests.java</a>&#160;<span class="change">(+2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/CvsLogUtilsTest.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">CvsLogUtilsTest.java</a>&#160;<span class="new">(new&#160;58)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/LookaheadReaderTest.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LookaheadReaderTest.java</a>&#160;<span class="new">(new&#160;117)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="5"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-04-15 23:27</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+lots of refactorings and fixes<br />
+<br />
+- tried to untangle creation process for pages and charts<br />
+<br />
+- replaced LinesOfCodeIterator by LOCSeriesBuilder<br />
+<br />
+- better handling of very small and empty repositories<br />
+<br />
+- more stuff
+    </p>
+    <p class="commitdetails"><strong>9</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/IntegerMapTest.java?r1=1.2&amp;r2=1.3" class="webrepository">IntegerMapTest.java</a>&#160;<span class="change">(+9)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="4"></a>
+    <a href="user_lukasz.html" class="author">Lukasz Pekacki</a>
+    <span class="date">2003-03-25 01:20</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.2</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Minor code review tasks. <br />
+<br />
+Added some javadocs<br />
+<br />
+Fixed some unhandled Exceptions
+    </p>
+    <p class="commitdetails"><strong>20</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/OutputUtilsTest.java?r1=1.1&amp;r2=1.2" class="webrepository">OutputUtilsTest.java</a>&#160;<span class="change">(+20&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="3"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2003-03-23 14:54</span>
+  </dt>
+  <dd>
+    <p class="comment">
+- Commit log: Improved escaping of CVS comments for HTML output<br />
+<br />
+- new method OutputUtils.escapeHtml(String)<br />
+<br />
+- added 100th unit test :-)
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.2&amp;r2=1.3" class="webrepository">AllTests.java</a>&#160;<span class="change">(+1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/OutputUtilsTest.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">OutputUtilsTest.java</a>&#160;<span class="new">(new&#160;2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="2"></a>
+    <a href="user_lukasz.html" class="author">Lukasz Pekacki</a>
+    <span class="date">2003-03-18 10:33</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.2</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+License changed to LGPL
+    </p>
+    <p class="commitdetails"><strong>26</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.1&amp;r2=1.2" class="webrepository">AllTests.java</a>&#160;<span class="change">(+13&#160;-11)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/IntegerMapTest.java?r1=1.1&amp;r2=1.2" class="webrepository">IntegerMapTest.java</a>&#160;<span class="change">(+13&#160;-11)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="1"></a>
+    <a href="user_lukasz.html" class="author">Lukasz Pekacki</a>
+    <span class="date">2003-02-04 06:58</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.1</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Move all test classes out of their directories into the<br />
+<br />
+new test dircetory test-src
+    </p>
+    <p class="commitdetails"><strong>330</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">AllTests.java</a>&#160;<span class="new">(new&#160;45)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/IntegerMapTest.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">IntegerMapTest.java</a>&#160;<span class="new">(new&#160;285)</span>
+      </li>
+    </ul>
+  </dd>
+
+</dl>
+
+</subsection></div></section><div id="generatedby">Generated by <a href="http://statcvs.sf.net">StatCVS</a> 0.7.0-beta</div>
+</body>
+</document>

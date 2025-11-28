@@ -1,0 +1,1962 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns:lxslt="http://xml.apache.org/xslt">
+<properties><title>December 2006 Commit Log</title></properties>
+<head>    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatCVS 0.7.0-beta"/>
+   <link rel="stylesheet" href="objectlab-statcvs-xdoc.css" type="text/css"/>
+<script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&#38;login=statsvn&#38;apiKey=R_2c362b417d0517c27876cbaca1bb68cc"></script>
+<script type="text/javascript" charset="utf-8">
+   // wait until page is loaded to call API
+   var redir_url;
+   var short_url;
+   BitlyCB.myShortenCallback = function(data) {
+      // this is how to get a result of shortening a single url
+      var result;
+      short_url=null;
+      for (var r in data.results) {
+         result = data.results[r];
+         result['longUrl'] = r;
+         short_url = result['shortUrl'];
+         break;
+      }
+      if (short_url==null) // bit.ly failed
+      document.location=redir_url;
+      else
+      redirToTwitter();
+   };
+   function shortenTweet(url) {
+      if (short_url == null || redir_url!=url) {
+      redir_url = url;
+      BitlyClient.shorten(document.location, 'BitlyCB.myShortenCallback');
+      }
+      else
+      redirToTwitter();
+      return false;
+   }
+   function redirToTwitter() { 
+      // replace {0} which is visible as %7B0} in the link
+      document.location = redir_url.replace('%7B0}', short_url);
+   }
+</script>
+</head>
+
+<body><section name="December 2006 Commit Log">
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for StatCVS</a></div>
+
+<div id="nav" class="section">
+<subsection name ="Commit Logs">
+<ul>
+    <li><a href="commitlog.html">January 2010</a></li>
+    <li><a href="2009-12.html">December 2009</a></li>
+    <li><a href="2009-11.html">November 2009</a></li>
+    <li><a href="2009-10.html">October 2009</a></li>
+    <li><a href="2009-09.html">September 2009</a></li>
+    <li><a href="2009-08.html">August 2009</a></li>
+    <li><a href="2009-07.html">July 2009</a></li>
+    <li><a href="2009-06.html">June 2009</a></li>
+    <li><a href="2009-05.html">May 2009</a></li>
+    <li><a href="2009-04.html">April 2009</a></li>
+    <li><a href="2009-03.html">March 2009</a></li>
+    <li><a href="2009-02.html">February 2009</a></li>
+    <li><a href="2009-01.html">January 2009</a></li>
+    <li><a href="2008-12.html">December 2008</a></li>
+    <li><a href="2008-11.html">November 2008</a></li>
+    <li><a href="2008-10.html">October 2008</a></li>
+    <li><a href="2008-09.html">September 2008</a></li>
+    <li><a href="2008-08.html">August 2008</a></li>
+    <li><a href="2008-07.html">July 2008</a></li>
+    <li><a href="2008-06.html">June 2008</a></li>
+    <li><a href="2008-05.html">May 2008</a></li>
+    <li><a href="2008-04.html">April 2008</a></li>
+    <li><a href="2008-03.html">March 2008</a></li>
+    <li><a href="2008-02.html">February 2008</a></li>
+    <li><a href="2008-01.html">January 2008</a></li>
+    <li><a href="2007-12.html">December 2007</a></li>
+    <li><a href="2007-11.html">November 2007</a></li>
+    <li><a href="2007-10.html">October 2007</a></li>
+    <li><a href="2007-09.html">September 2007</a></li>
+    <li><a href="2007-08.html">August 2007</a></li>
+    <li><a href="2007-07.html">July 2007</a></li>
+    <li><a href="2007-06.html">June 2007</a></li>
+    <li><a href="2007-05.html">May 2007</a></li>
+    <li><a href="2007-04.html">April 2007</a></li>
+    <li><a href="2007-03.html">March 2007</a></li>
+    <li><a href="2007-02.html">February 2007</a></li>
+    <li><a href="2007-01.html">January 2007</a></li>
+    <li><span class="here">December 2006</span></li>
+    <li><a href="2006-11.html">November 2006</a></li>
+    <li><a href="2006-10.html">October 2006</a></li>
+    <li><a href="2006-09.html">September 2006</a></li>
+    <li><a href="2006-08.html">August 2006</a></li>
+    <li><a href="2006-07.html">July 2006</a></li>
+    <li><a href="2006-06.html">June 2006</a></li>
+    <li><a href="2006-05.html">May 2006</a></li>
+    <li><a href="2006-04.html">April 2006</a></li>
+    <li><a href="2006-03.html">March 2006</a></li>
+    <li><a href="2006-02.html">February 2006</a></li>
+    <li><a href="2006-01.html">January 2006</a></li>
+    <li><a href="2005-12.html">December 2005</a></li>
+    <li><a href="2005-11.html">November 2005</a></li>
+    <li><a href="2005-10.html">October 2005</a></li>
+    <li><a href="2005-09.html">September 2005</a></li>
+    <li><a href="2005-08.html">August 2005</a></li>
+    <li><a href="2005-07.html">July 2005</a></li>
+    <li><a href="2005-06.html">June 2005</a></li>
+    <li><a href="2005-05.html">May 2005</a></li>
+    <li><a href="2005-04.html">April 2005</a></li>
+    <li><a href="2005-03.html">March 2005</a></li>
+    <li><a href="2005-02.html">February 2005</a></li>
+    <li><a href="2005-01.html">January 2005</a></li>
+    <li><a href="2004-12.html">December 2004</a></li>
+    <li><a href="2004-11.html">November 2004</a></li>
+    <li><a href="2004-10.html">October 2004</a></li>
+    <li><a href="2004-09.html">September 2004</a></li>
+    <li><a href="2004-08.html">August 2004</a></li>
+    <li><a href="2004-07.html">July 2004</a></li>
+    <li><a href="2004-06.html">June 2004</a></li>
+    <li><a href="2004-05.html">May 2004</a></li>
+    <li><a href="2004-04.html">April 2004</a></li>
+    <li><a href="2004-03.html">March 2004</a></li>
+    <li><a href="2004-02.html">February 2004</a></li>
+    <li><a href="2004-01.html">January 2004</a></li>
+    <li><a href="2003-12.html">December 2003</a></li>
+    <li><a href="2003-11.html">November 2003</a></li>
+    <li><a href="2003-10.html">October 2003</a></li>
+    <li><a href="2003-09.html">September 2003</a></li>
+    <li><a href="2003-08.html">August 2003</a></li>
+    <li><a href="2003-07.html">July 2003</a></li>
+    <li><a href="2003-06.html">June 2003</a></li>
+    <li><a href="2003-05.html">May 2003</a></li>
+    <li><a href="2003-04.html">April 2003</a></li>
+    <li><a href="2003-03.html">March 2003</a></li>
+    <li><a href="2003-02.html">February 2003</a></li>
+    <li><a href="2003-01.html">January 2003</a></li>
+    <li><a href="2002-12.html">December 2002</a></li>
+    <li><a href="2002-11.html">November 2002</a></li>
+    <li><a href="2002-10.html">October 2002</a></li>
+    <li><a href="2002-09.html">September 2002</a></li>
+    <li><a href="2002-08.html">August 2002</a></li>
+    <li><a href="2002-07.html">July 2002</a></li>
+</ul>
+</subsection></div><dl class="attributes">
+    <dt>Number of Commits:</dt>
+    <dd>70</dd>
+    <dt>Number of Active Developers:</dt>
+    <dd>3</dd>
+</dl>
+<dl class="commitlist">
+  <dt><a name="70"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-28 20:33</span>
+    <a class="permalink" title="Permalink to this commit" href="#70">#70</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.4</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Improved layout for XDoc
+    </p>
+    <p class="commitdetails"><strong>5</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupXDoc.java?r1=1.3&amp;r2=1.4" class="webrepository">MarkupXDoc.java</a>&#160;<span class="change">(+5&#160;-6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="69"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-28 20:32</span>
+    <a class="permalink" title="Permalink to this commit" href="#69">#69</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+SymbolicNames can have an explicit date. Needed for StatSVN.
+    </p>
+    <p class="commitdetails"><strong>18</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/model</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/model/SymbolicName.java?r1=1.2&amp;r2=1.3" class="webrepository">SymbolicName.java</a>&#160;<span class="change">(+18&#160;-5)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="68"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-28 17:28</span>
+    <a class="permalink" title="Permalink to this commit" href="#68">#68</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.9</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Shuffled stuff around on the AllDevelopers page
+    </p>
+    <p class="commitdetails"><strong>9</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.8&amp;r2=1.9" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+9&#160;-8)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="67"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-28 17:23</span>
+    <a class="permalink" title="Permalink to this commit" href="#67">#67</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.7</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed NPE when developer has 0 lines of code (modified only binary files?)
+    </p>
+    <p class="commitdetails"><strong>4</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DeveloperPageMaker.java?r1=1.6&amp;r2=1.7" class="webrepository">DeveloperPageMaker.java</a>&#160;<span class="change">(+4&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="66"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-16 23:40</span>
+    <a class="permalink" title="Permalink to this commit" href="#66">#66</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+XDoc CSS fixes (Benoit)
+    </p>
+    <p class="commitdetails"><strong>46</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/web-files</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/web-files/objectlab-statcvs-xdoc.css?r1=1.2&amp;r2=1.3" class="webrepository">objectlab-statcvs-xdoc.css</a>&#160;<span class="change">(+46&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="65"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-16 23:36</span>
+    <a class="permalink" title="Permalink to this commit" href="#65">#65</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.2</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed NPE with StatSVN
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/DevelopersOfTheMonthTable.java?r1=1.1&amp;r2=1.2" class="webrepository">DevelopersOfTheMonthTable.java</a>&#160;<span class="change">(+3&#160;-6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="64"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-16 19:25</span>
+    <a class="permalink" title="Permalink to this commit" href="#64">#64</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.8</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+text tweak
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.7&amp;r2=1.8" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="63"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-16 19:16</span>
+    <a class="permalink" title="Permalink to this commit" href="#63">#63</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.10</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Tweak some chart colors
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.9&amp;r2=1.10" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="62"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-16 19:11</span>
+    <a class="permalink" title="Permalink to this commit" href="#62">#62</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Tweak some chart colors
+    </p>
+    <p class="commitdetails"><strong>31</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ChartUtils.java?r1=1.1&amp;r2=1.2" class="webrepository">ChartUtils.java</a>&#160;<span class="change">(+15&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.8&amp;r2=1.9" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+16&#160;-12)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="61"></a>
+    <a href="user_jentzsch.html" class="author">Anja Jentzsch</a>
+    <span class="date">2006-12-16 19:07</span>
+    <a class="permalink" title="Permalink to this commit" href="#61">#61</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Developer Of The Month table added to the All Developers Page
+    </p>
+    <p class="commitdetails"><strong>126</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.6&amp;r2=1.7" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+8&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/DevelopersOfTheMonthTable.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DevelopersOfTheMonthTable.java</a>&#160;<span class="new">(new&#160;118)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="60"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-16 17:32</span>
+    <a class="permalink" title="Permalink to this commit" href="#60">#60</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.2</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Make XDoc stylesheet work with latest reports
+    </p>
+    <p class="commitdetails"><strong>12</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/web-files</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/web-files/objectlab-statcvs-xdoc.css?r1=1.1&amp;r2=1.2" class="webrepository">objectlab-statcvs-xdoc.css</a>&#160;<span class="change">(+12)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="59"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-11 08:49</span>
+    <a class="permalink" title="Permalink to this commit" href="#59">#59</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Review from Benoit Xhenseval:<br />
+- fixed two XML well-formedness errors<br />
+- re-added tags to file statistics charts, and made them large size again<br />
+- fixed a silly NPE when running with no WebRepository (regression)
+    </p>
+    <p class="commitdetails"><strong>14</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeLineChartMaker.java?r1=1.6&amp;r2=1.7" class="webrepository">TimeLineChartMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?r1=1.7&amp;r2=1.8" class="webrepository">CommitListFormatter.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/FileSizesPageMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">FileSizesPageMaker.java</a>&#160;<span class="change">(+3&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupXDoc.java?r1=1.2&amp;r2=1.3" class="webrepository">MarkupXDoc.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/HTMLTableCellRenderer.java?r1=1.6&amp;r2=1.7" class="webrepository">HTMLTableCellRenderer.java</a>&#160;<span class="change">(+5&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="58"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 15:30</span>
+    <a class="permalink" title="Permalink to this commit" href="#58">#58</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.8</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+bugfix (regression), silly NPE
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?r1=1.7&amp;r2=1.8" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="change">(+2&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="57"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 15:30</span>
+    <a class="permalink" title="Permalink to this commit" href="#57">#57</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.5</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+removed unused code
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ChartImage.java?r1=1.4&amp;r2=1.5" class="webrepository">ChartImage.java</a>&#160;<span class="change">(+1&#160;-17)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="56"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 15:29</span>
+    <a class="permalink" title="Permalink to this commit" href="#56">#56</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.17</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Re-instated messages for log out-of-sync issues, but now as info not warning
+    </p>
+    <p class="commitdetails"><strong>9</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/FileBuilder.java?r1=1.16&amp;r2=1.17" class="webrepository">FileBuilder.java</a>&#160;<span class="change">(+9&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="55"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 15:13</span>
+    <a class="permalink" title="Permalink to this commit" href="#55">#55</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+No longer needed
+    </p>
+    <p class="commitdetails"><strong>0</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/EmptyRepositoryException.java?rev=1.2&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">EmptyRepositoryException.java</a>&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="54"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 14:26</span>
+    <a class="permalink" title="Permalink to this commit" href="#54">#54</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.4</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Documentation
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ReportConfig.java?r1=1.3&amp;r2=1.4" class="webrepository">ReportConfig.java</a>&#160;<span class="change">(+3&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="53"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 14:22</span>
+    <a class="permalink" title="Permalink to this commit" href="#53">#53</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Refactoring to reduce the tunneling of configuration options through the static ConfigurationOptions class. Instead, a ReportConfig object is now widely passed around and has getters for most of the options.
+    </p>
+    <p class="commitdetails"><strong>343</strong> lines of code changed in <span class="files">35 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.55&amp;r2=1.56" class="webrepository">Main.java</a>&#160;<span class="change">(+14&#160;-6)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/CommitScatterChartMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">CommitScatterChartMaker.java</a>&#160;<span class="change">(+4&#160;-8)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?r1=1.6&amp;r2=1.7" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="change">(+15&#160;-16)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.7&amp;r2=1.8" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+23&#160;-22)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ModifyAddChartMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">ModifyAddChartMaker.java</a>&#160;<span class="change">(+3&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeBarChartMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">TimeBarChartMaker.java</a>&#160;<span class="change">(+18&#160;-19)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeLineChartMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">TimeLineChartMaker.java</a>&#160;<span class="change">(+10&#160;-11)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/Builder.java?r1=1.37&amp;r2=1.38" class="webrepository">Builder.java</a>&#160;<span class="change">(+10&#160;-8)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ConfigurationException.java?r1=1.1&amp;r2=1.2" class="webrepository">ConfigurationException.java</a>&#160;<span class="change">(+5&#160;-5)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CssHandler.java?r1=1.4&amp;r2=1.5" class="webrepository">CssHandler.java</a>&#160;<span class="change">(+5&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ReportConfig.java?r1=1.2&amp;r2=1.3" class="webrepository">ReportConfig.java</a>&#160;<span class="change">(+87&#160;-7)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+6&#160;-9)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?r1=1.6&amp;r2=1.7" class="webrepository">CommitListFormatter.java</a>&#160;<span class="change">(+11&#160;-13)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DeveloperPageMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">DeveloperPageMaker.java</a>&#160;<span class="change">(+12&#160;-12)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?r1=1.7&amp;r2=1.8" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="change">(+8&#160;-8)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectorySizesPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">DirectorySizesPageMaker.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/FileSizesPageMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">FileSizesPageMaker.java</a>&#160;<span class="change">(+7&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/HTML.java?r1=1.3&amp;r2=1.4" class="webrepository">HTML.java</a>&#160;<span class="change">(+1&#160;-20)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/IndexPageMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">IndexPageMaker.java</a>&#160;<span class="change">(+14&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LOCPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">LOCPageMaker.java</a>&#160;<span class="change">(+1&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">LogPageMaker.java</a>&#160;<span class="change">(+2&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupHTML.java?r1=1.2&amp;r2=1.3" class="webrepository">MarkupHTML.java</a>&#160;<span class="change">(+3&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupSyntax.java?r1=1.1&amp;r2=1.2" class="webrepository">MarkupSyntax.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupXDoc.java?r1=1.1&amp;r2=1.2" class="webrepository">MarkupXDoc.java</a>&#160;<span class="change">(+3&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.9&amp;r2=1.10" class="webrepository">Page.java</a>&#160;<span class="change">(+2&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/ReportSuiteMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">ReportSuiteMaker.java</a>&#160;<span class="change">(+15&#160;-16)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/HTMLTableCellRenderer.java?r1=1.5&amp;r2=1.6" class="webrepository">HTMLTableCellRenderer.java</a>&#160;<span class="change">(+11&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/TableCellRenderer.java?r1=1.8&amp;r2=1.9" class="webrepository">TableCellRenderer.java</a>&#160;<span class="change">(+6&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reportmodel</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reportmodel/FileColumn.java?r1=1.3&amp;r2=1.4" class="webrepository">FileColumn.java</a>&#160;<span class="change">(+13&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/FilesWithMostRevisionsTableReport.java?r1=1.5&amp;r2=1.6" class="webrepository">FilesWithMostRevisionsTableReport.java</a>&#160;<span class="change">(+8&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/LargestFilesTableReport.java?r1=1.6&amp;r2=1.7" class="webrepository">LargestFilesTableReport.java</a>&#160;<span class="change">(+8&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/BuilderTest.java?r1=1.24&amp;r2=1.25" class="webrepository">BuilderTest.java</a>&#160;<span class="change">(+6&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/DummyBuilder.java?r1=1.3&amp;r2=1.4" class="webrepository">DummyBuilder.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/FileBlockParserTest.java?r1=1.33&amp;r2=1.34" class="webrepository">FileBlockParserTest.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/LinesOfCodeTest.java?r1=1.20&amp;r2=1.21" class="webrepository">LinesOfCodeTest.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="52"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 12:37</span>
+    <a class="permalink" title="Permalink to this commit" href="#52">#52</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Refactor:<br />
+- OutputUtils.escapeHTML =&gt; HTML.escape<br />
+- OutputUtils =&gt; ChartUtils<br />
+- StatConstants.* =&gt; HTML.*
+    </p>
+    <p class="commitdetails"><strong>173</strong> lines of code changed in <span class="files">17 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ChartUtils.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ChartUtils.java</a>&#160;<span class="new">(new&#160;46)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="change">(+2&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.6&amp;r2=1.7" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+2&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/BugzillaIntegration.java?r1=1.4&amp;r2=1.5" class="webrepository">BugzillaIntegration.java</a>&#160;<span class="change">(+1&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?r1=1.5&amp;r2=1.6" class="webrepository">CommitListFormatter.java</a>&#160;<span class="change">(+5&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryTreeFormatter.java?r1=1.3&amp;r2=1.4" class="webrepository">DirectoryTreeFormatter.java</a>&#160;<span class="change">(+2&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/HTML.java?r1=1.2&amp;r2=1.3" class="webrepository">HTML.java</a>&#160;<span class="change">(+41&#160;-43)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupHTML.java?r1=1.1&amp;r2=1.2" class="webrepository">MarkupHTML.java</a>&#160;<span class="change">(+2&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.8&amp;r2=1.9" class="webrepository">Page.java</a>&#160;<span class="change">(+8&#160;-9)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/TableRenderer.java?r1=1.39&amp;r2=1.40" class="webrepository">TableRenderer.java</a>&#160;<span class="change">(+4&#160;-4)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/util/OutputUtils.java?rev=1.7&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">OutputUtils.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/util/StatConstants.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">StatConstants.java</a>&#160;<span class="del">(del)</span>
+      </li>
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/AllTests.java?r1=1.7&amp;r2=1.8" class="webrepository">AllTests.java</a>&#160;<span class="change">(+1)</span>
+      </li>
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/pages/AllTests.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">AllTests.java</a>&#160;<span class="new">(new&#160;20)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/pages/HTMLTest.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">HTMLTest.java</a>&#160;<span class="new">(new&#160;39)</span>
+      </li>
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/AllTests.java?r1=1.6&amp;r2=1.7" class="webrepository">AllTests.java</a>&#160;<span class="change">(-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/util/OutputUtilsTest.java?rev=1.3&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">OutputUtilsTest.java</a>&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="51"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 00:44</span>
+    <a class="permalink" title="Permalink to this commit" href="#51">#51</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.13</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Version number to 0.3-dev; we have enough new stuff to warrant a 0.1 bump
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/project.properties?r1=1.12&amp;r2=1.13" class="webrepository">project.properties</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="50"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-09 00:38</span>
+    <a class="permalink" title="Permalink to this commit" href="#50">#50</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Added file type report
+    </p>
+    <p class="commitdetails"><strong>106</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/FileSizesPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">FileSizesPageMaker.java</a>&#160;<span class="change">(+4&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/FileTypeReport.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">FileTypeReport.java</a>&#160;<span class="new">(new&#160;102)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="49"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 23:37</span>
+    <a class="permalink" title="Permalink to this commit" href="#49">#49</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.5</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Force 0 lower bound for time line charts (is better for avg file size chart)
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeLineChartMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">TimeLineChartMaker.java</a>&#160;<span class="change">(+2&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="48"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 22:47</span>
+    <a class="permalink" title="Permalink to this commit" href="#48">#48</a>
+  </dt>
+  <dd>
+    <p class="comment">
+This might conserve a bit of memory
+    </p>
+    <p class="commitdetails"><strong>12</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ChartImage.java?r1=1.3&amp;r2=1.4" class="webrepository">ChartImage.java</a>&#160;<span class="change">(+3&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.7&amp;r2=1.8" class="webrepository">Page.java</a>&#160;<span class="change">(+9&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="47"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 22:33</span>
+    <a class="permalink" title="Permalink to this commit" href="#47">#47</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Work around a JFreeChart bug that causes NPE
+    </p>
+    <p class="commitdetails"><strong>11</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/LOCSeriesBuilder.java?r1=1.2&amp;r2=1.3" class="webrepository">LOCSeriesBuilder.java</a>&#160;<span class="change">(+11&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="46"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 21:21</span>
+    <a class="permalink" title="Permalink to this commit" href="#46">#46</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.30</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Test failed because it worked with inconsistent VersionedFile objects
+    </p>
+    <p class="commitdetails"><strong>6</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/model</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/model/CvsContentTest.java?r1=1.29&amp;r2=1.30" class="webrepository">CvsContentTest.java</a>&#160;<span class="change">(+6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="45"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 21:15</span>
+    <a class="permalink" title="Permalink to this commit" href="#45">#45</a>
+  </dt>
+  <dd>
+    <p class="comment">
+- Repository.getSymbolicNames() now returns only those matching ConfigurationOptions.getSymbolicNamesPattern()<br />
+- Added Repository.getHead() special symbolic name<br />
+- Show repository tags in commit log<br />
+- Add table with all tags to index page
+    </p>
+    <p class="commitdetails"><strong>351</strong> lines of code changed in <span class="files">16 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/SymbolicNameAnnotation.java?r1=1.4&amp;r2=1.5" class="webrepository">SymbolicNameAnnotation.java</a>&#160;<span class="change">(+3&#160;-11)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/Builder.java?r1=1.36&amp;r2=1.37" class="webrepository">Builder.java</a>&#160;<span class="change">(+22&#160;-7)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/model</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/model/Repository.java?r1=1.1&amp;r2=1.2" class="webrepository">Repository.java</a>&#160;<span class="change">(+13&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?r1=1.4&amp;r2=1.5" class="webrepository">CommitListFormatter.java</a>&#160;<span class="change">(+28&#160;-10)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DeveloperPageMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">DeveloperPageMaker.java</a>&#160;<span class="change">(+3&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?r1=1.6&amp;r2=1.7" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/HTML.java?r1=1.1&amp;r2=1.2" class="webrepository">HTML.java</a>&#160;<span class="change">(+6&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/IndexPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">IndexPageMaker.java</a>&#160;<span class="change">(+6&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageGroupMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">LogPageGroupMaker.java</a>&#160;<span class="change">(+8&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">LogPageMaker.java</a>&#160;<span class="change">(+35&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/PageGroup.java?r1=1.5&amp;r2=1.6" class="webrepository">PageGroup.java</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/HTMLTableCellRenderer.java?r1=1.4&amp;r2=1.5" class="webrepository">HTMLTableCellRenderer.java</a>&#160;<span class="change">(+10&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/TableCellRenderer.java?r1=1.7&amp;r2=1.8" class="webrepository">TableCellRenderer.java</a>&#160;<span class="change">(+8&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reportmodel</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reportmodel/LinkColumn.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LinkColumn.java</a>&#160;<span class="new">(new&#160;53)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/TagReport.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">TagReport.java</a>&#160;<span class="new">(new&#160;146)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/web-files</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/web-files/statcvs.css?r1=1.19&amp;r2=1.20" class="webrepository">statcvs.css</a>&#160;<span class="change">(+7)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="44"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 17:08</span>
+    <a class="permalink" title="Permalink to this commit" href="#44">#44</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.4</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Space out overlapping tags in charts
+    </p>
+    <p class="commitdetails"><strong>31</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/SymbolicNameAnnotation.java?r1=1.3&amp;r2=1.4" class="webrepository">SymbolicNameAnnotation.java</a>&#160;<span class="change">(+31&#160;-8)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="43"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 17:08</span>
+    <a class="permalink" title="Permalink to this commit" href="#43">#43</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.5</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Tags are more visible on lighter blue color
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/CommitScatterChartMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">CommitScatterChartMaker.java</a>&#160;<span class="change">(+3&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="42"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 16:28</span>
+    <a class="permalink" title="Permalink to this commit" href="#42">#42</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.36</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Bugfix: NPE with initially dead files (regression)
+    </p>
+    <p class="commitdetails"><strong>5</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/Builder.java?r1=1.35&amp;r2=1.36" class="webrepository">Builder.java</a>&#160;<span class="change">(+5&#160;-5)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="41"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 16:19</span>
+    <a class="permalink" title="Permalink to this commit" href="#41">#41</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Added -no-developer option to exclude noisy accounts
+    </p>
+    <p class="commitdetails"><strong>313</strong> lines of code changed in <span class="files">19 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/build.xml?r1=1.34&amp;r2=1.35" class="webrepository">build.xml</a>&#160;<span class="change">(+2&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.16&amp;r2=1.17" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+15&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/CommitScatterChartMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">CommitScatterChartMaker.java</a>&#160;<span class="change">(+9&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+17&#160;-10)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ModifyAddChartMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">ModifyAddChartMaker.java</a>&#160;<span class="change">(+14&#160;-5)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CommandLineParser.java?r1=1.20&amp;r2=1.21" class="webrepository">CommandLineParser.java</a>&#160;<span class="change">(+7&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ConfigurationOptions.java?r1=1.22&amp;r2=1.23" class="webrepository">ConfigurationOptions.java</a>&#160;<span class="change">(+24&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ReportConfig.java?r1=1.1&amp;r2=1.2" class="webrepository">ReportConfig.java</a>&#160;<span class="change">(+7&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+43&#160;-12)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DeveloperPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">DeveloperPageMaker.java</a>&#160;<span class="change">(+10&#160;-5)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?r1=1.5&amp;r2=1.6" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/IndexPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">IndexPageMaker.java</a>&#160;<span class="change">(+10&#160;-11)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/AbstractLocTableReport.java?r1=1.9&amp;r2=1.10" class="webrepository">AbstractLocTableReport.java</a>&#160;<span class="change">(+23&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/AuthorsForDirectoryTableReport.java?r1=1.5&amp;r2=1.6" class="webrepository">AuthorsForDirectoryTableReport.java</a>&#160;<span class="change">(+6&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/AuthorsTableReport.java?rev=1.4&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">AuthorsTableReport.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/DevelopersTableReport.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DevelopersTableReport.java</a>&#160;<span class="new">(new&#160;44)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/DirectoriesForAuthorTableReport.java?r1=1.4&amp;r2=1.5" class="webrepository">DirectoriesForAuthorTableReport.java</a>&#160;<span class="change">(+5&#160;-5)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/TopAuthorsTableReport.java?rev=1.3&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">TopAuthorsTableReport.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/TopDevelopersTableReport.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">TopDevelopersTableReport.java</a>&#160;<span class="new">(new&#160;75)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="40"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 15:01</span>
+    <a class="permalink" title="Permalink to this commit" href="#40">#40</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Changed directory sizes table to show current LOC insead of total contributed LOC; removed the lines per change column
+    </p>
+    <p class="commitdetails"><strong>53</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/AbstractLocTableReport.java?r1=1.8&amp;r2=1.9" class="webrepository">AbstractLocTableReport.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/DirectoriesTableReport.java?r1=1.4&amp;r2=1.5" class="webrepository">DirectoriesTableReport.java</a>&#160;<span class="change">(+50&#160;-18)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="39"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 14:03</span>
+    <a class="permalink" title="Permalink to this commit" href="#39">#39</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.5</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Show # of deleted files on directory pages
+    </p>
+    <p class="commitdetails"><strong>14</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="change">(+14&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="38"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 13:55</span>
+    <a class="permalink" title="Permalink to this commit" href="#38">#38</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Improved reporting of missing CVS metadata and out-of-sync state
+    </p>
+    <p class="commitdetails"><strong>30</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.54&amp;r2=1.55" class="webrepository">Main.java</a>&#160;<span class="change">(+4&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/Builder.java?r1=1.34&amp;r2=1.35" class="webrepository">Builder.java</a>&#160;<span class="change">(+18&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/FileBuilder.java?r1=1.15&amp;r2=1.16" class="webrepository">FileBuilder.java</a>&#160;<span class="change">(+8&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="37"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 13:22</span>
+    <a class="permalink" title="Permalink to this commit" href="#37">#37</a>
+  </dt>
+  <dd>
+    <p class="comment">
+- show warning if specified log is not for specified working copy<br />
+- show warning if log and/or working copy need updating
+    </p>
+    <p class="commitdetails"><strong>60</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.53&amp;r2=1.54" class="webrepository">Main.java</a>&#160;<span class="change">(+10&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/Builder.java?r1=1.33&amp;r2=1.34" class="webrepository">Builder.java</a>&#160;<span class="change">(+34&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/FileBuilder.java?r1=1.14&amp;r2=1.15" class="webrepository">FileBuilder.java</a>&#160;<span class="change">(+16&#160;-5)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="36"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 13:21</span>
+    <a class="permalink" title="Permalink to this commit" href="#36">#36</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Added link to previous month at end of each commit log
+    </p>
+    <p class="commitdetails"><strong>45</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageGroupMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">LogPageGroupMaker.java</a>&#160;<span class="change">(+1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/NavigationNode.java?r1=1.2&amp;r2=1.3" class="webrepository">NavigationNode.java</a>&#160;<span class="change">(+2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.6&amp;r2=1.7" class="webrepository">Page.java</a>&#160;<span class="change">(+34)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/PageGroup.java?r1=1.4&amp;r2=1.5" class="webrepository">PageGroup.java</a>&#160;<span class="change">(+8)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="35"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 02:05</span>
+    <a class="permalink" title="Permalink to this commit" href="#35">#35</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Don't show LOC chart for directories that contain only binary files
+    </p>
+    <p class="commitdetails"><strong>15</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+4&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/LOCSeriesBuilder.java?r1=1.1&amp;r2=1.2" class="webrepository">LOCSeriesBuilder.java</a>&#160;<span class="change">(+11&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="34"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 01:34</span>
+    <a class="permalink" title="Permalink to this commit" href="#34">#34</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.4</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Show number of developers (patch #867600)
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+2&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="33"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 01:22</span>
+    <a class="permalink" title="Permalink to this commit" href="#33">#33</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.4</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed title of root directory page (regression)
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="32"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 01:02</span>
+    <a class="permalink" title="Permalink to this commit" href="#32">#32</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+HTML fix
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryTreeFormatter.java?r1=1.2&amp;r2=1.3" class="webrepository">DirectoryTreeFormatter.java</a>&#160;<span class="change">(+3&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="31"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 00:55</span>
+    <a class="permalink" title="Permalink to this commit" href="#31">#31</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.6</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+HTML fix
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.5&amp;r2=1.6" class="webrepository">Page.java</a>&#160;<span class="change">(+1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="30"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-08 00:47</span>
+    <a class="permalink" title="Permalink to this commit" href="#30">#30</a>
+  </dt>
+  <dd>
+    <p class="comment">
+HTML fixes
+    </p>
+    <p class="commitdetails"><strong>4</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?r1=1.3&amp;r2=1.4" class="webrepository">CommitListFormatter.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.4&amp;r2=1.5" class="webrepository">Page.java</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="29"></a>
+    <a href="user_uid91994.html" class="author">uid91994</a>
+    <span class="date">2006-12-08 00:26</span>
+    <a class="permalink" title="Permalink to this commit" href="#29">#29</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Another Big Refactoring.<br />
+- introduced ReportConfig object which is passed around during report creation, this makes many argument lists much shorter<br />
+- moved output.HTMLOutput to pages.ReportSuiteMaker<br />
+- moved output.HTMLTagger to pages.HTML<br />
+- changed the way the HTML/XDoc difference worked, now the interface is pages.MarkupSyntax<br />
+- simplified the registration of extra report, now they must be implemented as Pages and passed to the ReportSuiteMaker constructor<br />
+- moved LOCSeriesBuilder from output to reports
+    </p>
+    <p class="commitdetails"><strong>852</strong> lines of code changed in <span class="files">36 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.52&amp;r2=1.53" class="webrepository">Main.java</a>&#160;<span class="change">(+12&#160;-9)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ChartImage.java?r1=1.2&amp;r2=1.3" class="webrepository">ChartImage.java</a>&#160;<span class="change">(+2&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?r1=1.4&amp;r2=1.5" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+4&#160;-4)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/BugzillaIntegration.java?r1=1.3&amp;r2=1.4" class="webrepository">BugzillaIntegration.java</a>&#160;<span class="change">(+4&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ConfigurationOptions.java?r1=1.21&amp;r2=1.22" class="webrepository">ConfigurationOptions.java</a>&#160;<span class="change">(+9&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/DefaultCssHandler.java?r1=1.5&amp;r2=1.6" class="webrepository">DefaultCssHandler.java</a>&#160;<span class="change">(+3&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ExtraReportRegister.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ExtraReportRegister.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?rev=1.136&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">HTMLOutput.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLTagger.java?rev=1.41&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">HTMLTagger.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/LOCSeriesBuilder.java?rev=1.10&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LOCSeriesBuilder.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/OutputRenderer.java?rev=1.2&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">OutputRenderer.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/Report.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">Report.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ReportConfig.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ReportConfig.java</a>&#160;<span class="new">(new&#160;78)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/XDocOutput.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">XDocOutput.java</a>&#160;<span class="del">(del)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+20&#160;-31)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?r1=1.2&amp;r2=1.3" class="webrepository">CommitListFormatter.java</a>&#160;<span class="change">(+8&#160;-13)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DeveloperPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">DeveloperPageMaker.java</a>&#160;<span class="change">(+25&#160;-24)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="change">(+20&#160;-16)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectorySizesPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">DirectorySizesPageMaker.java</a>&#160;<span class="change">(+10&#160;-18)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryTreeFormatter.java?r1=1.1&amp;r2=1.2" class="webrepository">DirectoryTreeFormatter.java</a>&#160;<span class="change">(+6&#160;-11)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/FileSizesPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">FileSizesPageMaker.java</a>&#160;<span class="change">(+10&#160;-16)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/HTML.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">HTML.java</a>&#160;<span class="new">(new&#160;165)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/IndexPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">IndexPageMaker.java</a>&#160;<span class="change">(+12&#160;-19)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LOCPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">LOCPageMaker.java</a>&#160;<span class="change">(+11&#160;-19)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageGroupMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">LogPageGroupMaker.java</a>&#160;<span class="change">(+8&#160;-8)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">LogPageMaker.java</a>&#160;<span class="change">(+10&#160;-13)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupHTML.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">MarkupHTML.java</a>&#160;<span class="new">(new&#160;77)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupSyntax.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">MarkupSyntax.java</a>&#160;<span class="new">(new&#160;30)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/MarkupXDoc.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">MarkupXDoc.java</a>&#160;<span class="new">(new&#160;73)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.3&amp;r2=1.4" class="webrepository">Page.java</a>&#160;<span class="change">(+25&#160;-17)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/PageGroup.java?r1=1.3&amp;r2=1.4" class="webrepository">PageGroup.java</a>&#160;<span class="change">(+1&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/ReportSuiteMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ReportSuiteMaker.java</a>&#160;<span class="new">(new&#160;116)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/HTMLTableCellRenderer.java?r1=1.3&amp;r2=1.4" class="webrepository">HTMLTableCellRenderer.java</a>&#160;<span class="change">(+18&#160;-20)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/TableRenderer.java?r1=1.38&amp;r2=1.39" class="webrepository">TableRenderer.java</a>&#160;<span class="change">(+4&#160;-4)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/LOCSeriesBuilder.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LOCSeriesBuilder.java</a>&#160;<span class="new">(new&#160;88)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="28"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-07 22:05</span>
+    <a class="permalink" title="Permalink to this commit" href="#28">#28</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Added permalinks for commits
+    </p>
+    <p class="commitdetails"><strong>39</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?r1=1.1&amp;r2=1.2" class="webrepository">CommitListFormatter.java</a>&#160;<span class="change">(+29&#160;-9)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DeveloperPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">DeveloperPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">LogPageMaker.java</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/web-files</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/web-files/statcvs.css?r1=1.18&amp;r2=1.19" class="webrepository">statcvs.css</a>&#160;<span class="change">(+5&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="27"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-07 21:45</span>
+    <a class="permalink" title="Permalink to this commit" href="#27">#27</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Show multi-level parent links, and tweaked parent link layout
+    </p>
+    <p class="commitdetails"><strong>18</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/NavigationNode.java?r1=1.1&amp;r2=1.2" class="webrepository">NavigationNode.java</a>&#160;<span class="change">(+1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.2&amp;r2=1.3" class="webrepository">Page.java</a>&#160;<span class="change">(+10&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/PageGroup.java?r1=1.2&amp;r2=1.3" class="webrepository">PageGroup.java</a>&#160;<span class="change">(+4)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/web-files</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/web-files/statcvs.css?r1=1.17&amp;r2=1.18" class="webrepository">statcvs.css</a>&#160;<span class="change">(+3&#160;-7)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="26"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-07 20:31</span>
+    <a class="permalink" title="Permalink to this commit" href="#26">#26</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Completed switch to new-style report generation
+    </p>
+    <p class="commitdetails"><strong>136</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/AuthorPage.java?rev=1.14&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">AuthorPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.135&amp;r2=1.136" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+3&#160;-35)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLPage.java?rev=1.35&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">HTMLPage.java</a>&#160;<span class="del">(del)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="change">(+17&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DeveloperPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DeveloperPageMaker.java</a>&#160;<span class="new">(new&#160;116)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="25"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-07 18:17</span>
+    <a class="permalink" title="Permalink to this commit" href="#25">#25</a>
+  </dt>
+  <dd>
+    <p class="comment">
+More refactoring of old to new report generation style, with tweaks to reports. We lost the ability to sort the developers table by name.
+    </p>
+    <p class="commitdetails"><strong>630</strong> lines of code changed in <span class="files">26 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/AuthorPage.java?r1=1.13&amp;r2=1.14" class="webrepository">AuthorPage.java</a>&#160;<span class="change">(+3&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CPAPage.java?rev=1.12&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">CPAPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ConfigurationOptions.java?r1=1.20&amp;r2=1.21" class="webrepository">ConfigurationOptions.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/EmptyRepositoryPage.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">EmptyRepositoryPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/FileSizesPage.java?rev=1.6&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">FileSizesPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.134&amp;r2=1.135" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+55&#160;-63)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLPage.java?r1=1.34&amp;r2=1.35" class="webrepository">HTMLPage.java</a>&#160;<span class="change">(+2&#160;-30)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/IndexPage.java?rev=1.44&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">IndexPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ModulePage.java?rev=1.36&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ModulePage.java</a>&#160;<span class="del">(del)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/AllDevelopersPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">AllDevelopersPageMaker.java</a>&#160;<span class="new">(new&#160;71)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DirectoryPageMaker.java</a>&#160;<span class="new">(new&#160;150)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectorySizesPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">DirectorySizesPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectoryTreeFormatter.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DirectoryTreeFormatter.java</a>&#160;<span class="new">(new&#160;93)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/FileSizesPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">FileSizesPageMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/IndexPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">IndexPageMaker.java</a>&#160;<span class="new">(new&#160;92)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LOCPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">LOCPageMaker.java</a>&#160;<span class="change">(+1&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageGroupMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">LogPageGroupMaker.java</a>&#160;<span class="change">(+2&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">LogPageMaker.java</a>&#160;<span class="change">(+1&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/NavigationNode.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">NavigationNode.java</a>&#160;<span class="new">(new&#160;31)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?r1=1.1&amp;r2=1.2" class="webrepository">Page.java</a>&#160;<span class="change">(+59&#160;-12)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/PageGroup.java?r1=1.1&amp;r2=1.2" class="webrepository">PageGroup.java</a>&#160;<span class="change">(+49&#160;-12)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/AbstractLocTableReport.java?r1=1.7&amp;r2=1.8" class="webrepository">AbstractLocTableReport.java</a>&#160;<span class="change">(+4&#160;-8)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/AuthorsForDirectoryTableReport.java?r1=1.4&amp;r2=1.5" class="webrepository">AuthorsForDirectoryTableReport.java</a>&#160;<span class="change">(+2&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/AuthorsTableReport.java?r1=1.3&amp;r2=1.4" class="webrepository">AuthorsTableReport.java</a>&#160;<span class="change">(+4&#160;-10)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/DirectoriesForAuthorTableReport.java?r1=1.3&amp;r2=1.4" class="webrepository">DirectoriesForAuthorTableReport.java</a>&#160;<span class="change">(+2&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/DirectoriesTableReport.java?r1=1.3&amp;r2=1.4" class="webrepository">DirectoriesTableReport.java</a>&#160;<span class="change">(+2&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="24"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-07 03:02</span>
+    <a class="permalink" title="Permalink to this commit" href="#24">#24</a>
+  </dt>
+  <dd>
+    <p class="comment">
+- started refactoring of report pages into their own package<br />
+- LOC, dir sizes, file stats, and commit log now use new page code<br />
+- restructured commit log -- now per-month pages<br />
+- heavily modified the stylesheet
+    </p>
+    <p class="commitdetails"><strong>1008</strong> lines of code changed in <span class="files">28 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ChartImage.java?r1=1.1&amp;r2=1.2" class="webrepository">ChartImage.java</a>&#160;<span class="change">(+42&#160;-8)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/CommitScatterChartMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">CommitScatterChartMaker.java</a>&#160;<span class="change">(+2&#160;-1)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="change">(+3&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+5&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ModifyAddChartMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">ModifyAddChartMaker.java</a>&#160;<span class="change">(+3&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeBarChartMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">TimeBarChartMaker.java</a>&#160;<span class="change">(+3&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeLineChartMaker.java?r1=1.3&amp;r2=1.4" class="webrepository">TimeLineChartMaker.java</a>&#160;<span class="change">(+3&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/AuthorPage.java?r1=1.12&amp;r2=1.13" class="webrepository">AuthorPage.java</a>&#160;<span class="change">(+4&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CommitLogPage.java?rev=1.10&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">CommitLogPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/DirectorySizesPage.java?rev=1.5&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DirectorySizesPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.133&amp;r2=1.134" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+47&#160;-36)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLPage.java?r1=1.33&amp;r2=1.34" class="webrepository">HTMLPage.java</a>&#160;<span class="change">(+4&#160;-5)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/IndexPage.java?r1=1.43&amp;r2=1.44" class="webrepository">IndexPage.java</a>&#160;<span class="change">(+18&#160;-9)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/LOCPage.java?rev=1.11&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LOCPage.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ModulePage.java?r1=1.35&amp;r2=1.36" class="webrepository">ModulePage.java</a>&#160;<span class="change">(+4&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/OutputRenderer.java?r1=1.1&amp;r2=1.2" class="webrepository">OutputRenderer.java</a>&#160;<span class="change">(+6)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/pages</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/CommitListFormatter.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">CommitListFormatter.java</a>&#160;<span class="new">(new&#160;201)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/DirectorySizesPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DirectorySizesPageMaker.java</a>&#160;<span class="new">(new&#160;49)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/FileSizesPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">FileSizesPageMaker.java</a>&#160;<span class="new">(new&#160;95)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LOCPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LOCPageMaker.java</a>&#160;<span class="new">(new&#160;34)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageGroupMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LogPageGroupMaker.java</a>&#160;<span class="new">(new&#160;37)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/LogPageMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LogPageMaker.java</a>&#160;<span class="new">(new&#160;70)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/Page.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">Page.java</a>&#160;<span class="new">(new&#160;228)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/pages/PageGroup.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">PageGroup.java</a>&#160;<span class="new">(new&#160;50)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/CommitLogRenderer.java?rev=1.34&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">CommitLogRenderer.java</a>&#160;<span class="del">(del)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/reports</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/FilesWithMostRevisionsTableReport.java?r1=1.4&amp;r2=1.5" class="webrepository">FilesWithMostRevisionsTableReport.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/reports/LargestFilesTableReport.java?r1=1.5&amp;r2=1.6" class="webrepository">LargestFilesTableReport.java</a>&#160;<span class="change">(+3&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/web-files</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/web-files/statcvs.css?r1=1.16&amp;r2=1.17" class="webrepository">statcvs.css</a>&#160;<span class="change">(+94&#160;-64)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="23"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-06 16:20</span>
+    <a class="permalink" title="Permalink to this commit" href="#23">#23</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Added LOC Per Directory timeline, a la StatCVS-XML
+    </p>
+    <p class="commitdetails"><strong>117</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">LOCChartMaker.java</a>&#160;<span class="change">(+99&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/DirectorySizesPage.java?r1=1.4&amp;r2=1.5" class="webrepository">DirectorySizesPage.java</a>&#160;<span class="change">(+12&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.132&amp;r2=1.133" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+6&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="22"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-06 00:11</span>
+    <a class="permalink" title="Permalink to this commit" href="#22">#22</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.43</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Show time of report generation on index page (RFE #1146207)
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/IndexPage.java?r1=1.42&amp;r2=1.43" class="webrepository">IndexPage.java</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="21"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 23:34</span>
+    <a class="permalink" title="Permalink to this commit" href="#21">#21</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Removed annotations from file size and file count chart, looks clearer without
+    </p>
+    <p class="commitdetails"><strong>11</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/SymbolicNameAnnotation.java?r1=1.2&amp;r2=1.3" class="webrepository">SymbolicNameAnnotation.java</a>&#160;<span class="change">(+4&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeLineChartMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">TimeLineChartMaker.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.131&amp;r2=1.132" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+4&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="20"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 22:08</span>
+    <a class="permalink" title="Permalink to this commit" href="#20">#20</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Warn when all files were rejected by an (overly broad?) include/exclude pattern (bug 1146204)
+    </p>
+    <p class="commitdetails"><strong>59</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.51&amp;r2=1.52" class="webrepository">Main.java</a>&#160;<span class="change">(+16&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/Builder.java?r1=1.32&amp;r2=1.33" class="webrepository">Builder.java</a>&#160;<span class="change">(+34&#160;-5)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/util/FilePatternMatcher.java?r1=1.1&amp;r2=1.2" class="webrepository">FilePatternMatcher.java</a>&#160;<span class="change">(+9&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="19"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 21:44</span>
+    <a class="permalink" title="Permalink to this commit" href="#19">#19</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Cope with empty log file instead of aborting. Deprecated EmptyRepositoryException, it is no longer used by StatCVS.
+    </p>
+    <p class="commitdetails"><strong>33</strong> lines of code changed in <span class="files">12 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.50&amp;r2=1.51" class="webrepository">Main.java</a>&#160;<span class="change">(+3&#160;-12)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.15&amp;r2=1.16" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+1&#160;-4)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/Builder.java?r1=1.31&amp;r2=1.32" class="webrepository">Builder.java</a>&#160;<span class="change">(+3&#160;-12)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/CvsLogfileParser.java?r1=1.15&amp;r2=1.16" class="webrepository">CvsLogfileParser.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/input/EmptyRepositoryException.java?r1=1.1&amp;r2=1.2" class="webrepository">EmptyRepositoryException.java</a>&#160;<span class="change">(+5&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/EmptyRepositoryPage.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">EmptyRepositoryPage.java</a>&#160;<span class="new">(new)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.130&amp;r2=1.131" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/NoFilesPage.java?rev=1.3&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">NoFilesPage.java</a>&#160;<span class="del">(del)</span>
+      </li>
+      <li>
+        <strong>statcvs/tests-src/net/sf/statcvs/input</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/BuilderTest.java?r1=1.23&amp;r2=1.24" class="webrepository">BuilderTest.java</a>&#160;<span class="change">(+4&#160;-11)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/FileBlockParserTest.java?r1=1.32&amp;r2=1.33" class="webrepository">FileBlockParserTest.java</a>&#160;<span class="change">(+3&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/LinesOfCodeTest.java?r1=1.19&amp;r2=1.20" class="webrepository">LinesOfCodeTest.java</a>&#160;<span class="change">(+5&#160;-9)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/tests-src/net/sf/statcvs/input/ParserTest.java?r1=1.5&amp;r2=1.6" class="webrepository">ParserTest.java</a>&#160;<span class="change">(+3&#160;-7)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="18"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 20:52</span>
+    <a class="permalink" title="Permalink to this commit" href="#18">#18</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Show more relevant charts and tables for single-author repositories
+    </p>
+    <p class="commitdetails"><strong>63</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CPAPage.java?r1=1.11&amp;r2=1.12" class="webrepository">CPAPage.java</a>&#160;<span class="change">(+18&#160;-12)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.129&amp;r2=1.130" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+35&#160;-32)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/IndexPage.java?r1=1.41&amp;r2=1.42" class="webrepository">IndexPage.java</a>&#160;<span class="change">(+10&#160;-10)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="17"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 20:24</span>
+    <a class="permalink" title="Permalink to this commit" href="#17">#17</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed broken image link in HTML output (regression)
+    </p>
+    <p class="commitdetails"><strong>12</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/DirectorySizesPage.java?r1=1.3&amp;r2=1.4" class="webrepository">DirectorySizesPage.java</a>&#160;<span class="change">(+7&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.128&amp;r2=1.129" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+5&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="16"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 19:47</span>
+    <a class="permalink" title="Permalink to this commit" href="#16">#16</a>
+  </dt>
+  <dd>
+    <p class="comment">
+- Ant task supports all options again<br />
+- Ant task uses the same names as the command line for everything<br />
+- build file can call Ant task via "ant run.ant"
+    </p>
+    <p class="commitdetails"><strong>99</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/build.xml?r1=1.33&amp;r2=1.34" class="webrepository">build.xml</a>&#160;<span class="change">(+13)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.14&amp;r2=1.15" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+77&#160;-37)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CommandLineParser.java?r1=1.19&amp;r2=1.20" class="webrepository">CommandLineParser.java</a>&#160;<span class="change">(+3&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ConfigurationOptions.java?r1=1.19&amp;r2=1.20" class="webrepository">ConfigurationOptions.java</a>&#160;<span class="change">(+6&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="15"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 18:40</span>
+    <a class="permalink" title="Permalink to this commit" href="#15">#15</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.33</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Oops, broke the build when updating to latest JFreeChart. Fixed.
+    </p>
+    <p class="commitdetails"><strong>2</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/build.xml?r1=1.32&amp;r2=1.33" class="webrepository">build.xml</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="14"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 18:16</span>
+    <a class="permalink" title="Permalink to this commit" href="#14">#14</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Added JCVSWeb integration (Patch 1398245, ermeaney)
+    </p>
+    <p class="commitdetails"><strong>88</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.49&amp;r2=1.50" class="webrepository">Main.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/ant</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/ant/StatCvsTask.java?r1=1.13&amp;r2=1.14" class="webrepository">StatCvsTask.java</a>&#160;<span class="change">(+12&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CommandLineParser.java?r1=1.18&amp;r2=1.19" class="webrepository">CommandLineParser.java</a>&#160;<span class="change">(+7&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ConfigurationOptions.java?r1=1.18&amp;r2=1.19" class="webrepository">ConfigurationOptions.java</a>&#160;<span class="change">(+12&#160;-2)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/JCVSWebIntegration.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">JCVSWebIntegration.java</a>&#160;<span class="new">(new&#160;54)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="13"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 17:59</span>
+    <a class="permalink" title="Permalink to this commit" href="#13">#13</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.2</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added symbolic names annotations to commit scatter chart
+    </p>
+    <p class="commitdetails"><strong>51</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/CommitScatterChartMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">CommitScatterChartMaker.java</a>&#160;<span class="change">(+15&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/SymbolicNameAnnotation.java?r1=1.1&amp;r2=1.2" class="webrepository">SymbolicNameAnnotation.java</a>&#160;<span class="change">(+32&#160;-27)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeLineChartMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">TimeLineChartMaker.java</a>&#160;<span class="change">(+4&#160;-6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="12"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 16:58</span>
+    <a class="permalink" title="Permalink to this commit" href="#12">#12</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.3</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Upgrade to latest JFreeChart
+    </p>
+    <p class="commitdetails"><strong>12</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?r1=1.2&amp;r2=1.3" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="change">(+12&#160;-13)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="11"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 16:38</span>
+    <a class="permalink" title="Permalink to this commit" href="#11">#11</a>
+  </dt>
+  <dd>
+    <p class="comment">
+Upgrade to latest JFreeChart
+    </p>
+    <p class="commitdetails"><strong>5</strong> lines of code changed in <span class="files">6 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/.classpath?r1=1.11&amp;r2=1.12" class="webrepository">.classpath</a>&#160;<span class="change">(+2&#160;-2)</span>
+      </li>
+      <li>
+        <strong>statcvs/lib</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/lib/jcommon-1.0.0.jar?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">jcommon-1.0.0.jar</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/lib/jcommon-1.0.6.jar?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">jcommon-1.0.6.jar</a>&#160;<span class="new">(new)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/lib/jfreechart-1.0.1.jar?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">jfreechart-1.0.1.jar</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/lib/jfreechart-1.0.3.jar?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">jfreechart-1.0.3.jar</a>&#160;<span class="new">(new)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?r1=1.1&amp;r2=1.2" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="10"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 12:52</span>
+    <a class="permalink" title="Permalink to this commit" href="#10">#10</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.12</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Version number to 0.2.5-dev
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/project.properties?r1=1.11&amp;r2=1.12" class="webrepository">project.properties</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="9"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-05 12:49</span>
+    <a class="permalink" title="Permalink to this commit" href="#9">#9</a>
+  </dt>
+  <dd>
+    <p class="comment">
+- refactored all chart generation code into a separate package<br />
+- charts now produce ChartImage objects that know their URL and can be passed around<br />
+- chart titles and subtitles folded into one line
+    </p>
+    <p class="commitdetails"><strong>1220</strong> lines of code changed in <span class="files">23 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/charts</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ChartImage.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ChartImage.java</a>&#160;<span class="new">(new&#160;77)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/CommitScatterChartMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">CommitScatterChartMaker.java</a>&#160;<span class="new">(new&#160;147)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/DirectoryPieChartMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">DirectoryPieChartMaker.java</a>&#160;<span class="new">(new&#160;165)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/LOCChartMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LOCChartMaker.java</a>&#160;<span class="new">(new&#160;204)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/ModifyAddChartMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ModifyAddChartMaker.java</a>&#160;<span class="new">(new&#160;140)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/SymbolicNameAnnotation.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">SymbolicNameAnnotation.java</a>&#160;<span class="new">(new&#160;135)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeBarChartMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">TimeBarChartMaker.java</a>&#160;<span class="new">(new&#160;131)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/charts/TimeLineChartMaker.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">TimeLineChartMaker.java</a>&#160;<span class="new">(new&#160;88)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/AuthorPage.java?r1=1.11&amp;r2=1.12" class="webrepository">AuthorPage.java</a>&#160;<span class="change">(+14&#160;-8)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CPAPage.java?r1=1.10&amp;r2=1.11" class="webrepository">CPAPage.java</a>&#160;<span class="change">(+8&#160;-11)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.127&amp;r2=1.128" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+87&#160;-336)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/IndexPage.java?r1=1.40&amp;r2=1.41" class="webrepository">IndexPage.java</a>&#160;<span class="change">(+9&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/LOCPage.java?r1=1.10&amp;r2=1.11" class="webrepository">LOCPage.java</a>&#160;<span class="change">(+8&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ModulePage.java?r1=1.34&amp;r2=1.35" class="webrepository">ModulePage.java</a>&#160;<span class="change">(+7&#160;-6)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/BarChart.java?rev=1.14&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">BarChart.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/Chart.java?rev=1.12&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">Chart.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/CombinedCommitScatterChart.java?rev=1.7&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">CombinedCommitScatterChart.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/LOCChart.java?rev=1.41&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">LOCChart.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/PieChart.java?rev=1.45&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">PieChart.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/PointXYRenderer.java?rev=1.3&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">PointXYRenderer.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/StackedBarChart.java?rev=1.26&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">StackedBarChart.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/SymbolicNameAnnotation.java?rev=1.2&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">SymbolicNameAnnotation.java</a>&#160;<span class="del">(del)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/TimeLineChart.java?rev=1.8&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">TimeLineChart.java</a>&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="8"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-04 17:35</span>
+    <a class="permalink" title="Permalink to this commit" href="#8">#8</a>
+  </dt>
+  <dd>
+    <p class="comment">
+- added ExtraReport option<br />
+- unified handling of chart sizes<br />
+- widescreen chart sizes<br />
+(Benoit Xhenseval)
+    </p>
+    <p class="commitdetails"><strong>201</strong> lines of code changed in <span class="files">18 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/AuthorPage.java?r1=1.10&amp;r2=1.11" class="webrepository">AuthorPage.java</a>&#160;<span class="change">(+4&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CPAPage.java?r1=1.9&amp;r2=1.10" class="webrepository">CPAPage.java</a>&#160;<span class="change">(+21&#160;-18)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/DirectorySizesPage.java?r1=1.2&amp;r2=1.3" class="webrepository">DirectorySizesPage.java</a>&#160;<span class="change">(+6&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ExtraReportRegister.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">ExtraReportRegister.java</a>&#160;<span class="new">(new)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/FileSizesPage.java?r1=1.5&amp;r2=1.6" class="webrepository">FileSizesPage.java</a>&#160;<span class="change">(+3&#160;-3)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLOutput.java?r1=1.126&amp;r2=1.127" class="webrepository">HTMLOutput.java</a>&#160;<span class="change">(+66&#160;-50)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/HTMLPage.java?r1=1.32&amp;r2=1.33" class="webrepository">HTMLPage.java</a>&#160;<span class="change">(+9&#160;-9)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/IndexPage.java?r1=1.39&amp;r2=1.40" class="webrepository">IndexPage.java</a>&#160;<span class="change">(+24&#160;-12)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/LOCPage.java?r1=1.9&amp;r2=1.10" class="webrepository">LOCPage.java</a>&#160;<span class="change">(+6&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/ModulePage.java?r1=1.33&amp;r2=1.34" class="webrepository">ModulePage.java</a>&#160;<span class="change">(+10&#160;-10)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/Report.java?rev=1.1&amp;content-type=text/vnd.viewcvs-markup" class="webrepository">Report.java</a>&#160;<span class="new">(new)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/BarChart.java?r1=1.13&amp;r2=1.14" class="webrepository">BarChart.java</a>&#160;<span class="change">(+6&#160;-4)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/Chart.java?r1=1.11&amp;r2=1.12" class="webrepository">Chart.java</a>&#160;<span class="change">(+10&#160;-11)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/CombinedCommitScatterChart.java?r1=1.6&amp;r2=1.7" class="webrepository">CombinedCommitScatterChart.java</a>&#160;<span class="change">(+4&#160;-5)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/LOCChart.java?r1=1.40&amp;r2=1.41" class="webrepository">LOCChart.java</a>&#160;<span class="change">(+9&#160;-10)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/PieChart.java?r1=1.44&amp;r2=1.45" class="webrepository">PieChart.java</a>&#160;<span class="change">(+9&#160;-7)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/StackedBarChart.java?r1=1.25&amp;r2=1.26" class="webrepository">StackedBarChart.java</a>&#160;<span class="change">(+8&#160;-6)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/TimeLineChart.java?r1=1.7&amp;r2=1.8" class="webrepository">TimeLineChart.java</a>&#160;<span class="change">(+6&#160;-6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="7"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-04 17:34</span>
+    <a class="permalink" title="Permalink to this commit" href="#7">#7</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.18</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Bugfix: Copying binary files that contain ASCII #0 failed
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/util</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/util/FileUtils.java?r1=1.17&amp;r2=1.18" class="webrepository">FileUtils.java</a>&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt class="tag"><a name="tag-v0_2_4a">
+    Repository Tag: v0_2_4a</a>
+  </dt>
+  <dt><a name="6"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-03 00:34</span>
+    <a class="permalink" title="Permalink to this commit" href="#6">#6</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.32</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+sample report tweak
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/build.xml?r1=1.31&amp;r2=1.32" class="webrepository">build.xml</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="5"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-03 00:08</span>
+    <a class="permalink" title="Permalink to this commit" href="#5">#5</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.11</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Set version to 0.2.4a (skip 0.2.4 because StatSVN 0.2.0 contains a CVS-built and somewhat buggy version of statcvs.jar with that name)
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/project.properties?r1=1.10&amp;r2=1.11" class="webrepository">project.properties</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="4"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-03 00:06</span>
+    <a class="permalink" title="Permalink to this commit" href="#4">#4</a>
+  </dt>
+  <dd>
+    <p class="comment">
+HTML typography tweaks
+    </p>
+    <p class="commitdetails"><strong>8</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/BugzillaIntegration.java?r1=1.2&amp;r2=1.3" class="webrepository">BugzillaIntegration.java</a>&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/web-files</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/web-files/statcvs.css?r1=1.15&amp;r2=1.16" class="webrepository">statcvs.css</a>&#160;<span class="change">(+7)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="3"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-02 23:35</span>
+    <a class="permalink" title="Permalink to this commit" href="#3">#3</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.49</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+tweaked command line help text
+    </p>
+    <p class="commitdetails"><strong>8</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/Main.java?r1=1.48&amp;r2=1.49" class="webrepository">Main.java</a>&#160;<span class="change">(+8&#160;-9)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="2"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-02 23:18</span>
+    <a class="permalink" title="Permalink to this commit" href="#2">#2</a>
+  </dt>
+  <dd>
+    <p class="comment">
+- oops, the Bugzilla integration code was never used even if specified on cmd line<br />
+- Bugzilla regex now also catches "bug #1234" <br />
+- tweaks to Bugzilla integration code
+    </p>
+    <p class="commitdetails"><strong>29</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/BugzillaIntegration.java?r1=1.1&amp;r2=1.2" class="webrepository">BugzillaIntegration.java</a>&#160;<span class="change">(+20&#160;-31)</span>,
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/WebBugtrackerIntegration.java?r1=1.1&amp;r2=1.2" class="webrepository">WebBugtrackerIntegration.java</a>&#160;<span class="change">(+2)</span>
+      </li>
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/renderer</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/renderer/CommitLogRenderer.java?r1=1.33&amp;r2=1.34" class="webrepository">CommitLogRenderer.java</a>&#160;<span class="change">(+7&#160;-6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="1"></a>
+    <a href="user_cyganiak.html" class="author">Richard Cyganiak</a>
+    <span class="date">2006-12-02 20:27</span>
+    <a class="permalink" title="Permalink to this commit" href="#1">#1</a>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">1.18</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added -xdoc option as "official" shortcut for the undocumented -format xdoc
+    </p>
+    <p class="commitdetails"><strong>27</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>statcvs/src/net/sf/statcvs/output</strong>:
+        <a href="http://statcvs.cvs.sourceforge.net/statcvs/statcvs/src/net/sf/statcvs/output/CommandLineParser.java?r1=1.17&amp;r2=1.18" class="webrepository">CommandLineParser.java</a>&#160;<span class="change">(+27&#160;-21)</span>
+      </li>
+    </ul>
+  </dd>
+
+</dl>
+
+<p class="previous"><a href="2006-11.html">November 2006</a> &#187; </p>
+</section><div id="generatedby">Generated by <a href="http://statcvs.sf.net">StatCVS</a> 0.7.0-beta</div>
+</body>
+</document>

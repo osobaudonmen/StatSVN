@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns:lxslt="http://xml.apache.org/xslt">
+<properties><title>Directory Sizes</title></properties>
+<head>    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatCVS 0.7.0-beta"/>
+   <link rel="stylesheet" href="objectlab-statcvs-xdoc.css" type="text/css"/>
+<script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&#38;login=statsvn&#38;apiKey=R_2c362b417d0517c27876cbaca1bb68cc"></script>
+<script type="text/javascript" charset="utf-8">
+   // wait until page is loaded to call API
+   var redir_url;
+   var short_url;
+   BitlyCB.myShortenCallback = function(data) {
+      // this is how to get a result of shortening a single url
+      var result;
+      short_url=null;
+      for (var r in data.results) {
+         result = data.results[r];
+         result['longUrl'] = r;
+         short_url = result['shortUrl'];
+         break;
+      }
+      if (short_url==null) // bit.ly failed
+      document.location=redir_url;
+      else
+      redirToTwitter();
+   };
+   function shortenTweet(url) {
+      if (short_url == null || redir_url!=url) {
+      redir_url = url;
+      BitlyClient.shorten(document.location, 'BitlyCB.myShortenCallback');
+      }
+      else
+      redirToTwitter();
+      return false;
+   }
+   function redirToTwitter() { 
+      // replace {0} which is visible as %7B0} in the link
+      document.location = redir_url.replace('%7B0}', short_url);
+   }
+</script>
+</head>
+
+<body><section name="Directory Sizes">
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for StatCVS</a></div>
+<dl class="attributes">
+    <dt>Total Directories:</dt>
+    <dd>39</dd>
+</dl>
+<p class="chart"><img src="directories_loc_timeline.png" alt="Lines of Code Per Directory" width="952" height="596" /></p>
+<div class="section">
+<subsection name ="Directory Statistics">
+  <table  class="statCvsTable" rules="groups" summary="Overview of all activity in different directories">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Directory</th>
+        <th>Changes</th>
+        <th>Lines of Code</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Totals</th>
+        <td>3476 (100.0%)</td>
+        <td>26969 (100.0%)</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_output.html" class="directory">statcvs/src/net/sf/statcvs/output/</a></th>
+        <td>661 (19.0%)</td>
+        <td>2764 (10.2%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_pages.html" class="directory">statcvs/src/net/sf/statcvs/pages/</a></th>
+        <td>208 (6.0%)</td>
+        <td>2601 (9.6%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_reports.html" class="directory">statcvs/src/net/sf/statcvs/reports/</a></th>
+        <td>124 (3.6%)</td>
+        <td>2030 (7.5%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_charts.html" class="directory">statcvs/src/net/sf/statcvs/charts/</a></th>
+        <td>97 (2.8%)</td>
+        <td>1948 (7.2%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_input.html" class="directory">statcvs/src/net/sf/statcvs/input/</a></th>
+        <td>325 (9.3%)</td>
+        <td>1924 (7.1%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_model.html" class="directory">statcvs/src/net/sf/statcvs/model/</a></th>
+        <td>593 (17.1%)</td>
+        <td>1914 (7.1%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs_input.html" class="directory">statcvs/tests-src/net/sf/statcvs/input/</a></th>
+        <td>148 (4.3%)</td>
+        <td>1867 (6.9%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_pages_xml.html" class="directory">statcvs/src/net/sf/statcvs/pages/xml/</a></th>
+        <td>32 (0.9%)</td>
+        <td>1286 (4.8%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_reportmodel.html" class="directory">statcvs/src/net/sf/statcvs/reportmodel/</a></th>
+        <td>43 (1.2%)</td>
+        <td>1226 (4.5%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_util.html" class="directory">statcvs/src/net/sf/statcvs/util/</a></th>
+        <td>107 (3.1%)</td>
+        <td>1223 (4.5%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_site.html" class="directory">statcvs/site/</a></th>
+        <td>51 (1.5%)</td>
+        <td>1077 (4.0%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs_model.html" class="directory">statcvs/tests-src/net/sf/statcvs/model/</a></th>
+        <td>181 (5.2%)</td>
+        <td>988 (3.7%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs.html" class="directory">statcvs/</a></th>
+        <td>178 (5.1%)</td>
+        <td>917 (3.4%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs_util.html" class="directory">statcvs/tests-src/net/sf/statcvs/util/</a></th>
+        <td>28 (0.8%)</td>
+        <td>846 (3.1%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_renderer.html" class="directory">statcvs/src/net/sf/statcvs/renderer/</a></th>
+        <td>323 (9.3%)</td>
+        <td>834 (3.1%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_src_net_sf_statcvs.html" class="directory">statcvs/src/net/sf/statcvs/</a></th>
+        <td>205 (5.9%)</td>
+        <td>673 (2.5%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_web-files.html" class="directory">statcvs/src/net/sf/statcvs/web-files/</a></th>
+        <td>41 (1.2%)</td>
+        <td>615 (2.3%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_.settings.html" class="directory">statcvs/.settings/</a></th>
+        <td>4 (0.1%)</td>
+        <td>372 (1.4%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs_output.html" class="directory">statcvs/tests-src/net/sf/statcvs/output/</a></th>
+        <td>26 (0.7%)</td>
+        <td>336 (1.2%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_ant.html" class="directory">statcvs/src/net/sf/statcvs/ant/</a></th>
+        <td>25 (0.7%)</td>
+        <td>321 (1.2%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs_renderer.html" class="directory">statcvs/tests-src/net/sf/statcvs/renderer/</a></th>
+        <td>7 (0.2%)</td>
+        <td>240 (0.9%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_maven-common-build.html" class="directory">statcvs/maven-common-build/</a></th>
+        <td>2 (0.1%)</td>
+        <td>231 (0.9%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs_reportmodel.html" class="directory">statcvs/tests-src/net/sf/statcvs/reportmodel/</a></th>
+        <td>4 (0.1%)</td>
+        <td>218 (0.8%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_site_style.html" class="directory">statcvs/site/style/</a></th>
+        <td>1 (0.0%)</td>
+        <td>146 (0.5%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_weblinks_bugs.html" class="directory">statcvs/src/net/sf/statcvs/weblinks/bugs/</a></th>
+        <td>15 (0.4%)</td>
+        <td>144 (0.5%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs_pages.html" class="directory">statcvs/tests-src/net/sf/statcvs/pages/</a></th>
+        <td>5 (0.1%)</td>
+        <td>96 (0.4%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_tests-src_net_sf_statcvs.html" class="directory">statcvs/tests-src/net/sf/statcvs/</a></th>
+        <td>9 (0.3%)</td>
+        <td>66 (0.2%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_etc.html" class="directory">statcvs/etc/</a></th>
+        <td>4 (0.1%)</td>
+        <td>66 (0.2%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_src_net_sf_statcvs_output_web-files.html" class="directory">statcvs/src/net/sf/statcvs/output/web-files/</a></th>
+        <td>1 (0.0%)</td>
+        <td>0 (0.0%)</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_statcvs_site_images.html" class="directory">statcvs/site/images/</a></th>
+        <td>7 (0.2%)</td>
+        <td>0 (0.0%)</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_statcvs_lib.html" class="directory">statcvs/lib/</a></th>
+        <td>21 (0.6%)</td>
+        <td>0 (0.0%)</td>
+      </tr>
+    </tbody>
+  </table>
+
+<p class="chart"><img src="directory_sizes.png" alt="Directory Sizes" width="952" height="596" /></p></subsection></div></section><div id="generatedby">Generated by <a href="http://statcvs.sf.net">StatCVS</a> 0.7.0-beta</div>
+</body>
+</document>
