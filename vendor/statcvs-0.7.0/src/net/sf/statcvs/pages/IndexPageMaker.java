@@ -60,13 +60,10 @@ public class IndexPageMaker {
         if (headRevisionNumber != null && headRevisionNumber.indexOf('.') < 0) {
             page.addAttribute("Head revision", headRevisionNumber);
         }
-        page.addRawAttribute("Report Period", getReportPeriod());
+        page.addAttribute("Report Period", getReportPeriod());
         page.addAttribute("Total Files", getCurrentFileCount());
         page.addAttribute("Total Lines of Code", this.repository.getCurrentLOC());
         page.addAttribute("Developers", topDevelopers.getDeveloperCount());
-        if (ConfigurationOptions.isEnableTwitterButton()) {
-            page.addRawAttribute("Tweet this", TwitterHelp.buildOverviewLink(topDevelopers, repository, config));
-        }
         if (this.notesHTML != null) {
             page.addRawContent(this.notesHTML);
         }

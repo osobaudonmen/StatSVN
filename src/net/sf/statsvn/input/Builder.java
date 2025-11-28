@@ -284,16 +284,6 @@ public class Builder implements SvnLogBuilder {
             newAuthor.setHomePageUrl(p.getProperty("user." + lowerCaseName + ".url"));
             newAuthor.setImageUrl(p.getProperty("user." + lowerCaseName + ".image"));
             newAuthor.setEmail(p.getProperty("user." + lowerCaseName + ".email"));
-            newAuthor.setTwitterUserName(p.getProperty("user." + name.toLowerCase() + ".twitterUsername"));
-            newAuthor.setTwitterUserId(p.getProperty("user." + name.toLowerCase() + ".twitterUserId"));
-            String val = p.getProperty("user." + name.toLowerCase() + ".twitterIncludeFlash");
-            if (val != null && val.length() > 0) {
-                newAuthor.setTwitterIncludeFlash(Boolean.valueOf(val).booleanValue());
-            }
-            val = p.getProperty("user." + name.toLowerCase() + ".twitterIncludeHtml");
-            if (val != null && val.length() > 0) {
-                newAuthor.setTwitterIncludeHtml(Boolean.valueOf(val).booleanValue());
-            }
         }
         this.authors.put(lowerCaseName, newAuthor);
         return newAuthor;

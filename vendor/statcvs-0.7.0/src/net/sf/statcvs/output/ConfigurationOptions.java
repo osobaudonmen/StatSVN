@@ -82,7 +82,6 @@ public class ConfigurationOptions {
     private static FilePatternMatcher excludePattern = null;
 
     private static Collection nonDeveloperLogins = new ArrayList();
-    private static boolean enableTwitterButton = true;
 
     private static CssHandler cssHandler = new DefaultCssHandler("objectlab-statcvs.css");
     private static String charSet = "ISO-8859-1";
@@ -704,18 +703,6 @@ public class ConfigurationOptions {
             }
         }
         return defaultValue;
-    }
-
-    /**
-     * Enable/disable the Twitter "Tweet This" Buttons.
-     * @param value
-     */
-    public static void setEnableTwitterButton(boolean value) {
-        enableTwitterButton = value;
-    }
-
-    public static boolean isEnableTwitterButton() {
-        return enableTwitterButton;
     }
 
     public static String getHeaderUrl() {

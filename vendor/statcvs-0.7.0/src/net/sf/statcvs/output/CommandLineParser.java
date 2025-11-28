@@ -181,8 +181,6 @@ public class CommandLineParser {
                 // set the default to the XDOC css.
                 ConfigurationOptions.setDefaultCssFile("objectlab-statcvs-xdoc.css");
             }
-        } else if (s.equals("disable-twitter-button")) {
-            ConfigurationOptions.setEnableTwitterButton(false);
         } else if (s.equals("xml")) {
             /*
              * edited by Nilendra

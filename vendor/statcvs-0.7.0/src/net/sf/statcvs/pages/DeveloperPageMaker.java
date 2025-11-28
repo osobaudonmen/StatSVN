@@ -73,10 +73,6 @@ public class DeveloperPageMaker {
         if (this.developer.getRealName() != null && !this.developer.getRealName().equals(this.developer.getName())) {
             page.addAttribute("Real name", this.developer.getRealName());
         }
-        if (StringUtils.isNotEmpty(this.developer.getTwitterUserName())) {
-            page.addRawAttribute("Twitter", "@<a href=\"http://twitter.com/" + this.developer.getTwitterUserName() + "\">"
-                    + this.developer.getTwitterUserName() + "</a>");
-        }
         if (StringUtils.isNotEmpty(this.developer.getEmail())) {
             page.addRawAttribute("Email", "<a href=\"mailto:" + this.developer.getEmail() + "\">" + this.developer.getEmail() + "</a>");
         }
@@ -91,39 +87,9 @@ public class DeveloperPageMaker {
         String loc = getNumberAndPercentage(countContributedLines(this.developer.getRevisions()), countContributedLines(this.repository.getRevisions()));
         page.addAttribute("Lines of Code", loc);
         page.addAttribute("Most Recent Commit", ((Revision) this.developer.getRevisions().last()).getDate());
-        if (ConfigurationOptions.isEnableTwitterButton()) {
-            page.addRawAttribute("Tweet this", TwitterHelp.buildDeveloperLink(developer, loc, repository, config));
-        }
         page.addSection(Messages.getString("ACTIVITY_TITLE"));
         page.add(hourChart);
         page.add(weekdayChart);
-
-        if (StringUtils.isNotEmpty(this.developer.getTwitterUserName()) && this.developer.isTwitterIncludeHtml()) {
-            page.addSection("Twitter");
-            page.addRawContent("<div id=\"twitter_div\">");
-            page.addRawContent("<ul id=\"twitter_update_list\"/>");
-            page.addRawContent("<a href=\"http://twitter.com/" + developer.getTwitterUserName()
-                    + "\" id=\"twitter-link\" style=\"display:block;text-align:right;\">follow me on Twitter</a>");
-            page.addRawContent("</div>");
-            page.addRawContent("<script type=\"text/javascript\" src=\"http://twitter.com/javascripts/blogger.js\"></script>");
-            page.addRawContent("<script type=\"text/javascript\" src=\"http://twitter.com/statuses/user_timeline/" + developer.getTwitterUserName()
-                    + ".json?callback=twitterCallback2&amp;count=5\"></script>");
-        }
-        if (StringUtils.isNotEmpty(this.developer.getTwitterUserId()) && this.developer.isTwitterIncludeFlash()) {
-            page.addSection("Twitter");
-            page
-                    .addRawContent("<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,124,0\" width=\"550\" height=\"350\" id=\"TwitterWidget\" align=\"middle\">");
-            page.addRawContent("<param name=\"allowScriptAccess\" value=\"sameDomain\" />");
-            page.addRawContent("<param name=\"allowFullScreen\" value=\"false\" />");
-            page.addRawContent("<param name=\"movie\" value=\"http://static.twitter.com/flash/widgets/profile/TwitterWidget.swf\" />");
-            page.addRawContent("<param name=\"quality\" value=\"high\" />");
-            page.addRawContent("<param name=\"bgcolor\" value=\"#000000\" />");
-            page.addRawContent("<param name=\"FlashVars\" value=\"userID=" + developer.getTwitterUserId()
-                    + "&amp;styleURL=http://static.twitter.com/flash/widgets/profile/velvetica.xml\"/>");
-            page
-                    .addRawContent("<embed src=\"http://static.twitter.com/flash/widgets/profile/TwitterWidget.swf\" quality=\"high\" bgcolor=\"#000000\" width=\"550\" height=\"350\" name=\"TwitterWidget\" align=\"middle\" allowScriptAccess=\"sameDomain\" allowFullScreen=\"false\" type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" FlashVars=\"userID="
-                            + developer.getTwitterUserId() + "&amp;styleURL=http://static.twitter.com/flash/widgets/profile/velvetica.xml\"/></object>");
-        }
 
         page.addSection("Activity in Directories");
         page.add(new DirectoriesForAuthorTableReport(this.config, this.developer));

@@ -59,7 +59,6 @@ public class StatCvsTask extends Task {
     private String nonDeveloperLogin;
     private String charset;
     private String configFile;
-    private boolean disableTwitterButton = false;
     
     /**
      * Constructor for StatCvsTask.
@@ -150,7 +149,6 @@ public class StatCvsTask extends Task {
         if (configFile != null) {
             ConfigurationOptions.setConfigFile(this.configFile);
         }
-        ConfigurationOptions.setEnableTwitterButton(!disableTwitterButton);
     }
 
     /**
@@ -302,9 +300,5 @@ public class StatCvsTask extends Task {
 
     public void setConfigFile(String configFile) {
         this.configFile = configFile;
-    }
-
-    public void setDisableTwitterButton(boolean disableTwitterButton) {
-        this.disableTwitterButton = disableTwitterButton;
     }
 }

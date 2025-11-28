@@ -43,10 +43,6 @@ public class MarkupXDoc extends AbstractMarkup implements MarkupSyntax {
         b.append("   <link rel=\"stylesheet\" href=\"");
         b.append(HTML.escape(stylesheetURL));
         b.append("\" type=\"text/css\"/>\n");
-        
-        if (ConfigurationOptions.isEnableTwitterButton()) {
-            addTwitterScript(b);
-        }
         b.append("</head>\n\n<body>");
 
         return b.toString();

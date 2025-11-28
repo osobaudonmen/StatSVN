@@ -52,7 +52,6 @@ public class DevelopersOfTheMonthTable implements TableReport {
         final LinkColumn months = new LinkColumn("Month");
         final AuthorColumn developers = new AuthorColumn();
         final IntegerColumn loc = new IntegerColumn("Lines");
-        final SimpleTextColumn twitter = new SimpleTextColumn("Tweet This");
         loc.setShowPercentages(false);
 
         this.table = new Table("Repository Tags");
@@ -60,9 +59,6 @@ public class DevelopersOfTheMonthTable implements TableReport {
         this.table.addColumn(months);
         this.table.addColumn(developers);
         this.table.addColumn(loc);
-        if (ConfigurationOptions.isEnableTwitterButton()) {
-            this.table.addColumn(twitter);
-        }
         final Date start = this.repository.getFirstDate();
         final Date end = this.repository.getLastDate();
         final Calendar calendar = new GregorianCalendar();
@@ -80,7 +76,6 @@ public class DevelopersOfTheMonthTable implements TableReport {
                 final Author developer = (Author) it.next();
                 developers.addValue(developer);
                 loc.addValue(developerMap.get(developer));
-                twitter.addValue(TwitterHelp.buildDeveloperOfMonthLink(developer, developerMap.get(developer), repository, month_year, config));
             }
 
             if (calendar.get(Calendar.YEAR) == startCal.get(Calendar.YEAR) && calendar.get(Calendar.MONTH) == startCal.get(Calendar.MONTH)) {
