@@ -1,3 +1,17 @@
+StatSVN のフォーク版
+
+このリポジトリは、[StatSVN](https://github.com/AusHick/StatSVN) のフォーク版です。
+自分が利用するために都合の良い改造しています。
+
+- バグ修正
+- 日本語対応
+- Github Copilotを使用して開発をします
+- 要らない機能の削除
+
+以下、オリジナルのREADME.mdを掲載しています。
+
+---
+
 StatSVN
 ------------
 StatSVN is a statistics tool for SVN repositories. It generates HTML reports from SVN log files.
