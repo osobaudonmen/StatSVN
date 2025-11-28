@@ -41,6 +41,11 @@ echo -e "${GREEN}[4/5]${NC} リソースファイルをコピー中..."
 cp src/net/sf/statsvn/*.properties build/classes/main/net/sf/statsvn/ 2>/dev/null || true
 if [ -d "vendor/statcvs-0.7.0/src/net/sf/statcvs" ]; then
     find vendor/statcvs-0.7.0/src/net/sf/statcvs -name "*.properties" -exec sh -c 'cp "$1" build/classes/main/net/sf/statcvs/ 2>/dev/null || true' _ {} \;
+    # ウェブファイル（CSS等）もコピー
+    if [ -d "vendor/statcvs-0.7.0/src/net/sf/statcvs/web-files" ]; then
+        mkdir -p build/classes/main/net/sf/statcvs/web-files
+        cp vendor/statcvs-0.7.0/src/net/sf/statcvs/web-files/* build/classes/main/net/sf/statcvs/web-files/ 2>/dev/null || true
+    fi
 fi
 echo "  ✓ リソースファイルをコピー"
 
