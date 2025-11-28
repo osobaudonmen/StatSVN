@@ -25,3 +25,6 @@ hs_err_pid*
 /bin
 /build
 /testing
+
+# IDE project files
+.project
