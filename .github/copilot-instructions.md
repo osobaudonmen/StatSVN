@@ -28,12 +28,72 @@
 
 ## ビルドと実行
 
-- このリポジトリはビルドに `javac` を直接使う形でコンパイル可能（`lib/` に依存 JAR がある）。
+### ビルド手順
 
-### 実行例
+このリポジトリはスタンドアロン実行可能なFat JAR（全依存ライブラリを含む）を生成します。
+
+#### 推奨方法: ビルドスクリプト
 
 ```bash
-LANG=<lang>　java -jar <statsvn.jar> <svn-logfile> <checked-out-directory> -output-dir <output-dir> -charset <charset> -disable-twitter-button -viewvc <viewwvc-url> -mantis <mantis-url> -username <username> -password <password>
+./build.sh
+```
+
+このスクリプトは以下を自動実行します：
+1. Javaソースコードをコンパイル（`javac`で`src/`を`build/classes/main/`にコンパイル）
+2. 依存ライブラリを全て含めたFat JARを生成
+3. `build/dist/statsvn.jar`（約6.1MB）を作成
+
+#### Makefile を使用する方法
+
+```bash
+make build    # ビルド実行
+make clean    # クリーニング
+make test     # テスト実行
+make help     # ヘルプ表示
+```
+
+#### 手動でビルドする場合
+
+```bash
+# 1. コンパイル
+javac -d build/classes/main -cp "lib/*" $(find src -name "*.java")
+
+# 2. リソースファイルをコピー
+cp src/net/sf/statsvn/*.properties build/classes/main/net/sf/statsvn/
+
+# 3. Fat JAR を作成
+cd build/tmp_fatjar
+for jar in ../../lib/*.jar; do jar xf "$jar"; done
+cd - > /dev/null
+cp -r build/classes/main/net build/tmp_fatjar/
+jar cfm build/dist/statsvn.jar build/manifest.mf -C build/tmp_fatjar .
+```
+
+### 実行方法
+
+ビルド後、以下のコマンドで実行します：
+
+```bash
+java -jar build/dist/statsvn.jar [options] <logfile> <directory>
+```
+
+**実行例（テスト環境）:**
+
+```bash
+LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar testing/svn.log testing/project \
+  -output-dir testing/output \
+  -charset UTF-8 \
+  -disable-twitter-button \
+  -viewvc http://localhost/viewvc/ \
+  -mantis http://localhost/mantis/ \
+  -username user123 \
+  -password password123
+```
+
+**オプション確認:**
+
+```bash
+java -jar build/dist/statsvn.jar
 ```
 
 ## テストと検証
@@ -63,11 +123,11 @@ LANG=<lang>　java -jar <statsvn.jar> <svn-logfile> <checked-out-directory> -out
 ## よくある命令のテンプレ（例）
 
 - 「ビルドしてください」
-  - 期待される動作: ソースをコンパイルして `build/dist/statsvn.jar` を作り、実行確認まで行う。出力と起きたエラーを報告する。
-- 「実行スクリプトを作ってください」
-  - 期待される動作: 環境を検出し、`run-statsvn.sh` を作成して実行例と使い方を明示する。
+  - 期待される動作: `./build.sh` を実行するか、`make build` でビルドしてJARを生成。実行確認まで行い、出力と起きたエラーを報告する。
+- 「テストしてください」
+  - 期待される動作: `make test` で自動テストを実行。またはビルド後に手動で `java -jar build/dist/statsvn.jar testing/svn.log testing/project ...` で実行確認する。
 - 「このクラスをリファクタして下さい」
-  - 期待される動作: 小さな、安全な変更に限定してリファクタリングし、コンパイル/テストを通す。
+  - 期待される動作: 小さな、安全な変更に限定してリファクタリングし、`./build.sh` でコンパイル/テストを通す。
 
 ## 安全性・機密情報について
 
