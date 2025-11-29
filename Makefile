@@ -27,7 +27,7 @@ test: build
 	@echo ""
 	@echo "テスト実行中..."
 	@LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar testing/svn.log testing/project \
-		-output-dir testing/output-test \
+		-output-dir testing/output \
 		-charset UTF-8 \
 		-disable-twitter-button \
 		-viewvc http://localhost/viewvc/ \
@@ -35,5 +35,5 @@ test: build
 		-username user123 \
 		-password password123
 	@echo ""
-	@echo "✓ テスト完了: testing/output-test/"
-	@ls -lh testing/output-test/ | head -10
+	@echo "✓ テスト完了: testing/output/"
+	@ls -lh testing/output/ | head -10
