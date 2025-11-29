@@ -97,6 +97,68 @@ LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar testing/svn.log testing/projec
 java -jar build/dist/statsvn.jar
 ```
 
+### 配布用（Fat JAR）確認と同梱方法
+
+- **目的**: 生成物の JAR を単体で配布できるように、外部ライブラリや必要な外部ファイルをすべて同梱する。
+- **前提**: `lib/` に外部依存 JAR、`vendor/` に外部ソースやリソースが存在すること。
+
+- **含むリソース**: HTML/CSS/JS、画像、フォントなどの静的ウェブリソースや設定ファイルなど、配布に必要な外部ファイルも同梱対象です。
+
+#### スクリプト/Makefile を使う場合
+
+`./build.sh` や `make build` は基本的に依存を展開して `build/tmp_fatjar` に集約し、`build/dist/statsvn.jar` を作成します。ビルド後に以下で確認してください:
+
+```bash
+# JAR の中身と依存が含まれているか確認
+jar tf build/dist/statsvn.jar | head -n 40
+
+# 実行テスト
+LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar --help
+```
+
+#### 手動で同梱する場合（詳細）
+
+1. 作業ディレクトリを用意します:
+
+```bash
+rm -rf build/tmp_fatjar
+mkdir -p build/tmp_fatjar
+```
+
+2. 依存 JAR を展開して中身を集める:
+
+```bash
+for jar in lib/*.jar; do (cd build/tmp_fatjar && jar xf "../../$jar"); done
+```
+
+3. コンパイルしたクラスとリソースをコピーする:
+
+```bash
+cp -r build/classes/main/* build/tmp_fatjar/ || true
+cp -r src/net/sf/statsvn/*.properties build/tmp_fatjar/net/sf/statsvn/ 2>/dev/null || true
+# 必要なら vendor 内の追加リソースもコピー
+cp -r vendor/statcvs-0.7.0/site/web-files/* build/tmp_fatjar/ 2>/dev/null || true
+```
+
+4. マニフェストを用意して JAR を作成する:
+
+```bash
+jar cfm build/dist/statsvn.jar build/manifest.mf -C build/tmp_fatjar .
+```
+
+5. 最終確認 — JAR にクラス/リソースが含まれているか、依存の主要クラスが存在するかを確認してください:
+
+```bash
+jar tf build/dist/statsvn.jar | grep -E "net/sf/statsvn|org/|com/|META-INF/|d3|repomap" || true
+LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar --help
+```
+
+#### 注意点
+
+- ネイティブライブラリや外部データファイル（例: 大きな静的データ）はJARに含めないほうがよい場合があります。その場合は配布方法とインストール手順を別途ドキュメント化してください。
+- `jar` コマンドでクラス競合（同名のリソースやクラス）が発生する場合、優先順位の検討や一部ライブラリの除外が必要です。
+
+
 ## テストと検証
 
 - 変更後はまずコンパイルを確認する（`javac`）。可能なら実行して `Main` の Usage 出力などを確認する。
