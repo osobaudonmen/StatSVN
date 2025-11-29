@@ -60,7 +60,9 @@ public class IndexPageMaker {
         if (headRevisionNumber != null && headRevisionNumber.indexOf('.') < 0) {
             page.addAttribute("Head revision", headRevisionNumber);
         }
-        page.addAttribute("Report Period", getReportPeriod());
+        // getReportPeriod() returns HTML (span wrappers). Add as raw attribute
+        // so it is not escaped again by Page.addAttribute.
+        page.addRawAttribute("Report Period", getReportPeriod());
         page.addAttribute("Total Files", getCurrentFileCount());
         page.addAttribute("Total Lines of Code", this.repository.getCurrentLOC());
         page.addAttribute("Developers", topDevelopers.getDeveloperCount());
