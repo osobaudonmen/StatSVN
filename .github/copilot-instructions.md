@@ -18,7 +18,7 @@
 
 - 日本語で解凍する。
 - 簡潔で直接的、協調的な口調で回答する。
- - ユーザーが「ブラウザで開いて」と指示した場合は、**VSCode の内蔵ブラウザ（Simple Browser）で開くこと**を意味します。`file://` 経由ではなく、HTTP サーバ（例: `http://localhost:8000/`）を使って内蔵ブラウザで確認してください。
+ - ユーザーが「ブラウザで開いて」と指示した場合は、**VSCode の内蔵ブラウザ（Simple Browser）で開くこと**を意味します。
 - 重要な変更・前提・制約は必ず明記する。
 - 実行前に大きな変更を行う場合は簡単なプランを提示してユーザーの承認を得る。
 
@@ -192,38 +192,34 @@ HTMLレポート内に含まれるJavaScriptのデバッグや動作確認は、
    ```bash
    make build
    LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar testing/svn.log testing/project \
-     -output-dir testing/output-test -charset UTF-8
+     -output-dir testing/output -charset UTF-8
    ```
 
    **注意（出力ディレクトリのクリーン）**: テストでレポートを生成する際、`-output-dir` で指定した出力先が既に存在する場合は、上書きによる混乱を避けるため生成前にクリーンしてください。例:
 
    ```bash
    # 出力先が存在する場合は中身を削除してから実行
-   rm -rf testing/output-test && mkdir -p testing/output-test
+   rm -rf testing/output && mkdir -p testing/output
    LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar testing/svn.log testing/project \
-     -output-dir testing/output-test -charset UTF-8
+     -output-dir testing/output -charset UTF-8
    ```
 
-2. **HTTPサーバの起動**
-   ```bash
-   cd testing/output-test
-   python3 -m http.server 8000 > /tmp/server.log 2>&1 &
-   sleep 2
-   ```
+2. **ブラウザで直接開く（file://）**
+  - 出力ディレクトリに移動して、生成された `repomap.html` をファイルで開きます。VSCode の内蔵ブラウザ（Simple Browser）で開くか、システムのブラウザで `file://` URL を使ってください。例:
+    ```bash
+    # VSCode の Simple Browser を使うか、単にファイルを開く
+    # 例: file:///home/yuichi/working/StatSVN/testing/output/repomap.html
+    ```
+  - 必要に応じて、HTTP サーバを使った確認も引き続き可能です（オプション）。
 
-3. **内蔵ブラウザで確認**
-   - HTTPサーバ起動後、`http://localhost:8000/repomap.html`（またはその他のHTMLファイル）を内蔵ブラウザで開く
-   - `file://` プロトコルではCORS制限によりJavaScriptが正常に動作しないため、必ずHTTP経由でアクセスすること
-
-  **監視（重要）**: 内蔵ブラウザで動作確認する際は、以下を必ず確認してください。
+  **監視（重要）**: ブラウザで動作確認する際は、以下を必ず確認してください。
   - ブラウザのデベロッパーツール（F12）を開き、**Console**タブで JavaScript エラーが発生していないか確認する。
-  - **Network** タブで `repomap-data.json` や `repomap.js` / `repomap.css` の取得が 200 で成功しているか、404/500 等のエラーがないか確認する。
-  - サーバー側ログを同時に監視する（例: `python3 -m http.server` をバックグラウンドで起動した場合はリダイレクト先のログを `tail -f /tmp/server.log` 等で監視する）。
+  - **Network** タブで `repomap-data.js` や `repomap.js` / `repomap.css` の取得が成功しているか（file://の場合はリソースが読み込まれているか）確認する。
   - エラーが発生したら、まずコンソールのスタックトレースと Network のレスポンス内容を保存して共有してください。
 
-4. **ブラウザのデベロッパーツール**
-   - ブラウザのコンソール（F12キー）で JavaScript エラーを確認
-  - Network タブでリソース読み込み（`repomap.js` / `repomap-data.json` 等）の成功/失敗を確認
+3. **ブラウザのデベロッパーツール**
+  - ブラウザのコンソール（F12キー）で JavaScript エラーを確認
+  - Network タブでリソース読み込み（`repomap.js` / `repomap-data.js` 等）の成功/失敗を確認
 
 ### テスト環境
 
