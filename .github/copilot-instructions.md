@@ -84,7 +84,6 @@ java -jar build/dist/statsvn.jar [options] <logfile> <directory>
 LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar testing/svn.log testing/project \
   -output-dir testing/output \
   -charset UTF-8 \
-  -disable-twitter-button \
   -viewvc http://localhost/viewvc/ \
   -mantis http://localhost/mantis/ \
   -username user123 \
@@ -163,6 +162,23 @@ LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar --help
 
 - 変更後はまずコンパイルを確認する（`javac`）。可能なら実行して `Main` の Usage 出力などを確認する。
 - 既存のユニットテスト（存在する場合）は実行する。
+
+### svn.log の生成方法
+
+テスト用の `svn.log` はリポジトリの作業コピーまたはリポジトリ URL から XML 形式で出力します。一般的な手順:
+
+- 作業コピーから生成する（既に `testing/project/` がチェックアウト済みの場合）:
+
+```bash
+LANG=ja_JP.UTF-8 svn log --xml -v testing/project > testing/svn.log
+```
+
+- リポジトリ URL から直接取得する（作業コピーがない場合）:
+
+```bash
+LANG=ja_JP.UTF-8 svn log --xml -v svn://localhost/repo/trunk > testing/svn.log
+```
+
 
 ### JavaScriptの動作確認
 
