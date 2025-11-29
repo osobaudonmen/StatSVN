@@ -210,6 +210,9 @@ public class RepoMapPageMaker {
         }
         out.write("{");
         out.write("\"label\":\"" + jsonEscape(name) + "\"");
+        // expose the directory's full path so client-side code can
+        // unambiguously identify directories when drilling down
+        out.write(",\"path\":\"" + jsonEscape(dir.getPath()) + "\"");
         out.write(",\"children\":[");
         boolean firstChild = true;
         final SortedSet set = dir.getSubdirectories();
@@ -245,7 +248,9 @@ public class RepoMapPageMaker {
                 out.write(",\"change\":" + String.valueOf(delta));
                 final double percentage = ((double) delta) / (double) loc * 100.0;
                 out.write(",\"value\":" + String.valueOf(percentage));
-                out.write(",\"path\":\"" + jsonEscape((dir.isRoot() ? "" : dir.getName() + "/") + vfile.getFilename()) + "\"");
+                // Use the directory's full path so nested directories produce
+                // unique, correct paths (Directory.getPath() includes trailing '/').
+                out.write(",\"path\":\"" + jsonEscape(dir.getPath() + vfile.getFilename()) + "\"");
                 out.write("}");
                 firstChild = false;
             }

@@ -210,7 +210,6 @@
           div.style.border = '1px solid rgba(0,0,0,0.12)';
           div.style.background = '#f7f7f7';
           div.style.cursor = 'zoom-in';
-          div.setAttribute('tabindex', 0);
           div.setAttribute('role','button');
           div.setAttribute('aria-label', child.label || '');
           var lbl = document.createElement('div'); lbl.className='repomap-label'; lbl.textContent = child.label || '';
@@ -224,12 +223,13 @@
               e.stopPropagation();
               try {
                 // collect branch nodes from this div up to the document body
-                var p = div;
+                var p = this;
                 var ancestors = [];
                 while (p && p !== document.body) {
                   if (p.__repomap_node) ancestors.push(p.__repomap_node);
                   p = p.parentElement;
                 }
+                
                 // reverse to outermost..deepest
                 ancestors = ancestors.reverse();
                 // find index of current in ancestor chain
@@ -248,7 +248,7 @@
               // fallback: simple push
               state.zoomStack.push(c); state.current = c; draw(state);
             });
-            div.addEventListener('keydown', function(e){ if (e.key==='Enter') { div.click(); } if (e.key==='Escape') { if (state.zoomStack.length>1) { state.zoomStack.pop(); state.current = state.zoomStack[state.zoomStack.length-1]; draw(state); } } });
+            
             div.addEventListener('mouseenter', function(e){ tooltip.style.display='block'; tooltip.innerHTML = '<strong>'+escapeHtml(c.label)+'</strong>'; var info=[]; if (c._weight) info.push('LOC: '+c._weight); if (info.length) tooltip.innerHTML += '<div>'+escapeHtml(info.join(' | '))+'</div>'; });
             div.addEventListener('mousemove', function(e){ tooltip.style.left = (e.pageX+12)+'px'; tooltip.style.top = (e.pageY+12)+'px'; });
             div.addEventListener('mouseleave', function(e){ tooltip.style.display='none'; });
@@ -268,7 +268,6 @@
           leaf.style.boxSizing = 'border-box';
           leaf.style.border = '1px solid rgba(255,255,255,0.5)';
           leaf.style.cursor = 'auto';
-          leaf.setAttribute('tabindex', 0);
           leaf.setAttribute('role','button');
           leaf.setAttribute('aria-label', child.label || '');
           leaf.style.background = colorFromValue(child.value);
@@ -282,7 +281,7 @@
             leaf.addEventListener('click', function(e){ e.stopPropagation();
               try {
                 // collect branch nodes from the leaf up to the top
-                var p = leaf.parentElement;
+                var p = this.parentElement;
                 var ancestors = [];
                 while (p && p !== document.body) {
                   if (p.__repomap_node) ancestors.push(p.__repomap_node);
@@ -308,26 +307,14 @@
                 }
               } catch (ex) {}
             });
-            leaf.addEventListener('keydown', function(e){ if (e.key==='Enter') { leaf.click(); } if (e.key==='Escape') { if (state.zoomStack.length>1) { state.zoomStack.pop(); state.current = state.zoomStack[state.zoomStack.length-1]; draw(state); } } });
+            
             leaf.addEventListener('mouseenter', function(e){ tooltip.style.display='block'; tooltip.innerHTML = '<strong>'+escapeHtml(c.label)+'</strong>'; var info=[]; if (c._weight) info.push('LOC:'+c._weight); if (c.change!==undefined) info.push('change:'+c.change); if (c.value!==undefined) info.push('value:'+c.value); if (c.path) info.push('path:'+escapeHtml(c.path)); if (info.length) tooltip.innerHTML += '<div>'+escapeHtml(info.join(' | '))+'</div>'; });
             leaf.addEventListener('mousemove', function(e){ tooltip.style.left = (e.pageX+12)+'px'; tooltip.style.top = (e.pageY+12)+'px'; });
             leaf.addEventListener('mouseleave', function(e){ tooltip.style.display='none'; });
           })(child);
         }
       }
-      if (!container.__repomap_nav_attached) {
-        container.addEventListener('keydown', function(e){
-          var dir = null;
-          if (e.key === 'ArrowLeft') dir='left'; else if (e.key==='ArrowRight') dir='right'; else if (e.key==='ArrowUp') dir='up'; else if (e.key==='ArrowDown') dir='down';
-          if (dir) {
-            e.preventDefault();
-            var active = document.activeElement;
-            var target = findNeighborElement(container, active, dir) || findNeighborElement(container, null, dir);
-            if (target) target.focus();
-          }
-        });
-        container.__repomap_nav_attached = true;
-      }
+      
     }
 
     function clearContainer(container) {
