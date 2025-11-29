@@ -449,15 +449,45 @@ public class SvnInfoUtils implements ISvnInfoProcessor {
             result = url.substring(getRepositoryUrl().length());
         }
         
-        // bugs with spaces in filenames. 
+        // bugs with spaces in filenames and malformed percent-escapes.
+        // Use a tolerant decode: if URLDecoder throws IllegalArgumentException
+        // (due to invalid % sequences), escape stray '%' characters then retry.
         String decoded;
         try {
-            decoded =  URLDecoder.decode(result, "UTF-8");
-        } catch (UnsupportedEncodingException ex)
-        {
+            decoded = URLDecoder.decode(result, "UTF-8");
+        } catch (final UnsupportedEncodingException ex) {
             decoded = result;
+        } catch (final IllegalArgumentException ex) {
+            // Fix '%' characters that are not followed by two hex digits by
+            // replacing them with "%25" so decode will succeed.
+            final StringBuilder sb = new StringBuilder(result.length() * 2);
+            for (int i = 0; i < result.length(); i++) {
+                final char c = result.charAt(i);
+                if (c == '%') {
+                    if (i + 2 < result.length()) {
+                        final char c1 = result.charAt(i + 1);
+                        final char c2 = result.charAt(i + 2);
+                        if (isHexDigit(c1) && isHexDigit(c2)) {
+                            sb.append('%');
+                        } else {
+                            sb.append("%25");
+                        }
+                    } else {
+                        sb.append("%25");
+                    }
+                } else {
+                    sb.append(c);
+                }
+            }
+
+            try {
+                decoded = URLDecoder.decode(sb.toString(), "UTF-8");
+            } catch (final Exception ex2) {
+                // If all else fails, fall back to the original raw value.
+                decoded = result;
+            }
         }
-        
+
         return decoded;
     }
 
@@ -501,6 +531,13 @@ public class SvnInfoUtils implements ISvnInfoProcessor {
 
     protected void setRepositoryUuid(String repositoryUuid) {
         sRepositoryUuid = repositoryUuid;
+    }
+
+    /**
+     * Returns true if the character is a hexadecimal digit.
+     */
+    private static boolean isHexDigit(final char c) {
+        return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
     }
 
     
