@@ -18,7 +18,7 @@ StatSVN のフォーク版
 
 ### StatCVS
 - StatSVNのベースとなるCVS統計ツール
-- ソースコード: `vendor/statcvs-0.7.0/`
+- ソースコード: `src/net/sf/statcvs/`
 - プロジェクト: [StatCVS - SourceForge](https://sourceforge.net/projects/statcvs/)
 - StatCVS 0.7.0 のソースを含めており、ビルド時に StatSVN と一緒にコンパイルされます
 
