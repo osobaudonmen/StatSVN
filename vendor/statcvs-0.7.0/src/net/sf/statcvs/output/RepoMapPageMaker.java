@@ -84,20 +84,16 @@ public class RepoMapPageMaker {
         page.addRawAttribute(Messages.getString("REPOMAP_END_DATE"), HTML.getDate(currentDate));
 
         page.addRawContent("<p>" + Messages.getString("REPOMAP_DESCRIPTION") + "</p>");
-        page.addRawContent("<p>" + getApplet() + "</p>");
-        page.addRawContent("<p><small>This page uses <a href=\"http://jtreemap.sourceforge.net\">JTreeMap</a>.</small></p>");
-        buildXmlForJTreeMap();
+        // Insert JS/CSS based treemap container (applet removed)
+        page.addRawContent("<div id=\"repomap\" style=\"width:940px;height:600px;\"></div>");
+        page.addRawContent("<link rel=\"stylesheet\" href=\"repomap.css\" />");
+        page.addRawContent("<script src=\"repomap.js\"></script>");
+        buildJsonForTreemap();
 
         return page;
     }
 
-    private String getApplet() {
-        return "<applet archive=\"./" + Messages.getString("JTREEMAP_JAR") + "\" code=\"net.sf.jtreemap.swing.example.JTreeMapAppletExample\""
-                + " width=\"940\" height=\"600\"><param name=\"dataFile\" value=\"" + REPO_FILE + "\"/>" + "<param name=\"viewTree\" value=\"true\"/>"
-                + "<param name=\"showWeight\" value=\"true\"/>" + "<param name=\"valuePrefix\" value=\"Change:\"/>"
-                + "<param name=\"weightPrefix\" value=\"LOC:\"/>" + "<param name=\"dataFileType\" value=\"xml\"/>"
-                + "<param name=\"colorProvider\" value=\"HSBLog\"/>" + "</applet>";
-    }
+    
 
     private void buildXmlForJTreeMap() {
         BufferedWriter out = null;
@@ -129,17 +125,167 @@ public class RepoMapPageMaker {
     private void copyJar(final String jtreemapJar) throws IOException {
         InputStream stream = null;
         try {
-            stream = RepoMapPageMaker.class.getResourceAsStream(WEB_FILE_PATH + jtreemapJar);
+            // resources are packaged under /net/sf/statcvs/web-files/ in the jar
+            final String resourcePath = "/net/sf/statcvs/" + WEB_FILE_PATH + jtreemapJar;
+            stream = RepoMapPageMaker.class.getResourceAsStream(resourcePath);
             if (stream != null) {
                 FileUtils.copyFile(stream, new File(ConfigurationOptions.getOutputDir() + jtreemapJar));
             } else {
-                throw new IOException("The stream to " + (WEB_FILE_PATH + jtreemapJar) + " failed, is it copied in the jar?");
+                throw new IOException("The stream to " + resourcePath + " failed, is it copied in the jar?");
             }
         } finally {
             if (stream != null) {
                 stream.close();
             }
         }
+    }
+
+    /*
+     * New JSON writer: emits repomap-data.json with same structure as old XML.
+     */
+    private void buildJsonForTreemap() {
+        BufferedWriter out = null;
+        try {
+            // copy client-side assets (JS/CSS) to output dir so the generated page can load them
+            try {
+                copyWebFiles();
+            } catch (final IOException ioe) {
+                // if copy fails, continue but log stacktrace
+                ioe.printStackTrace();
+            }
+            out = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + "repomap-data.json"));
+            out.write("{");
+            out.write("\"label\":\"[root]\",");
+            out.write("\"children\":[");
+            final Iterator it = config.getRepository().getDirectories().iterator();
+            boolean first = true;
+            if (it.hasNext()) {
+                final Directory dir = (Directory) it.next();
+                first = writeDirectoryJson(out, dir, first);
+            }
+            out.write("]}");
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (final IOException e) {
+                    // ignore
+                }
+            }
+        }
+    }
+
+    private void copyWebFiles() throws IOException {
+        // copy repomap.js and repomap.css from resources (WEB_FILE_PATH) to output dir
+        InputStream jsStream = null;
+        InputStream cssStream = null;
+        try {
+            // use absolute classpath locations: resources live under /net/sf/statcvs/web-files/
+            final String base = "/net/sf/statcvs/" + WEB_FILE_PATH;
+            jsStream = RepoMapPageMaker.class.getResourceAsStream(base + "repomap.js");
+            if (jsStream != null) {
+                FileUtils.copyFile(jsStream, new File(ConfigurationOptions.getOutputDir() + "repomap.js"));
+            }
+            cssStream = RepoMapPageMaker.class.getResourceAsStream(base + "repomap.css");
+            if (cssStream != null) {
+                FileUtils.copyFile(cssStream, new File(ConfigurationOptions.getOutputDir() + "repomap.css"));
+            }
+        } finally {
+            if (jsStream != null) {
+                jsStream.close();
+            }
+            if (cssStream != null) {
+                cssStream.close();
+            }
+        }
+    }
+
+    private boolean writeDirectoryJson(final BufferedWriter out, final Directory dir, final boolean firstParent) throws IOException {
+        boolean first = firstParent;
+        final String name = dir.isRoot() ? Messages.getString("NAVIGATION_ROOT") : dir.getName();
+        if (!first) {
+            out.write(",");
+        }
+        out.write("{");
+        out.write("\"label\":\"" + jsonEscape(name) + "\"");
+        out.write(",\"children\":[");
+        boolean firstChild = true;
+        final SortedSet set = dir.getSubdirectories();
+        if (set != null) {
+            for (final Iterator it = set.iterator(); it.hasNext();) {
+                final Directory sub = (Directory) it.next();
+                if (!firstChild) {
+                    out.write(",");
+                }
+                writeDirectoryJson(out, sub, true);
+                firstChild = false;
+            }
+        }
+        final SortedSet files = dir.getFiles();
+        if (files != null && !files.isEmpty()) {
+            for (final Iterator file = files.iterator(); file.hasNext();) {
+                final VersionedFile vfile = (VersionedFile) file.next();
+                int loc = vfile.getCurrentLinesOfCode();
+                final int delta = calculateTotalDelta(vfile);
+                if (loc == 0) {
+                    loc = Math.abs(delta);
+                }
+                if (loc == 0) {
+                    continue;
+                }
+                if (!firstChild) {
+                    out.write(",");
+                }
+                out.write("{");
+                out.write("\"label\":\"" + jsonEscape(vfile.getFilename()) + "\"");
+                out.write(",\"weight\":" + String.valueOf(loc));
+                out.write(",\"size\":" + String.valueOf(loc));
+                out.write(",\"change\":" + String.valueOf(delta));
+                final double percentage = ((double) delta) / (double) loc * 100.0;
+                out.write(",\"value\":" + String.valueOf(percentage));
+                out.write(",\"path\":\"" + jsonEscape((dir.isRoot() ? "" : dir.getName() + "/") + vfile.getFilename()) + "\"");
+                out.write("}");
+                firstChild = false;
+            }
+        }
+        out.write("]}");
+        return false;
+    }
+
+    private String jsonEscape(final String s) {
+        if (s == null) {
+            return "";
+        }
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            final char c = s.charAt(i);
+            switch (c) {
+                case '\\':
+                    sb.append("\\\\");
+                    break;
+                case '"':
+                    sb.append("\\\"");
+                    break;
+                case '\n':
+                    sb.append("\\n");
+                    break;
+                case '\r':
+                    sb.append("\\r");
+                    break;
+                case '\t':
+                    sb.append("\\t");
+                    break;
+                default:
+                    if (c < 32) {
+                        sb.append(String.format("\\u%04x", (int) c));
+                    } else {
+                        sb.append(c);
+                    }
+            }
+        }
+        return sb.toString();
     }
 
     private void addSpaces(final int count, final BufferedWriter out) throws IOException {

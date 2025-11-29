@@ -1,0 +1,52 @@
+.repomap-node{
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.repomap-node .repomap-label{
+  font-size: 12px;
+  padding: 2px;
+  color: #111;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.repomap-node.branch{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+}
+
+.repomap-node.leaf{
+  cursor: default;
+}
+
+.repomap-tooltip{
+  position: absolute;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.repomap-crumb{
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  background: rgba(255,255,255,0.95);
+  color: #111;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+.repomap-node:focus{
+  outline: 2px solid #3b99fc;
+}

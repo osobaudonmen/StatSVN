@@ -26,5 +26,8 @@ hs_err_pid*
 /build
 /testing
 
+# Filtered source created during build
+src-temp/
+
 # IDE project files
 .project
