@@ -434,7 +434,12 @@
     document.addEventListener('DOMContentLoaded', function(){
       var c = document.getElementById('repomap');
       if (c) {
-        initFromUrl('repomap', 'repomap-data.json');
+        // Prefer data provided via script wrapper when present (avoids file:// CORS issues)
+        if (typeof window !== 'undefined' && window.repomapData) {
+          initWithData('repomap', window.repomapData);
+        } else {
+          initFromUrl('repomap', 'repomap-data.json');
+        }
       }
     });
 

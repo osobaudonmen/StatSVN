@@ -87,6 +87,8 @@ public class RepoMapPageMaker {
         // Insert JS/CSS based treemap container (applet removed)
         page.addRawContent("<div id=\"repomap\" style=\"width:940px;height:600px;\"></div>");
         page.addRawContent("<link rel=\"stylesheet\" href=\"repomap.css\" />");
+        // Include generated data as a script to avoid CORS when opening files locally
+        page.addRawContent("<script src=\"repomap-data.js\"></script>");
         page.addRawContent("<script src=\"repomap.js\"></script>");
         buildJsonForTreemap();
 
@@ -144,7 +146,8 @@ public class RepoMapPageMaker {
      * New JSON writer: emits repomap-data.json with same structure as old XML.
      */
     private void buildJsonForTreemap() {
-        BufferedWriter out = null;
+        // Build JSON into a buffer first so we can emit both .json and .js wrappers
+        final StringBuilder sb = new StringBuilder();
         try {
             // copy client-side assets (JS/CSS) to output dir so the generated page can load them
             try {
@@ -153,27 +156,34 @@ public class RepoMapPageMaker {
                 // if copy fails, continue but log stacktrace
                 ioe.printStackTrace();
             }
-            out = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + "repomap-data.json"));
-            out.write("{");
-            out.write("\"label\":\"[root]\",");
-            out.write("\"children\":[");
+            sb.append("{");
+            sb.append("\"label\":\"[root]\",");
+            sb.append("\"children\":[");
             final Iterator it = config.getRepository().getDirectories().iterator();
             boolean first = true;
             if (it.hasNext()) {
                 final Directory dir = (Directory) it.next();
-                first = writeDirectoryJson(out, dir, first);
+                first = writeDirectoryJson(sb, dir, first);
             }
-            out.write("]}");
+            sb.append("]}");
+
+            // write JSON file
+            BufferedWriter outJson = null;
+            BufferedWriter outJs = null;
+            try {
+                outJson = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + "repomap-data.json"));
+                outJson.write(sb.toString());
+                // also write a JS wrapper that assigns the data to a global variable so it can be loaded via <script>
+                outJs = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + "repomap-data.js"));
+                outJs.write("window.repomapData = ");
+                outJs.write(sb.toString());
+                outJs.write(";\n");
+            } finally {
+                if (outJson != null) try { outJson.close(); } catch (final IOException e) { }
+                if (outJs != null) try { outJs.close(); } catch (final IOException e) { }
+            }
         } catch (final IOException e) {
             e.printStackTrace();
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (final IOException e) {
-                    // ignore
-                }
-            }
         }
     }
 
@@ -202,25 +212,25 @@ public class RepoMapPageMaker {
         }
     }
 
-    private boolean writeDirectoryJson(final BufferedWriter out, final Directory dir, final boolean firstParent) throws IOException {
+    private boolean writeDirectoryJson(final StringBuilder out, final Directory dir, final boolean firstParent) {
         boolean first = firstParent;
         final String name = dir.isRoot() ? Messages.getString("NAVIGATION_ROOT") : dir.getName();
         if (!first) {
-            out.write(",");
+            out.append(',');
         }
-        out.write("{");
-        out.write("\"label\":\"" + jsonEscape(name) + "\"");
+        out.append('{');
+        out.append("\"label\":\"").append(jsonEscape(name)).append('\"');
         // expose the directory's full path so client-side code can
         // unambiguously identify directories when drilling down
-        out.write(",\"path\":\"" + jsonEscape(dir.getPath()) + "\"");
-        out.write(",\"children\":[");
+        out.append(",\"path\":\"").append(jsonEscape(dir.getPath())).append('\"');
+        out.append(",\"children\":[");
         boolean firstChild = true;
         final SortedSet set = dir.getSubdirectories();
         if (set != null) {
             for (final Iterator it = set.iterator(); it.hasNext();) {
                 final Directory sub = (Directory) it.next();
                 if (!firstChild) {
-                    out.write(",");
+                    out.append(',');
                 }
                 writeDirectoryJson(out, sub, true);
                 firstChild = false;
@@ -239,23 +249,23 @@ public class RepoMapPageMaker {
                     continue;
                 }
                 if (!firstChild) {
-                    out.write(",");
+                    out.append(',');
                 }
-                out.write("{");
-                out.write("\"label\":\"" + jsonEscape(vfile.getFilename()) + "\"");
-                out.write(",\"weight\":" + String.valueOf(loc));
-                out.write(",\"size\":" + String.valueOf(loc));
-                out.write(",\"change\":" + String.valueOf(delta));
+                out.append('{');
+                out.append("\"label\":\"").append(jsonEscape(vfile.getFilename())).append('\"');
+                out.append(",\"weight\":").append(String.valueOf(loc));
+                out.append(",\"size\":").append(String.valueOf(loc));
+                out.append(",\"change\":").append(String.valueOf(delta));
                 final double percentage = ((double) delta) / (double) loc * 100.0;
-                out.write(",\"value\":" + String.valueOf(percentage));
+                out.append(",\"value\":").append(String.valueOf(percentage));
                 // Use the directory's full path so nested directories produce
                 // unique, correct paths (Directory.getPath() includes trailing '/').
-                out.write(",\"path\":\"" + jsonEscape(dir.getPath() + vfile.getFilename()) + "\"");
-                out.write("}");
+                out.append(",\"path\":\"").append(jsonEscape(dir.getPath() + vfile.getFilename())).append('\"');
+                out.append('}');
                 firstChild = false;
             }
         }
-        out.write("]}");
+        out.append("]}");
         return false;
     }
 
