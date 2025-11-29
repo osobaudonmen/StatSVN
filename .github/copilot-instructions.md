@@ -102,6 +102,32 @@ java -jar build/dist/statsvn.jar
 - 変更後はまずコンパイルを確認する（`javac`）。可能なら実行して `Main` の Usage 出力などを確認する。
 - 既存のユニットテスト（存在する場合）は実行する。
 
+### JavaScriptの動作確認
+
+HTMLレポート内に含まれるJavaScript（D3.js等）のデバッグや動作確認は、以下の手順で行うこと：
+
+1. **ビルドとテスト実行**
+   ```bash
+   make build
+   LANG=ja_JP.UTF-8 java -jar build/dist/statsvn.jar testing/svn.log testing/project \
+     -output-dir testing/output-test -charset UTF-8
+   ```
+
+2. **HTTPサーバの起動**
+   ```bash
+   cd testing/output-test
+   python3 -m http.server 8000 > /tmp/server.log 2>&1 &
+   sleep 2
+   ```
+
+3. **内蔵ブラウザで確認**
+   - HTTPサーバ起動後、`http://localhost:8000/repomap.html`（またはその他のHTMLファイル）を内蔵ブラウザで開く
+   - `file://` プロトコルではCORS制限によりJavaScriptが正常に動作しないため、必ずHTTP経由でアクセスすること
+
+4. **ブラウザのデベロッパーツール**
+   - ブラウザのコンソール（F12キー）で JavaScript エラーを確認
+   - Network タブでリソース読み込み（D3.jsライブラリなど）の成功/失敗を確認
+
 ### テスト環境
 
 - テストは `testing/` ディレクトリ内で実行すること。
