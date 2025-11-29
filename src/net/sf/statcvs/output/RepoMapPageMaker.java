@@ -143,10 +143,10 @@ public class RepoMapPageMaker {
     }
 
     /*
-     * New JSON writer: emits repomap-data.json with same structure as old XML.
+     * New writer: emits repomap-data.js (assigns window.repomapData).
      */
     private void buildJsonForTreemap() {
-        // Build JSON into a buffer first so we can emit both .json and .js wrappers
+        // Build JSON into a buffer first so we can emit a .js wrapper
         final StringBuilder sb = new StringBuilder();
         try {
             // copy client-side assets (JS/CSS) to output dir so the generated page can load them
@@ -167,19 +167,14 @@ public class RepoMapPageMaker {
             }
             sb.append("]}");
 
-            // write JSON file
-            BufferedWriter outJson = null;
+            // write only the JS wrapper file that assigns the data to a global variable
             BufferedWriter outJs = null;
             try {
-                outJson = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + "repomap-data.json"));
-                outJson.write(sb.toString());
-                // also write a JS wrapper that assigns the data to a global variable so it can be loaded via <script>
                 outJs = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + "repomap-data.js"));
                 outJs.write("window.repomapData = ");
                 outJs.write(sb.toString());
                 outJs.write(";\n");
             } finally {
-                if (outJson != null) try { outJson.close(); } catch (final IOException e) { }
                 if (outJs != null) try { outJs.close(); } catch (final IOException e) { }
             }
         } catch (final IOException e) {

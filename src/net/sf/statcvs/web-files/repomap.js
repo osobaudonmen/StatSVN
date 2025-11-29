@@ -438,7 +438,17 @@
         if (typeof window !== 'undefined' && window.repomapData) {
           initWithData('repomap', window.repomapData);
         } else {
-          initFromUrl('repomap', 'repomap-data.json');
+          // Try to load repomap-data.js (script wrapper) dynamically
+          var s = document.createElement('script');
+          s.src = 'repomap-data.js';
+          s.onload = function() {
+            try {
+              if (window.repomapData) initWithData('repomap', window.repomapData);
+              else console.error('repomap-data.js loaded but window.repomapData is undefined');
+            } catch (e) { console.error('Error initializing repomap from repomap-data.js', e); }
+          };
+          s.onerror = function() { console.error('Failed to load repomap-data.js'); };
+          (document.head || document.documentElement).appendChild(s);
         }
       }
     });
