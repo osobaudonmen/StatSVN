@@ -60,14 +60,17 @@ jobs:
         id: release_body
         run: |
           set -euo pipefail
-          printf \
-            '## Build Information\n\n  %-20s %s\n  %-20s %s\n  %-20s %s\n\n## Artifacts\n\n  %-20s %s\n  %-20s %s\n' \
-            "**Commit**:" "`${{ github.sha }}`" \
-            "**Branch**:" "`${{ github.ref_name }}`" \
-            "**Build Date (UTC)**:" $(date -u +"%Y-%m-%dT%H:%M:%SZ") \
-            "**ZIP**:" "`${{ steps.prepare.outputs.zip_name }}`" \
-            "**Contains**:" "`statsvn.jar`, `README.md`, `LICENSE`" \
-            > /tmp/release_body.txt
+          # Use echo lines instead of printf so output is easy to read and compare.
+          echo "## Build Information" > /tmp/release_body.txt
+          echo "" >> /tmp/release_body.txt
+          echo "  **Commit**: \`${{ github.sha }}\`" >> /tmp/release_body.txt
+          echo "  **Branch**: \`${{ github.ref_name }}\`" >> /tmp/release_body.txt
+          echo "  **Build Date (UTC)**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> /tmp/release_body.txt
+          echo "" >> /tmp/release_body.txt
+          echo "## Artifacts" >> /tmp/release_body.txt
+          echo "" >> /tmp/release_body.txt
+          echo "  **ZIP**: \`${{ steps.prepare.outputs.zip_name }}\`" >> /tmp/release_body.txt
+          echo "  **Contains**: \`statsvn.jar\`, \`README.md\`, \`LICENSE\`" >> /tmp/release_body.txt
 
           echo "/tmp/release_body.txt created"
 
