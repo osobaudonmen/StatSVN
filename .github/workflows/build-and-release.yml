@@ -1,3 +1,9 @@
+# GitHub Actions Workflow: Build and Release JAR
+# Triggered: On push to main branch
+# Creates: Automated releases tagged as build-<run_id> with JAR+docs zip
+# Retention: Keeps latest 5 releases (generations), deletes older ones
+# Files: Generates statsvn_<run_number>.zip containing JAR, README.md, LICENSE
+
 name: Build and Release JAR
 
 on:
@@ -44,14 +50,16 @@ jobs:
         id: prepare
         run: |
           set -e
-          mkdir -p dist
+          mkdir -p dist/statsvn
           ZIP_NAME="statsvn_${{ github.run_number }}.zip"
-          # Copy jar and docs into dist
-          cp build/dist/statsvn.jar dist/statsvn.jar
-          cp README.md dist/README.md || true
-          cp LICENSE dist/LICENSE || true
+          # Copy jar and docs into organized subdirectory
+          cp build/dist/statsvn.jar dist/statsvn/
+          cp README.md dist/statsvn/README.md || echo "Warning: README.md not found"
+          cp LICENSE dist/statsvn/LICENSE || echo "Warning: LICENSE not found"
+          # Create zip with directory structure
           cd dist
-          zip -r "$ZIP_NAME" statsvn.jar README.md LICENSE || true
+          zip -r "$ZIP_NAME" statsvn/ || { echo "ERROR: Failed to create zip"; exit 1; }
+          ls -lh "$ZIP_NAME"
           echo "zip_name=$ZIP_NAME" >> $GITHUB_OUTPUT
 
       - name: Generate release body
@@ -61,24 +69,31 @@ jobs:
           # Attempt to list files added in this push (fallback gracefully)
           added_files=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }} 2>/dev/null || true)
           
-          # Build the release body
-          echo "RELEASE_BODY<<EOF" >> $GITHUB_OUTPUT
-          echo "## Build Information" >> $GITHUB_OUTPUT
-          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_OUTPUT
-          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_OUTPUT
-          echo "- **Build Date**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_OUTPUT
-          echo "- **Run number**: ${{ github.run_number }}" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo "## Artifacts" >> $GITHUB_OUTPUT
-          echo "- ZIP: \`${{ steps.prepare.outputs.zip_name }}\` (contains statsvn.jar, README.md, LICENSE)" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo "## Changed files in this push" >> $GITHUB_OUTPUT
+          # Create multiline release body using temporary file
+          cat > /tmp/release_body.txt <<'BODY_EOF'
+## Build Information
+- **Commit**: ${{ github.sha }}
+- **Branch**: ${{ github.ref_name }}
+- **Build Date**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+- **Run number**: ${{ github.run_number }}
+
+## Artifacts
+- **ZIP**: `${{ steps.prepare.outputs.zip_name }}`
+  - Contains: statsvn.jar, README.md, LICENSE
+  - Organized in `statsvn/` subdirectory for clean extraction
+
+## Changed files in this push
+BODY_EOF
           
           if [ -n "$added_files" ]; then
-            echo "$added_files" >> $GITHUB_OUTPUT
+            echo "$added_files" >> /tmp/release_body.txt
           else
-            echo "- (no new files detected)" >> $GITHUB_OUTPUT
+            echo "(no new files detected)" >> /tmp/release_body.txt
           fi
+          
+          # Read body into output, properly handling multiline
+          echo "RELEASE_BODY<<EOF" >> $GITHUB_OUTPUT
+          cat /tmp/release_body.txt >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create and push tag
@@ -88,8 +103,14 @@ jobs:
           echo "Creating tag: $TAG"
           git config user.email "actions@github.com"
           git config user.name "github-actions[bot]"
-          git tag -a "$TAG" -m "Automated build $TAG - $GITHUB_SHA"
-          git push origin "$TAG"
+          # Check if tag already exists
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "WARNING: Tag $TAG already exists, skipping tag creation"
+          else
+            git tag -a "$TAG" -m "Automated build $TAG - ${{ github.sha }}"
+            git push origin "$TAG" || { echo "ERROR: Failed to push tag"; exit 1; }
+            echo "Tag created and pushed: $TAG"
+          fi
           echo "tag_name=$TAG" >> $GITHUB_OUTPUT
 
       - name: Create release and upload ZIP
@@ -107,18 +128,21 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Installing gh CLI..."
-          sudo apt-get update && sudo apt-get install -y gh jq || true
-
           echo "Cleaning up old releases (keeping latest 5)..."
+          # gh CLI is pre-installed on Ubuntu runners
           # List releases that start with 'build-', sorted by createdAt descending, skip first 5
           releases=$(gh release list --limit 100 --json tagName,createdAt --jq 'map(select(.tagName | startswith("build-"))) | sort_by(.createdAt) | reverse | .[5:] | map(.tagName) | .[]')
 
+          deleted_count=0
           for tag in $releases; do
             if [ -n "$tag" ] && [ "$tag" != "${{ steps.create_tag.outputs.tag_name }}" ]; then
-              echo "Deleting release: $tag"
-              gh release delete "$tag" --yes --cleanup-tag || echo "Failed to delete $tag (might not exist)"
+              echo "Deleting old release: $tag"
+              if gh release delete "$tag" --yes --cleanup-tag; then
+                ((deleted_count++))
+              else
+                echo "Warning: Failed to delete $tag (might not exist)"
+              fi
             fi
           done
+          echo "Deleted $deleted_count old release(s)"
