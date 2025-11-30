@@ -70,20 +70,20 @@ jobs:
           added_files=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }} 2>/dev/null || true)
           
           # Create multiline release body using temporary file
-          cat > /tmp/release_body.txt <<'BODY_EOF'
-## Build Information
-- **Commit**: ${{ github.sha }}
-- **Branch**: ${{ github.ref_name }}
-- **Build Date**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
-- **Run number**: ${{ github.run_number }}
+            cat > /tmp/release_body.txt <<'BODY_EOF'
+            ## Build Information
+            - **Commit**: ${{ github.sha }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Build Date**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            - **Run number**: ${{ github.run_number }}
 
-## Artifacts
-- **ZIP**: `${{ steps.prepare.outputs.zip_name }}`
-  - Contains: statsvn.jar, README.md, LICENSE
-  - Organized in `statsvn/` subdirectory for clean extraction
+            ## Artifacts
+            - **ZIP**: `${{ steps.prepare.outputs.zip_name }}`
+              - Contains: statsvn.jar, README.md, LICENSE
+              - Organized in `statsvn/` subdirectory for clean extraction
 
-## Changed files in this push
-BODY_EOF
+            ## Changed files in this push
+            BODY_EOF
           
           if [ -n "$added_files" ]; then
             echo "$added_files" >> /tmp/release_body.txt
