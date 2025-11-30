@@ -2,7 +2,7 @@
 # Triggered: On push to main branch
 # Creates: Automated releases tagged as build-<run_id> with JAR+docs zip
 # Retention: Keeps latest 5 releases (generations), deletes older ones
-# Files: Generates statsvn_<run_number>.zip containing JAR, README.md, LICENSE
+# Files: Generates statsvn_r<run_number>.zip containing JAR, README.md, LICENSE
 
 name: Build and Release JAR
 
@@ -51,7 +51,7 @@ jobs:
         run: |
           set -e
           mkdir -p dist/statsvn
-          ZIP_NAME="statsvn_${{ github.run_number }}.zip"
+          ZIP_NAME="statsvn_r${{ github.run_number }}.zip"
           # Copy jar and docs into organized subdirectory
           cp build/dist/statsvn.jar dist/statsvn/
           cp README.md dist/statsvn/README.md || echo "Warning: README.md not found"
@@ -113,16 +113,22 @@ jobs:
           fi
           echo "tag_name=$TAG" >> $GITHUB_OUTPUT
 
-      - name: Create release and upload ZIP
-        uses: softprops/action-gh-release@v1
+      - name: Create release and upload ZIP (using gh CLI)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.create_tag.outputs.tag_name }}
-          name: "Release #${{ github.run_number }}"
-          body: ${{ steps.release_body.outputs.RELEASE_BODY }}
-          files: |
-            dist/${{ steps.prepare.outputs.zip_name }}
+        run: |
+          set -e
+          TAG=${{ steps.create_tag.outputs.tag_name }}
+          ZIP=dist/${{ steps.prepare.outputs.zip_name }}
+          echo "Creating or updating release for tag: $TAG"
+          # If release exists, update notes and upload asset; otherwise create it
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release exists; updating notes and uploading asset"
+            gh release edit "$TAG" --title "Release #${{ github.run_number }}" --notes-file /tmp/release_body.txt || true
+            gh release upload "$TAG" "$ZIP" --clobber || true
+          else
+            gh release create "$TAG" "$ZIP" --title "Release #${{ github.run_number }}" --notes-file /tmp/release_body.txt
+          fi
 
       - name: Cleanup old releases (keep latest 5)
         continue-on-error: true
