@@ -1,4 +1,4 @@
-StatSVN のフォーク版
+# StatSVN Fork
 
 このリポジトリは、[StatSVN](https://github.com/AusHick/StatSVN) のフォーク版です。
 自分が利用するために都合の良い改造しています。
