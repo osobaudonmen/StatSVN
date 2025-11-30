@@ -110,14 +110,7 @@ jobs:
           fi
           echo "tag_name=$TAG" >> $GITHUB_OUTPUT
 
-      - name: Authenticate gh CLI
-        if: always()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -e
-          # Authenticate gh with the provided token so subsequent gh commands can run non-interactively
-          echo "$GITHUB_TOKEN" | gh auth login --with-token
+
 
       - name: Create release and upload ZIP (using gh CLI)
         env:
