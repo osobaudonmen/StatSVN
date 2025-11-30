@@ -65,36 +65,33 @@ jobs:
       - name: Generate release body
         id: release_body
         run: |
-          set -e
+          set -euo pipefail
+          # Collect variables (these are expanded by GitHub Actions before the runner executes)
+          COMMIT=${{ github.sha }}
+          BRANCH=${{ github.ref_name }}
+          RUN_NUMBER=${{ github.run_number }}
+          ZIP_NAME=${{ steps.prepare.outputs.zip_name }}
+          BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
           # Attempt to list files added in this push (fallback gracefully)
           added_files=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }} 2>/dev/null || true)
-          
-          # Create multiline release body using temporary file
-            cat > /tmp/release_body.txt <<'BODY_EOF'
-            ## Build Information
-            - **Commit**: ${{ github.sha }}
-            - **Branch**: ${{ github.ref_name }}
-            - **Build Date**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
-            - **Run number**: ${{ github.run_number }}
 
-            ## Artifacts
-            - **ZIP**: `${{ steps.prepare.outputs.zip_name }}`
-              - Contains: statsvn.jar, README.md, LICENSE
-              - Organized in `statsvn/` subdirectory for clean extraction
+          # Create a clean release body file (use unquoted HEREDOC so shell variables expand)
+          cat > /tmp/release_body.txt <<EOF
+                ## Build Information
 
-            ## Changed files in this push
-            BODY_EOF
-          
-          if [ -n "$added_files" ]; then
-            echo "$added_files" >> /tmp/release_body.txt
-          else
-            echo "(no new files detected)" >> /tmp/release_body.txt
-          fi
-          
-          # Read body into output, properly handling multiline
-          echo "RELEASE_BODY<<EOF" >> $GITHUB_OUTPUT
-          cat /tmp/release_body.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+                - **Commit**: \\`${COMMIT}\\`
+                - **Branch**: \\`${BRANCH}\\`
+                - **Build Date (UTC)**: ${BUILD_DATE}
+
+                ## Artifacts
+
+                - **ZIP**: \\`${ZIP_NAME}\\`
+                - Contains: \\`statsvn.jar\\`, \\`README.md\\`, \\`LICENSE\\`
+
+                EOF
+
+          echo "/tmp/release_body.txt created"
 
       - name: Create and push tag
         id: create_tag
@@ -112,6 +109,15 @@ jobs:
             echo "Tag created and pushed: $TAG"
           fi
           echo "tag_name=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Authenticate gh CLI
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          # Authenticate gh with the provided token so subsequent gh commands can run non-interactively
+          echo "$GITHUB_TOKEN" | gh auth login --with-token
 
       - name: Create release and upload ZIP (using gh CLI)
         env:
