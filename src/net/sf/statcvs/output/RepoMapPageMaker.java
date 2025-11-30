@@ -100,7 +100,12 @@ public class RepoMapPageMaker {
     private void buildXmlForJTreeMap() {
         BufferedWriter out = null;
         try {
-            copyJar(Messages.getString("JTREEMAP_JAR"));
+            // Only attempt to copy the JTreeMap jar if the property is defined.
+            final String jtreemapJar = Messages.getString("JTREEMAP_JAR");
+            // Messages.getString returns '!KEY!' when missing; skip in that case
+            if (jtreemapJar != null && !jtreemapJar.startsWith("!")) {
+                copyJar(jtreemapJar);
+            }
             out = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + REPO_FILE));
             out.write("<?xml version='1.0' encoding='ISO-8859-1'?>\n");
             // out.append("<!DOCTYPE root SYSTEM \"TreeMap.dtd\" >\n");
