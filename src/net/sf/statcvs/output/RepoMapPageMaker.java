@@ -95,58 +95,6 @@ public class RepoMapPageMaker {
         return page;
     }
 
-    
-
-    private void buildXmlForJTreeMap() {
-        BufferedWriter out = null;
-        try {
-            // Only attempt to copy the JTreeMap jar if the property is defined.
-            final String jtreemapJar = Messages.getString("JTREEMAP_JAR");
-            // Messages.getString returns '!KEY!' when missing; skip in that case
-            if (jtreemapJar != null && !jtreemapJar.startsWith("!")) {
-                copyJar(jtreemapJar);
-            }
-            out = new BufferedWriter(new FileWriter(ConfigurationOptions.getOutputDir() + REPO_FILE));
-            out.write("<?xml version='1.0' encoding='ISO-8859-1'?>\n");
-            // out.append("<!DOCTYPE root SYSTEM \"TreeMap.dtd\" >\n");
-            out.write("<root>\n");
-            final Iterator it = config.getRepository().getDirectories().iterator();
-            if (it.hasNext()) {
-                final Directory dir = (Directory) it.next();
-                doDirectory(out, dir);
-            }
-            out.write("</root>");
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (final IOException e) {
-                    //					SvnConfigurationOptions.getTaskLogger().error(e.toString());
-                }
-            }
-        }
-    }
-
-    private void copyJar(final String jtreemapJar) throws IOException {
-        InputStream stream = null;
-        try {
-            // resources are packaged under /net/sf/statcvs/web-files/ in the jar
-            final String resourcePath = "/net/sf/statcvs/" + WEB_FILE_PATH + jtreemapJar;
-            stream = RepoMapPageMaker.class.getResourceAsStream(resourcePath);
-            if (stream != null) {
-                FileUtils.copyFile(stream, new File(ConfigurationOptions.getOutputDir() + jtreemapJar));
-            } else {
-                throw new IOException("The stream to " + resourcePath + " failed, is it copied in the jar?");
-            }
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
-        }
-    }
-
     /*
      * New writer: emits repomap-data.js (assigns window.repomapData).
      */
