@@ -80,7 +80,7 @@ public abstract class DirectoryPieChartMaker {
                 otherSum += dirSizes.get(dir);
             }
         }
-        data.setValue(Messages.getString("PIE_MODSIZE_OTHER"), new Integer(otherSum));
+        data.setValue(Messages.getString("PIE_MODSIZE_OTHER"), Integer.valueOf(otherSum));
         colors.put(Messages.getString("PIE_MODSIZE_OTHER"), Color.GRAY);
 
         final JFreeChart chart = ChartFactory.createPieChart(this.config.getProjectName() + ": " + title, data, false, false, false);

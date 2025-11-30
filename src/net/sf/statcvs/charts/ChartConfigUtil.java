@@ -70,10 +70,10 @@ public final class ChartConfigUtil {
      */
     public static Dimension getDimension(final String chartName, final Dimension defaultDimension) {
         final Integer width = ConfigurationOptions
-                .getConfigIntegerProperty("chart." + chartName + ".width", "chart.width", new Integer(defaultDimension.width));
+            .getConfigIntegerProperty("chart." + chartName + ".width", "chart.width", Integer.valueOf(defaultDimension.width));
 
-        final Integer height = ConfigurationOptions.getConfigIntegerProperty("chart." + chartName + ".height", "chart.height", new Integer(
-                defaultDimension.height));
+        final Integer height = ConfigurationOptions.getConfigIntegerProperty("chart." + chartName + ".height", "chart.height", Integer.valueOf(
+            defaultDimension.height));
 
         return new Dimension(width.intValue(), height.intValue());
     }
@@ -129,7 +129,7 @@ public final class ChartConfigUtil {
         final String imageLocation = ConfigurationOptions.getConfigStringProperty("chart." + chartName + ".chartBackgroundImage.url",
                 "chart.chartBackgroundImage.url", null);
         final Float alpha = ConfigurationOptions.getConfigFloatProperty("chart." + chartName + ".chartBackgroundImage.transparency",
-                "chart.chartBackgroundImage.transparency", new Float(0.35));
+            "chart.chartBackgroundImage.transparency", Float.valueOf(0.35f));
         if (StringUtils.isNotEmpty(imageLocation) && alpha != null) {
             Image image = null;
             try {
@@ -160,7 +160,7 @@ public final class ChartConfigUtil {
         final String imageLocation = ConfigurationOptions.getConfigStringProperty("chart." + chartName + ".plotImage.url", "chart.plotImage.url",
                 null);
         final Float alpha = ConfigurationOptions.getConfigFloatProperty("chart." + chartName + ".plotImage.transparency", "chart.plotImage.transparency",
-                new Float(0.35));
+            Float.valueOf(0.35f));
         if (StringUtils.isNotEmpty(imageLocation) && alpha != null) {
             Image image = null;
             try {
@@ -188,7 +188,7 @@ public final class ChartConfigUtil {
     public static void configureCopyrightNotice(final String chartName, final JFreeChart chart) {
         final String copyrightTxt = ConfigurationOptions.getConfigStringProperty("chart." + chartName + ".copyright", "chart.copyright", null);
         final Integer copyrightTxtSize = ConfigurationOptions.getConfigIntegerProperty("chart." + chartName + ".copyrightTextSize", "chart.copyrightTextSize",
-                new Integer(9));
+            Integer.valueOf(9));
         if (StringUtils.isNotEmpty(copyrightTxt)) {
             final TextTitle copyright = new TextTitle(copyrightTxt, new Font("SansSerif", Font.PLAIN, copyrightTxtSize.intValue()));
 

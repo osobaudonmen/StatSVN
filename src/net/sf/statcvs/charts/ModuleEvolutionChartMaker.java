@@ -213,15 +213,15 @@ public class ModuleEvolutionChartMaker {
 
                     final int index = (x * groupCount) + y;
                     oDateX[index] = date;
-                    oDoubleY[index] = new Double(y);
+                    oDoubleY[index] = Double.valueOf(y);
                     final double value = map.get(group.getName()) * 100.0 / max;
-                    oDoubleZ[index] = (value != 0) ? new Double(value) : null;
+                    oDoubleZ[index] = (value != 0) ? Double.valueOf(value) : null;
                 }
             } else {
                 for (int y = 0; y < groupCount; y++) {
                     final int index = (x * groupCount) + y;
                     oDateX[index] = date;
-                    oDoubleY[index] = new Double(y);
+                    oDoubleY[index] = Double.valueOf(y);
                     //oDoubleZ[index] = null;
                 }
             }

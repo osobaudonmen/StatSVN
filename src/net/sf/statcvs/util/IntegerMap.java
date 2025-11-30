@@ -64,7 +64,7 @@ public class IntegerMap {
         max = Math.max(max, value);
         sum -= get(key);
         sum += value;
-        map.put(key, new Integer(value));
+        map.put(key, Integer.valueOf(value));
     }
 
     /**

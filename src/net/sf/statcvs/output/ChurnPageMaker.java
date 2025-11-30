@@ -75,9 +75,9 @@ public class ChurnPageMaker {
             final Date dateToUse = blastTime(rev.getDate());
             final Integer changes = (Integer) changePerRevision.get(dateToUse);
             if (changes == null) {
-                changePerRevision.put(dateToUse, new Integer(Math.abs(getLineChanges(rev))));
+                changePerRevision.put(dateToUse, Integer.valueOf(Math.abs(getLineChanges(rev))));
             } else {
-                changePerRevision.put(dateToUse, new Integer(Math.abs(changes.intValue()) + getLineChanges(rev)));
+                changePerRevision.put(dateToUse, Integer.valueOf(Math.abs(changes.intValue()) + getLineChanges(rev)));
             }
         }
 

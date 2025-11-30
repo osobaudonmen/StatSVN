@@ -70,7 +70,7 @@ public class IntegerColumn extends Column {
      * @param value the new value
      */
     public void addValue(final int value) {
-        values.add(new Integer(value));
+        values.add(Integer.valueOf(value));
         sum += value;
     }
 

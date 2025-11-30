@@ -63,8 +63,8 @@ public class CloudCommitTableReport implements TableReport {
 
         calculate(content.getCommits());
         int lines = 0;
-        final Integer minFrequency = ConfigurationOptions.getConfigIntegerProperty("cloud.minFrequency", new Integer(5));
-        final Integer maxNumbers = ConfigurationOptions.getConfigIntegerProperty("cloud.maxWordNumberInTable", new Integer(50));
+        final Integer minFrequency = ConfigurationOptions.getConfigIntegerProperty("cloud.minFrequency", Integer.valueOf(5));
+        final Integer maxNumbers = ConfigurationOptions.getConfigIntegerProperty("cloud.maxWordNumberInTable", Integer.valueOf(50));
         final Iterator it = cloudMap.iteratorSortedByValueReverse();
         double maxFreq = -1;
         while (it.hasNext()) {
@@ -93,7 +93,7 @@ public class CloudCommitTableReport implements TableReport {
 
     private void calculate(final List commits) {
         final Iterator it = commits.iterator();
-        final Integer minSize = ConfigurationOptions.getConfigIntegerProperty("cloud.minLengthForWord", new Integer(4));
+        final Integer minSize = ConfigurationOptions.getConfigIntegerProperty("cloud.minLengthForWord", Integer.valueOf(4));
         while (it.hasNext()) {
             final Commit commit = (Commit) it.next();
             if (commit.getAuthor() == null || !this.config.isDeveloper(commit.getAuthor())) {
@@ -156,8 +156,8 @@ public class CloudCommitTableReport implements TableReport {
 
         int lines = 0;
         final Iterator it = cloudMap.iteratorSortedByValueReverse();
-        final Integer minFrequency = ConfigurationOptions.getConfigIntegerProperty("cloud.minFrequency", new Integer(5));
-        final Integer maxNumbers = ConfigurationOptions.getConfigIntegerProperty("cloud.maxWordNumberInCloud", new Integer(100));
+        final Integer minFrequency = ConfigurationOptions.getConfigIntegerProperty("cloud.minFrequency", Integer.valueOf(5));
+        final Integer maxNumbers = ConfigurationOptions.getConfigIntegerProperty("cloud.maxWordNumberInCloud", Integer.valueOf(100));
         double maxFreq = -1;
         final TreeMap tm = new TreeMap();
         while (it.hasNext()) {
