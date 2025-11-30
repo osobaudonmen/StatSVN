@@ -45,7 +45,12 @@ jobs:
         run: |
           set -e
           mkdir -p dist/statsvn
-          ZIP_NAME="statsvn_r${{ github.run_number }}.zip"
+          # Read version from VERSION file (first line, trimmed) and build zip name
+          VERSION=$(sed -n '1p' VERSION | tr -d '[:space:]' || true)
+          if [ -z "$VERSION" ]; then
+            VERSION="unknown"
+          fi
+          ZIP_NAME="statsvn-${VERSION}-${{ github.run_number }}.zip"
           # Copy jar and docs into organized subdirectory
           cp build/dist/statsvn.jar dist/statsvn/
           cp README.md dist/statsvn/README.md || echo "Warning: README.md not found"
@@ -65,7 +70,7 @@ jobs:
           echo "" >> /tmp/release_body.txt
           echo "  **Commit**: \`${{ github.sha }}\`" >> /tmp/release_body.txt
           echo "  **Branch**: \`${{ github.ref_name }}\`" >> /tmp/release_body.txt
-          echo "  **Build Date (UTC)**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> /tmp/release_body.txt
+          echo "  **Build Date (UTC)**: \`$(date -u +"%Y-%m-%dT%H:%M:%SZ")\`" >> /tmp/release_body.txt
           echo "" >> /tmp/release_body.txt
           echo "## Artifacts" >> /tmp/release_body.txt
           echo "" >> /tmp/release_body.txt
