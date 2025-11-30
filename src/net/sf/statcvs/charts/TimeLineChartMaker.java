@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.statcvs.Messages;
+import java.text.SimpleDateFormat;
 import net.sf.statcvs.output.ReportConfig;
 import net.sf.statcvs.reportmodel.TimeLine;
 import net.sf.statcvs.reportmodel.TimePoint;
@@ -68,6 +69,7 @@ public class TimeLineChartMaker {
         plot.getRenderer().setSeriesPaint(0, Color.blue);
         final DateAxis axis = (DateAxis) plot.getDomainAxis();
         axis.setVerticalTickLabels(true);
+        axis.setDateFormatOverride(new SimpleDateFormat(Messages.getString("DATE_FORMAT_MONTH")));
         plot.getRangeAxis().setLowerBound(0);
         plot.setRenderer(new XYStepRenderer());
         for (final Iterator it = annotations.iterator(); it.hasNext();) {

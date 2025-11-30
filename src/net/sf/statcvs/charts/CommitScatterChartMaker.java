@@ -26,6 +26,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -82,6 +83,7 @@ public class CommitScatterChartMaker {
     public ChartImage toFile() {
         final DateAxis timeAxis = new DateAxis(Messages.getString("TIME_CSC_DOMAIN"));
         timeAxis.setVerticalTickLabels(true);
+        timeAxis.setDateFormatOverride(new SimpleDateFormat(Messages.getString("DATE_FORMAT_MONTH")));
         final CombinedDomainXYPlot combinedPlot = new CombinedDomainXYPlot(timeAxis);
         List annotations = SymbolicNameAnnotation.createAnnotations(repository.getSymbolicNames());
         combinedPlot.add(createPlot(createTimeSeries(this.repository.getRevisions()), "All (" + Messages.getString("TIME_CSC_RANGE") + ")", ALL_COMMITS_COLOR,

@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.statcvs.Messages;
+import java.text.SimpleDateFormat;
 import net.sf.statcvs.charts.ChartConfigUtil;
 import net.sf.statcvs.charts.ChartImage;
 
@@ -107,6 +108,7 @@ public class LOCChurnChartMaker {
 
         final DateAxis domainAxis = (DateAxis) plot.getDomainAxis();
         domainAxis.setVerticalTickLabels(true);
+        domainAxis.setDateFormatOverride(new SimpleDateFormat(Messages.getString("DATE_FORMAT_MONTH")));
 
         // now add the churnSet
         final NumberAxis rangeAxis2 = new NumberAxis(Messages.getString("CHURN_RANGE"));

@@ -1,6 +1,7 @@
 package net.sf.statcvs.charts;
 
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import net.sf.statcvs.model.Repository;
 import net.sf.statcvs.model.Revision;
 import net.sf.statcvs.output.ReportConfig;
 import net.sf.statcvs.util.IntegerMap;
+import net.sf.statcvs.Messages;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ColorBar;
@@ -63,7 +65,8 @@ public class ModuleEvolutionChartMaker {
             return null;
         }
 
-        final ValueAxis xAxis = new DateAxis("Date");
+        final DateAxis xAxis = new DateAxis(Messages.getString("TIME_LOC_DOMAIN"));
+        xAxis.setDateFormatOverride(new SimpleDateFormat(Messages.getString("DATE_FORMAT_MONTH")));
         final SymbolAxis yAxis = new SymbolAxis("Module", (String[]) repository.getModules().keySet().toArray(new String[0]));
 
         //        SymbolicAxis yAxis = new SymbolicAxis(grouper.getName(), (String[])groupNames.toArray(new String[0])); 

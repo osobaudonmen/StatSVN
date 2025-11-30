@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -129,6 +130,7 @@ public class LOCChartMaker {
         }
         final DateAxis domainAxis = (DateAxis) plot.getDomainAxis();
         domainAxis.setVerticalTickLabels(true);
+        domainAxis.setDateFormatOverride(new SimpleDateFormat(Messages.getString("DATE_FORMAT_MONTH")));
         final ValueAxis valueAxis = plot.getRangeAxis();
         valueAxis.setLowerBound(0);
 
