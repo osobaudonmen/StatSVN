@@ -1,13 +1,14 @@
 # StatSVN Fork
 
 このリポジトリは、[StatSVN](https://github.com/AusHick/StatSVN) のフォーク版です。
-自分が利用するために都合の良い改造しています。
 
-- バグ修正
-- 日本語特化
+- バグ修正・調整
+  - パスに%を含むファイルでエラーになるバグを修正
+  - グラフの日付書式の調整
 - Repo Heatmapのアプレットの廃止（簡易的なJavascript実装で置き換え）
-- Github Copilotを使用して開発をします
 - 要らない機能の削除
+  - Twitter Button
+- 開発にGithub Copilotを使用しています
 
 ## プロジェクト構成
 
