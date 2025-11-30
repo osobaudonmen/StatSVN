@@ -11,11 +11,19 @@ echo -e "${BLUE}StatSVN ビルドプロセス開始${NC}"
 echo -e "${BLUE}========================================${NC}"
 
 echo -e "${GREEN}[1/5]${NC} ディレクトリ構造を確認中..."
-if [ ! -d "src" ] || [ ! -d "lib" ] || [ ! -f "build/manifest.mf" ]; then
-    echo "エラー: 必要なディレクトリまたはファイルが見つかりません"
+if [ ! -d "src" ] || [ ! -d "lib" ]; then
+    echo "エラー: 必要なディレクトリが見つかりません"
     echo "  - src/"
     echo "  - lib/"
-    echo "  - build/manifest.mf"
+    exit 1
+fi
+
+# Require a source-controlled manifest template at `src/META-INF/MANIFEST.MF`.
+if [ -f "src/META-INF/MANIFEST.MF" ]; then
+    MANIFEST_SRC="src/META-INF/MANIFEST.MF"
+else
+    echo "エラー: マニフェストテンプレートが見つかりません"
+    echo "  - src/META-INF/MANIFEST.MF (required)"
     exit 1
 fi
 echo "  ✓ ディレクトリ構造確認済み"
@@ -79,6 +87,11 @@ cp -r build/classes/main/net build/tmp_fatjar/
 # JARファイルを作成
 rm -f build/dist/statsvn.jar
 mkdir -p build/dist
+# Ensure build/manifest.mf exists for jar cfm (copy from source template if provided)
+if [ -f "src/META-INF/MANIFEST.MF" ]; then
+    mkdir -p build
+    cp src/META-INF/MANIFEST.MF build/manifest.mf
+fi
 jar cfm build/dist/statsvn.jar build/manifest.mf -C build/tmp_fatjar .
 
 echo "  ✓ Fat JARを作成"
