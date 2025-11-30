@@ -9,7 +9,7 @@ name: Build and Release JAR
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-release:
