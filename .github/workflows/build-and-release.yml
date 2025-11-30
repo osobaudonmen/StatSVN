@@ -124,11 +124,6 @@ jobs:
           for tag in $releases; do
             if [ -n "$tag" ] && [ "$tag" != "${{ steps.create_tag.outputs.tag_name }}" ]; then
               echo "Deleting old release: $tag"
-              if gh release delete "$tag" --yes --cleanup-tag; then
-                ((deleted_count++))
-              else
-                echo "Warning: Failed to delete $tag (might not exist)"
-              fi
+              gh release delete "$tag" --yes --cleanup-tag || echo "Failed to delete $tag (might not exist)"
             fi
           done
-          echo "Deleted $deleted_count old release(s)"
