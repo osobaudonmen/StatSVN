@@ -60,18 +60,12 @@ jobs:
         id: release_body
         run: |
           set -euo pipefail
-          # Collect variables (these are expanded by GitHub Actions before the runner executes)
-          COMMIT=${{ github.sha }}
-          BRANCH=${{ github.ref_name }}
-          ZIP_NAME=${{ steps.prepare.outputs.zip_name }}
-          BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
           printf \
             '## Build Information\n\n  %-20s %s\n  %-20s %s\n  %-20s %s\n\n## Artifacts\n\n  %-20s %s\n  %-20s %s\n' \
-            "**Commit**:" "`$COMMIT`" \
-            "**Branch**:" "`$BRANCH`" \
-            "**Build Date (UTC)**:" "$BUILD_DATE" \
-            "**ZIP**:" "`$ZIP_NAME`" \
+            "**Commit**:" "`${{ github.sha }}`" \
+            "**Branch**:" "`${{ github.ref_name }}`" \
+            "**Build Date (UTC)**:" $(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+            "**ZIP**:" "`${{ steps.prepare.outputs.zip_name }}`" \
             "**Contains**:" "`statsvn.jar`, `README.md`, `LICENSE`" \
             > /tmp/release_body.txt
 
