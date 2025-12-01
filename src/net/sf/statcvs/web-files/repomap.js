@@ -475,9 +475,16 @@
     function initWithData(containerId, data) {
       var container = document.getElementById(containerId);
       if (!container) return;
-      sumWeights(data);
+      
+      // Skip single-child root nodes to avoid unnecessary outer frames (e.g. [root] -> [root] -> content)
+      var effectiveRoot = data;
+      while (effectiveRoot && effectiveRoot.children && effectiveRoot.children.length === 1) {
+        effectiveRoot = effectiveRoot.children[0];
+      }
+
+      sumWeights(effectiveRoot);
       var tooltip = createTooltip();
-      var state = { container: container, tooltip: tooltip, root: data, current: data, zoomStack: [data] };
+      var state = { container: container, tooltip: tooltip, root: effectiveRoot, current: effectiveRoot, zoomStack: [effectiveRoot] };
       window.RepoMapState = state;
       draw(state);
       window.addEventListener('resize', function(){ draw(state); });
