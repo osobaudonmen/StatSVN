@@ -1,8 +1,13 @@
 (function () {
     'use strict';
 
-    // Simple slice-and-dice treemap renderer (pure JS, no external libs)
+    // Squarified Treemap renderer (pure JS, no external libs)
     // Exposes window.RepoMap.init(containerId, dataUrl)
+    // Implements the Squarified Treemap algorithm by van Wijk & van de Wetering
+    // Reference: https://vanwijk.win.tue.nl/stm.pdf
+    //
+    // The algorithm minimizes the worst-case aspect ratio of rectangles,
+    // resulting in more square-shaped rectangles for better visualization.
 
     function sumWeights(node) {
       if (!node) return 0;
@@ -68,62 +73,112 @@
     function layoutSquarified(items, x, y, w, h) {
       var rects = [];
       if (!items || items.length === 0) return rects;
-      var nodes = items.slice().sort(function(a,b){ return b.value - a.value; });
-      var total = nodes.reduce(function(s,it){ return s + (it.value||0); }, 0);
-      if (total === 0) return rects;
+      
+      // Calculate total value and scale factor to convert value to area (pixels)
+      var totalValue = items.reduce(function(s,it){ return s + (it.value||0); }, 0);
+      if (totalValue <= 0) return rects;
+      var totalArea = w * h;
+      var valueToAreaScale = totalArea / totalValue;
+      
+      // Create working copy of items with scaled values (area)
+      var nodes = items.map(function(it){
+        return { node: it.node, value: (it.value||0) * valueToAreaScale };
+      }).sort(function(a,b){ return b.value - a.value; });
+      
       var rx = x, ry = y, rw = w, rh = h;
+      var remaining = nodes.slice();
+
+      function sumValues(arr) {
+        return arr.reduce(function(s,it){ return s + it.value; }, 0);
+      }
 
       function layoutRow(row, rrx, rry, rrw, rrh, horizontal) {
-        var rowSum = row.reduce(function(s,it){ return s + it.value; }, 0);
+        var rowSum = sumValues(row);
+        var remainingSum = sumValues(remaining);
+        var totalSum = rowSum + remainingSum;
+        
+        if (totalSum === 0) return {rx: rrx, ry: rry, rw: rrw, rh: rrh};
+        
         if (horizontal) {
-          var rowWidth = (rowSum/total) * rrw;
+          // rw >= rh. Wide rectangle. Cut vertical strip. Stack items VERTICALLY.
+          var rowWidth = (rowSum / totalSum) * rrw;
           var off = 0;
-          for (var i=0;i<row.length;i++) {
+          for (var i=0; i<row.length; i++) {
             var it = row[i];
-            var iw = (rowWidth * (it.value/rowSum));
-            rects.push({node: it.node, x: rrx + off, y: rry, w: Math.max(1, Math.round(iw)), h: Math.max(1, Math.round(rrh))});
-            off += iw;
+            var ih = (it.value / rowSum) * rrh;
+            rects.push({
+              node: it.node,
+              x: rrx,
+              y: rry + off,
+              w: Math.max(0, rowWidth),
+              h: Math.max(0, ih)
+            });
+            off += ih;
           }
           return {rx: rrx + rowWidth, ry: rry, rw: Math.max(0, rrw - rowWidth), rh: rrh};
         } else {
-          var rowHeight = (rowSum/total) * rrh;
-          var off2 = 0;
-          for (var j=0;j<row.length;j++) {
-            var it2 = row[j];
-            var ih = (rowHeight * (it2.value/rowSum));
-            rects.push({node: it2.node, x: rrx, y: rry + off2, w: Math.max(1, Math.round(rrw)), h: Math.max(1, Math.round(ih))});
-            off2 += ih;
+          // rw < rh. Tall rectangle. Cut horizontal strip. Stack items HORIZONTALLY.
+          var rowHeight = (rowSum / totalSum) * rrh;
+          var off = 0;
+          for (var j=0; j<row.length; j++) {
+            var it = row[j];
+            var iw = (it.value / rowSum) * rrw;
+            rects.push({
+              node: it.node,
+              x: rrx + off,
+              y: rry,
+              w: Math.max(0, iw),
+              h: Math.max(0, rowHeight)
+            });
+            off += iw;
           }
           return {rx: rrx, ry: rry + rowHeight, rw: rrw, rh: Math.max(0, rrh - rowHeight)};
         }
       }
 
       function worstAspect(row, shortSide) {
-        if (!row || row.length===0) return Infinity;
-        var sum = row.reduce(function(s,it){ return s + it.value; }, 0);
+        if (!row || row.length === 0) return Infinity;
+        if (shortSide <= 0) return Infinity;
+        var sum = sumValues(row);
+        if (sum === 0) return Infinity;
         var maxv = row.reduce(function(m,it){ return Math.max(m, it.value); }, 0);
         var minv = row.reduce(function(m,it){ return Math.min(m, it.value); }, Infinity);
+        if (minv <= 0) minv = 1;
+        
         var s = (shortSide * shortSide * maxv) / (sum * sum);
-        var t = (sum * sum) / (shortSide * shortSide * Math.max(1, minv));
+        var t = (sum * sum) / (shortSide * shortSide * minv);
         return Math.max(s, t);
       }
 
-      var remaining = nodes.slice();
       while (remaining.length > 0 && rw > 0 && rh > 0) {
         var horizontal = rw >= rh;
-        var side = horizontal ? rh : rw;
+        var shortSide = horizontal ? rh : rw;
+        
         var row = [];
         row.push(remaining.shift());
-        var bestWorst = worstAspect(row, side);
+        var bestWorst = worstAspect(row, shortSide);
+        
         while (remaining.length > 0) {
-          var cand = remaining[0];
-          var trial = row.concat([cand]);
-          var wst = worstAspect(trial, side);
-          if (wst <= bestWorst) { row = trial; bestWorst = wst; remaining.shift(); } else { break; }
+          var candidate = remaining[0];
+          var trial = row.concat([candidate]);
+          var trialWorst = worstAspect(trial, shortSide);
+          
+          if (trialWorst <= bestWorst) {
+            row = trial;
+            bestWorst = trialWorst;
+            remaining.shift();
+          } else {
+            break;
+          }
         }
+        
         var nextRect = layoutRow(row, rx, ry, rw, rh, horizontal);
-        rx = nextRect.rx; ry = nextRect.ry; rw = nextRect.rw; rh = nextRect.rh;
+        rx = nextRect.rx;
+        ry = nextRect.ry;
+        rw = nextRect.rw;
+        rh = nextRect.rh;
       }
+      
       return rects;
     }
 
@@ -188,12 +243,18 @@
     function renderNodes(container, node, x, y, w, h, horizontal, tooltip, state, depth) {
       if (!node) return;
       if (!node.children || node.children.length === 0) return;
+      
+      // Prepare items for layout: convert node children to {node, value} pairs
       var items = [];
-      for (var i=0;i<node.children.length;i++) {
+      for (var i=0; i<node.children.length; i++) {
         items.push({node: node.children[i], value: node.children[i]._weight || 0});
       }
+      
+      // Use Squarified Treemap algorithm to compute rectangle positions
       var rects = layoutSquarified(items, x, y, w, h);
-      for (var i=0;i<rects.length;i++) {
+      
+      // Render each rectangle as either a branch (container) or leaf node
+      for (var i=0; i<rects.length; i++) {
         var r = rects[i];
         var child = r.node;
         if (child.children && child.children.length) {
