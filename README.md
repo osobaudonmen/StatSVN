@@ -24,6 +24,12 @@
 - プロジェクト: [StatCVS - SourceForge](https://sourceforge.net/projects/statcvs/)
 - StatCVS 0.7.0 のソースを含めており、ビルド時に StatSVN と一緒にコンパイルされます
 
+## 動作要件
+
+- **Java 17 以上**
+  - ビルド時もJava 17以上が必要です
+  - コンパイルオプションで `--release 17` を使用しています
+
 ---
 
 以下、オリジナルのREADME.mdを掲載しています。
