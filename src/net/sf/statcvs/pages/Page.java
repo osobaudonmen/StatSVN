@@ -38,6 +38,9 @@ public class Page implements NavigationNode {
     private boolean showLinkToPreviousSibling = false;
     private boolean inSection = false;
     private boolean written = false;
+    private int logPageYear = -1;
+    private int logPageMonth = -1;
+    private int logPageCommitCount = -1;
 
     /**
      * Creates a new page.
@@ -77,6 +80,24 @@ public class Page implements NavigationNode {
     public void addChild(final NavigationNode child) {
         this.children.add(child);
         child.setParent(this);
+    }
+
+    public void setLogPageMetadata(final int year, final int month, final int commitCount) {
+        this.logPageYear = year;
+        this.logPageMonth = month;
+        this.logPageCommitCount = commitCount;
+    }
+
+    public int getLogPageYear() {
+        return this.logPageYear;
+    }
+
+    public int getLogPageMonth() {
+        return this.logPageMonth;
+    }
+
+    public int getLogPageCommitCount() {
+        return this.logPageCommitCount;
     }
 
     /* (non-Javadoc)
@@ -248,6 +269,29 @@ public class Page implements NavigationNode {
         if (this.siblingsTitle == null || this.siblings.isEmpty()) {
             return "";
         }
+
+        // Check if siblings are commit log pages (have year/month metadata)
+        boolean isCommitLogGroup = false;
+        final Iterator testIt = this.siblings.iterator();
+        while (testIt.hasNext()) {
+            final NavigationNode sibling = (NavigationNode) testIt.next();
+            if (sibling instanceof Page) {
+                final Page siblingPage = (Page) sibling;
+                if (siblingPage.getLogPageYear() >= 0) {
+                    isCommitLogGroup = true;
+                    break;
+                }
+            }
+        }
+
+        if (isCommitLogGroup) {
+            return getMonthlyCalendarNavigation();
+        } else {
+            return getSimpleListNavigation();
+        }
+    }
+
+    private String getSimpleListNavigation() {
         final StringBuffer s = new StringBuffer();
         s.append(this.outputFormat.startSection2(this.siblingsTitle, "nav"));
         s.append("<ul>\n");
@@ -263,6 +307,93 @@ public class Page implements NavigationNode {
             s.append("</li>\n");
         }
         s.append("</ul>\n");
+        s.append(this.outputFormat.endSection2());
+        return s.toString();
+    }
+
+    private String getMonthlyCalendarNavigation() {
+        // Collect year and month information from siblings
+        // Store as: year -> month -> (url, commitCount)
+        java.util.TreeMap<Integer, java.util.TreeMap<Integer, java.util.Map<String, Object>>> yearMonthMap = 
+            new java.util.TreeMap<Integer, java.util.TreeMap<Integer, java.util.Map<String, Object>>>(
+                java.util.Collections.reverseOrder());
+        
+        final Iterator it = this.siblings.iterator();
+        while (it.hasNext()) {
+            final NavigationNode sibling = (NavigationNode) it.next();
+            if (sibling instanceof Page) {
+                final Page page = (Page) sibling;
+                if (page.getLogPageYear() >= 0 && page.getLogPageCommitCount() > 0) {
+                    final int year = page.getLogPageYear();
+                    final int month = page.getLogPageMonth();
+                    final int commitCount = page.getLogPageCommitCount();
+                    
+                    java.util.TreeMap<Integer, java.util.Map<String, Object>> monthMap = yearMonthMap.get(year);
+                    if (monthMap == null) {
+                        monthMap = new java.util.TreeMap<Integer, java.util.Map<String, Object>>();
+                        yearMonthMap.put(year, monthMap);
+                    }
+                    
+                    java.util.Map<String, Object> cellData = new java.util.HashMap<String, Object>();
+                    cellData.put("url", page.getURL());
+                    cellData.put("count", commitCount);
+                    monthMap.put(month, cellData);
+                }
+            }
+        }
+        
+        if (yearMonthMap.isEmpty()) {
+            return getSimpleListNavigation();
+        }
+
+        final StringBuffer s = new StringBuffer();
+        s.append(this.outputFormat.startSection2(this.siblingsTitle, "nav monthly-calendar"));
+        s.append("<table class=\"monthly-calendar\">\n");
+        s.append("  <thead><tr class=\"header\"><th class=\"month-header\">Year</th>");
+        
+        // Month headers (January to December)
+        final String[] monthNames = {"January", "February", "March", "April", "May", "June",
+                                     "July", "August", "September", "October", "November", "December"};
+        for (int m = 0; m < 12; m++) {
+            s.append("<th>").append(monthNames[m].substring(0, 3)).append("</th>");
+        }
+        s.append("</tr></thead>\n");
+        s.append("  <tbody>\n");
+        
+        int rowIndex = 1;
+        for (final Integer year : yearMonthMap.keySet()) {
+            final String rowClass = (rowIndex % 2 == 0) ? "even" : "odd";
+            s.append("    <tr class=\"").append(rowClass).append("\"><td class=\"year-cell\">").append(year).append("</td>");
+            final java.util.TreeMap<Integer, java.util.Map<String, Object>> monthMap = yearMonthMap.get(year);
+            
+            // Display months from January (0) to December (11)
+            for (int m = 0; m < 12; m++) {
+                boolean isCurrent = (year == this.logPageYear && m == this.logPageMonth);
+                if (isCurrent) {
+                    s.append("<td class=\"current-month\">");
+                } else {
+                    s.append("<td>");
+                }
+                if (monthMap.containsKey(m)) {
+                    final java.util.Map<String, Object> cellData = monthMap.get(m);
+                    final String url = (String) cellData.get("url");
+                    final int count = (Integer) cellData.get("count");
+                    if (isCurrent) {
+                        s.append("<strong>").append(count).append("</strong>");
+                    } else {
+                        s.append(HTML.getLink(url, String.valueOf(count)));
+                    }
+                } else {
+                    s.append("&nbsp;");
+                }
+                s.append("</td>");
+            }
+            s.append("</tr>\n");
+            rowIndex++;
+        }
+        
+        s.append("  </tbody>\n");
+        s.append("</table>\n");
         s.append(this.outputFormat.endSection2());
         return s.toString();
     }

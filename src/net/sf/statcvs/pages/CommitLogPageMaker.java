@@ -67,6 +67,7 @@ public class CommitLogPageMaker {
 
     public NavigationNode toFile() {
         final Page result = this.config.createPage(getFileName(), getTitle(), getTitle() + " Commit Log");
+        result.setLogPageMetadata(this.year, this.month, this.commits.size());
         result.addAttribute("Number of Commits", this.commits.size());
         result.addAttribute("Number of Active Developers", countActiveDevelopers());
         if (!this.commits.isEmpty()) {

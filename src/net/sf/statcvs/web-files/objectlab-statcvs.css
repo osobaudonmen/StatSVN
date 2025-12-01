@@ -173,3 +173,54 @@ tfoot {
 #generatedby a:hover {
   color: red;
 }
+
+/* Monthly Calendar Navigation */
+#nav.monthly-calendar {
+  float: right;
+  padding: 0.5em;
+  width: auto;
+  white-space: normal;
+  max-width: 100%;
+}
+
+/* Monthly Calendar Navigation */
+table.monthly-calendar {
+  border-collapse: collapse;
+  font-size: 85%;
+  width: auto;
+  margin: 0.5em 0;
+}
+
+table.monthly-calendar th {
+  text-align: center;
+  padding: 0.1em 1em 0.3em;
+  font-weight: bold;
+}
+
+table.monthly-calendar th.month-header {
+  text-align: left;
+}
+
+table.monthly-calendar td {
+  text-align: center;
+  padding: 0.1em 1em 0.3em;
+  width: 2.5em;
+}
+
+table.monthly-calendar td.year-cell {
+  text-align: left;
+  font-weight: bold;
+}
+
+table.monthly-calendar td.current-month {
+  background-color: #f99;
+  font-weight: bold;
+}
+
+table.monthly-calendar a {
+  text-decoration: none;
+}
+
+table.monthly-calendar a:hover {
+  text-decoration: underline;
+}
