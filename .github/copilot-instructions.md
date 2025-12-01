@@ -75,6 +75,29 @@ cp -r build/classes/main/net build/tmp_fatjar/
 jar cfm build/dist/statsvn.jar build/manifest.mf -C build/tmp_fatjar .
 ```
 
+#### Java 17 対応ビルドルール
+
+- **必須要件**: Java 17 以上がインストールされていること
+- **コンパイルオプション**: Java 17 互換性を確保するため、以下のオプションを使用する：
+  ```bash
+  javac --release 17 -encoding UTF-8 -d build/classes/main -cp "lib/*" $(find src vendor/statcvs-0.7.0/src -name "*.java")
+  ```
+- **JAR マニフェスト**: `build/manifest.mf` に以下を記載して Java 17 での実行を保証する：
+  ```
+  Manifest-Version: 1.0
+  Main-Class: net.sf.statsvn.Main
+  Created-By: Java 17
+  ```
+- **実行時環境**: Java 17 以上で実行すること：
+  ```bash
+  java -jar build/dist/statsvn.jar [options]
+  ```
+- **検証方法**: コンパイル後、以下コマンドでコンパイル対象バージョンを確認すること：
+  ```bash
+  javap -verbose build/classes/main/net/sf/statsvn/Main.class | grep "major version"
+  ```
+  - Java 17 の場合: `major version: 61`
+
 ### 実行方法
 
 ビルド後、以下のコマンドで実行します：
