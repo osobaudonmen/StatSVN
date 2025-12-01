@@ -48,7 +48,7 @@ grep -RIl --exclude-dir=.git --exclude='*.png' --exclude='*.jar' "@VERSION@" src
 done
 # Compile project sources
 SRC_FILES=$(find src-temp -name "*.java")
-javac -encoding UTF-8 -d build/classes/main -cp "lib/*" $SRC_FILES
+javac --release 17 -encoding UTF-8 -d build/classes/main -cp "lib/*" $SRC_FILES
 echo "  ✓ コンパイル完了"
 
 echo -e "${GREEN}[4/5]${NC} リソースファイルをコピー中..."
