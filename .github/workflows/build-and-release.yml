@@ -63,13 +63,14 @@ jobs:
 
       - name: Generate release body
         id: release_body
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           REPO_URL="https://github.com/${{ github.repository }}"
           # Use echo lines instead of printf so output is easy to read and compare.
           echo "## Build Information" > /tmp/release_body.txt
           echo "" >> /tmp/release_body.txt
-          echo "  **Commit**: [${{ github.sha }}]($REPO_URL/commit/${{ github.sha }})" >> /tmp/release_body.txt
           echo "  **Branch**: \`${{ github.ref_name }}\`" >> /tmp/release_body.txt
           echo "  **Build Date (UTC)**: \`$(date -u +"%Y-%m-%dT%H:%M:%SZ")\`" >> /tmp/release_body.txt
           echo "" >> /tmp/release_body.txt
@@ -82,10 +83,14 @@ jobs:
           )
           
           if [ -n "$PREV_TAG" ]; then
-            echo "## Commits since $PREV_TAG" >> /tmp/release_body.txt
-            echo "" >> /tmp/release_body.txt
-            git log "$PREV_TAG..${{ github.sha }}" --pretty=format:"- [%h]($REPO_URL/commit/%H) %s" >> /tmp/release_body.txt || true
-            echo "" >> /tmp/release_body.txt
+            COMMIT_COUNT=$(git rev-list --count "$PREV_TAG..${{ github.sha }}" 2>/dev/null || echo "0")
+            if [ "$COMMIT_COUNT" -gt "0" ]; then
+              echo "## Commits since previous release ($COMMIT_COUNT)" >> /tmp/release_body.txt
+              echo "" >> /tmp/release_body.txt
+              git log "$PREV_TAG..${{ github.sha }}" --pretty=format:"- [%h]($REPO_URL/commit/%H) %s" >> /tmp/release_body.txt || true
+              echo "" >> /tmp/release_body.txt
+              echo "" >> /tmp/release_body.txt
+            fi
           fi
           
           echo "## Artifacts" >> /tmp/release_body.txt
