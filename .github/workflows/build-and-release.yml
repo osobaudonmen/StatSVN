@@ -78,7 +78,7 @@ jobs:
           # Get the previous release tag (same method as Cleanup old releases)
           PREV_TAG=$(
             gh release list --limit 100 --json tagName,createdAt \
-              --jq 'map(select(.tagName | startswith("build-"))) | sort_by(.createdAt) | reverse | .[1] | .tagName' \
+              --jq 'map(select(.tagName | startswith("build-"))) | sort_by(.createdAt) | reverse | .[0] | .tagName' \
               2>/dev/null || echo ""
           )
           
