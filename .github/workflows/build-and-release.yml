@@ -65,13 +65,29 @@ jobs:
         id: release_body
         run: |
           set -euo pipefail
+          REPO_URL="https://github.com/${{ github.repository }}"
           # Use echo lines instead of printf so output is easy to read and compare.
           echo "## Build Information" > /tmp/release_body.txt
           echo "" >> /tmp/release_body.txt
-          echo "  **Commit**: \`${{ github.sha }}\`" >> /tmp/release_body.txt
+          echo "  **Commit**: [${{ github.sha }}]($REPO_URL/commit/${{ github.sha }})" >> /tmp/release_body.txt
           echo "  **Branch**: \`${{ github.ref_name }}\`" >> /tmp/release_body.txt
           echo "  **Build Date (UTC)**: \`$(date -u +"%Y-%m-%dT%H:%M:%SZ")\`" >> /tmp/release_body.txt
           echo "" >> /tmp/release_body.txt
+          
+          # Get the previous release tag (same method as Cleanup old releases)
+          PREV_TAG=$(
+            gh release list --limit 100 --json tagName,createdAt \
+              --jq 'map(select(.tagName | startswith("build-"))) | sort_by(.createdAt) | reverse | .[1] | .tagName' \
+              2>/dev/null || echo ""
+          )
+          
+          if [ -n "$PREV_TAG" ]; then
+            echo "## Commits since $PREV_TAG" >> /tmp/release_body.txt
+            echo "" >> /tmp/release_body.txt
+            git log "$PREV_TAG..${{ github.sha }}" --pretty=format:"- [%h]($REPO_URL/commit/%H) %s" >> /tmp/release_body.txt || true
+            echo "" >> /tmp/release_body.txt
+          fi
+          
           echo "## Artifacts" >> /tmp/release_body.txt
           echo "" >> /tmp/release_body.txt
           echo "  **ZIP**: \`${{ steps.prepare.outputs.zip_name }}\`" >> /tmp/release_body.txt
